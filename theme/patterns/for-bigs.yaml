@@ -1,0 +1,44 @@
+page:
+  path: /site
+  slug: bigs
+  name: For Bigs
+pattern:
+  -
+    key: calendars
+    format: blocks
+    name: Activity Calendars
+    singular: Calendar
+    pattern: activity-calendars
+    preview: title
+  -
+    key: ideas
+    format: html
+    name: "Ideas & Guidelines"
+    description: Use the H2 and UL tags for proper formatting.
+  -
+    key: featured
+    format: html
+    name: Featured Content
+  -
+    key: activities
+    format: html
+    name: Activity Planning
+  -
+    key: guidelines
+    format: blocks
+    name: Program Guidelines
+    singular: Guidelines PDF
+    pattern: program-guidelines
+    preview: title
+  -
+    key: resources
+    format: html
+    name: Resources for Mentoring
+    description: Use the H2 and UL tags for proper formatting.
+  -
+    key: faq
+    format: blocks
+    name: Frequently Asked Questions
+    singular: "Q&A"
+    pattern: question
+    preview: question

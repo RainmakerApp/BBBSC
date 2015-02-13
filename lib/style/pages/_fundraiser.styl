@@ -1,0 +1,426 @@
+.page.page-fundraiser
+	color $text
+	.fundraiser-info
+		background #393939
+		color white
+		padding 15px 0
+		@media (min-width $md)
+			.col
+				padding-bottom 0
+		.funds-raised
+			clearfix()
+			p
+				margin 0 0 10px
+			.left
+				float left
+				small
+					color #8F9395
+					&:before
+						content ' '
+			.right
+				float right
+		.progress-bar
+			margin-bottom 0
+		a.btn
+			background-color $green
+			color #FFF
+			display block
+			font-size 14px
+			font-weight 600
+			line-height 40px
+			text-align center
+			text-decoration none
+			transition all 300ms ease
+			@extend .tr-up
+			&:hover
+				background-color darken($green, 15%)
+		.align-right
+			@media (min-width $md)
+				text-align right
+			@media (max-width ($md - 1))
+				text-align center
+			p
+				line-height 24px
+				margin 0
+				span.ends
+					background-color #2B2D2F
+					border-radius 2px
+					font-size 14px
+					font-weight 300
+					padding 5px 10px
+				span.num-group
+					margin-left 7px
+					position relative
+					span.num
+						background-color #212223
+						border-radius 2px
+						font-size 14px
+						font-weight 300
+						margin-left 3px
+						padding 5px 10px
+					&#months, &#weeks
+						&:after
+							color #8F9395
+							font-size 10px
+							left 5px
+							position absolute
+							top 20px
+						&#months:after
+							content 'Months'
+						&#weeks:after
+							content 'Weeks'
+	.container#main
+		padding-bottom 60px
+		@media (min-width $sm)
+			padding-top 20px
+		clearfix()
+		.banner-area
+			@media (min-width $sm)
+				margin-bottom 125px
+			@media (max-width ($sm - 1))
+				margin-bottom 100px
+			position relative
+			clearfix()
+			.banner-area_grid
+				height 400px
+				margin 0 auto
+				overflow hidden
+				width 100%
+			.banner-area_featured
+				background-color darken(#EEE, 25%)
+				background-image url(../images/dummy/tall-thumb.png)
+				background-size cover
+				left 15px
+				position absolute
+				@media (min-width $sm)
+					bottom -100px
+					height 200px
+					width 200px
+				@media (max-width ($sm - 1))
+					bottom -75px
+					height 125px
+					width 125px
+			.banner-area_meta
+				margin 15px 0 0
+				padding-left 130px
+				@media (min-width $sm)
+					padding-left 255px
+				position absolute
+				width 100%
+				.meta_title, .meta_info
+					float left
+				.meta_title
+					@media (max-width 900px)
+						display none
+					padding-right 15px
+					width 70%
+					h1
+						font-size 30px
+						line-height 1em
+						margin 0 0 15px
+					a.btn:not(:last-child)
+						margin-right 15px
+				.meta_info
+					padding-right 15px
+					text-align right
+					width 100%
+					@media (min-width 901px)
+						padding-right 0
+						width 30%
+					span.num
+						font-size 24px
+						font-weight 600
+						position relative
+						&:nth-child(n+2)
+							margin-left 30px
+						&:after
+							bottom -12px
+							color #A1A1A1
+							font-size 12px
+							font-weight 300
+							left 0
+							position absolute
+						&#supporters:after
+							content 'Supporters'
+						&#updates:after
+							content 'Updates'
+						&#shares:after
+							content 'Shares'
+		.mobile-title
+			@media (min-width 901px)
+				display none
+			@media (max-width 900px)
+				display block
+				h1
+					margin-top 0
+				a.btn
+					padding 0
+					text-align center
+					width 33.3333333%
+			@media (max-width $sm)
+				a.btn
+					font-size 12px
+		.sidebar
+			section
+				margin 0 0 30px
+				h4
+					font-size 16px
+					font-weight 600
+					margin-bottom 15px
+					small
+						color #A1A1A1
+						font-size 100%
+						font-weight 300
+						margin-left 5px
+				ul
+					list-style none
+					margin 0
+					padding 0
+					li
+						margin-bottom 10px
+						clearfix()
+						.left
+							float left
+							font-weight 300
+						.right
+							float right
+				&.fundraisers
+					ul
+						li
+							display table
+							table-layout fixed
+							width 100%
+							.thumb, .title
+								display table-cell
+								vertical-align middle
+								width 30%
+								img
+									vertical-align middle
+									width 100%
+							.title
+								padding-left 15px
+								width 70%
+								a
+									color $secondary
+									display inline-block
+									font-weight 300
+								strong
+									display block
+						li
+							clearfix()
+		ul.tabs
+			@media (min-width $sm)
+				border-bottom 2px solid $text
+			list-style none
+			margin 15px 0
+			padding 0
+			clearfix()
+			.tab
+				cursor pointer
+				font-size 14px
+				float left
+				padding-bottom 10px
+				padding-top 10px
+				position relative
+				span.badge
+					border-radius 2px
+					font-size 12px
+					margin-left 5px
+					padding 2px 5px 1px
+				@extend .tr-up
+				@media (min-width: $sm)
+					&:not(.active)
+						border-left 2px solid transparent
+						border-right 2px solid transparent
+						border-top 2px solid transparent
+						color lighten($text, 75%)
+						span.badge
+							background-color lighten($text, 75%)
+							color white
+						&:nth-child(n+2):before
+							background lighten($text, 75%)
+							content ''
+							height 16px
+							left -4px
+							position absolute
+							top 50%
+							transform translateY(-50%)
+							width 2px
+							z-index -1
+					&:nth-child(1)
+						padding-left 30px
+						padding-right 30px
+						&.active
+							border-left 2px solid $text
+							border-right 2px solid $text
+					&:nth-child(2)
+						padding-left 30px
+						padding-right 30px
+						text-align center
+						&.active
+							border-left 2px solid $text
+							border-right 2px solid $text
+					&:nth-child(3)
+						padding-left 30px
+						padding-right 30px
+						text-align right
+						&.active
+							border-left 2px solid $text
+							border-right 2px solid $text
+					&.active
+						border-top 2px solid $text
+						span.badge
+							background-color $secondary
+							color white
+						&:after
+							background #FFF
+							bottom -2px
+							content ''
+							height 2px
+							left 0
+							position absolute
+							width 100%
+				@media (max-width: ($sm - 1))
+					display block
+					width 100%
+					&:not(.active)
+						border-bottom 2px solid lighten($text, 75%)
+						color lighten($text, 75%)
+						span.badge
+							background-color lighten($text, 75%)
+							color white
+					&.active
+						border-bottom 2px solid $text
+						span.badge
+							background-color $secondary
+							color white
+					p
+						font-size 14px
+						font-weight 500
+						margin 0
+						tr-ls(0.015em)
+		form#ticket
+			clearfix()
+		.ticket
+			display table
+			margin 30px 0
+			table-layout fixed
+			overflow hidden
+			width 100%
+			clearfix()
+			.ticket__left, .ticket__right
+				background-color #F5F5F5
+				border-color #E6E6E6
+				border-style solid
+				display table-cell
+				float none
+			.ticket__left
+				border-width 1px 0 1px 1px
+				border-right 2px dashed #E6E6E6
+				position relative
+				width 15%
+				.ticket__left-punchout
+					background white
+					border 1px solid #E6E6E6
+					border-radius 15px
+					height 60%
+					left 50%
+					position absolute
+					transform translateY(-50%) translateX(-50%)
+					top 50%
+					width 30px
+				&:before, &:after
+					background white
+					border 1px solid #E6E6E6
+					border-radius 50%
+					content ''
+					height 40px
+					position absolute
+					width 40px
+				&:before
+					right -20px
+					top -20px
+				&:after
+					right -20px
+					bottom -20px
+			.ticket__right
+				border-width 1px 1px 1px 0
+				padding 30px 30px 30px 45px
+				width 85%
+				h1, h2
+					margin 0
+				h2
+					color $green
+					font-family 'Roboto Condensed', $proxima
+					font-size 16px
+					@extend .tr-up
+				h1
+					font-family 'Roboto Condensed', $proxima
+					margin-bottom 15px
+				p
+					span
+						display block
+					.head
+						color $green
+						font-family 'Roboto Condensed', $proxima
+						font-size 15px
+					.lead
+						color #A1A1A1
+						font-size 12px
+						font-weight 300
+				.icons
+					.col
+						&:first-of-type
+							p
+								padding-left 22px
+						&:last-of-type
+							p
+								padding-left 15px
+					p
+						position relative
+						i
+							color $green
+							font-size 18px
+							left 0
+							position absolute
+							top 2px
+						@media (max-width $sm)
+							margin-bottom 0
+				.input
+					.col
+						padding-bottom 0
+					p
+						margin-bottom 5px
+					.icon-select
+						position relative
+						i
+							color $secondary
+							position absolute
+							right 10px
+							top 5px
+					select
+						appearance none
+						background-color white
+						border 1px solid #E6E6E6
+						border-radius 2px
+						color #A1A1A1
+						font-weight 300
+						outline 0
+						padding 5px 10px
+						width 100%
+					.total
+						color $green
+						font-family 'Roboto Condensed', $proxima
+						text-align right
+						@media (max-width $sm)
+							margin-top 40px
+						p
+							font-size 60px
+							font-weight 600
+							margin 10px 0 0
+							position relative
+							&:before
+								content 'TOTAL'
+								font-size 18px
+								position absolute
+								top -20px

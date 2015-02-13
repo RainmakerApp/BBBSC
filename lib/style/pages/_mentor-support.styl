@@ -1,0 +1,252 @@
+.page.page-mentor-support
+	color $text
+	.jumbotron
+		background-image url(../images/banners/mentor-support.png)
+	.tabs.big.two
+		border-bottom 2px solid $text
+		margin-bottom 40px
+		margin-top 60px
+		clearfix()
+		.tab
+			cursor pointer
+			float left
+			padding-bottom 10px
+			padding-top 10px
+			position relative
+			width 50%
+			@media (min-width: $sm)
+				&:not(.active)
+					border-left 2px solid transparent
+					border-right 2px solid transparent
+					border-top 2px solid transparent
+					color lighten($text, 75%)
+				&:nth-child(1)
+					padding-left 0
+					padding-right 30px
+					&.active
+						border-right 2px solid $text
+				&:nth-child(2)
+					padding-left 30px
+					padding-right 0
+					text-align right
+					&.active
+						border-left 2px solid $text
+				&.active
+					border-top 2px solid $text
+					&:after
+						background #FFF
+						bottom -2px
+						content ''
+						height 2px
+						left 0
+						position absolute
+						width 100%
+				p
+					font-size 50px
+					font-weight 100
+					margin 0
+			@media (max-width: ($sm - 1))
+				&:not(.active)
+					border-left 2px solid transparent
+					border-right 2px solid transparent
+					border-top 2px solid transparent
+					color lighten($text, 75%)
+				&:nth-child(1)
+					padding-left 0
+					padding-right 15px
+					&.active
+						border-right 2px solid $text
+				&:nth-child(2)
+					padding-left 15px
+					text-align right
+					&.active
+						border-left 2px solid $text
+						border-right 0
+				&.active
+					border-top 2px solid $text
+					&:after
+						background #FFF
+						bottom -2px
+						content ''
+						height 2px
+						left 0
+						position absolute
+						width 100%
+				p
+					font-size 14px
+					font-weight 500
+					margin 0
+					tr-ls(0.015em)
+			
+	.content
+		h1
+			font-size 36px
+			font-weight 100
+			text-transform initial
+			&.guidelines
+				position relative
+				left -10px
+				i
+					color $secondary
+			&.resources
+				position relative
+				@extend .icon-resources
+				&:before
+					// content '\e800'
+					color $secondary
+					font-size 48px
+					@media (min-width: $sm)
+						left -65px
+						position absolute
+						top -5px
+					@extend .bbbs-icon
+		ul.guidelines
+			list-style nne
+			margin 15px 0 0
+			padding 0
+			li
+				display inline
+				@extend .col
+				@extend .col-sm-6
+				@extend .col-md-4
+				div
+					border 4px solid #c8c8c8
+					text-align center
+					h4
+						background #c8c8c8
+						color #FFF
+						font-size 12px
+						padding 5px
+					h1
+						color #c8c8c8
+						font-size 100px
+						margin 25px 0 15px
+					a
+						background $secondary
+						border 0
+						color #FFF
+						display inline-block
+						font-size 10px
+						margin-bottom 15px
+						padding 5px 15px
+						text-decoration none
+						transition all 300ms ease
+						@extend .tr-up
+						&:hover
+							background darken($secondary, 25%)
+	.faq
+		h1
+			position relative
+			@extend .tr-init
+			i
+				color $secondary
+				font-size 42px
+				@media (min-width: $sm)
+					position absolute
+					left -60px
+					top -8px
+		ul li
+			&:nth-child(odd)
+				background #ecebeb
+				padding 15px 30px
+			&:nth-child(even)
+				padding 15px 30px
+			&:not(.active)
+				cursor pointer
+			dl, dt, dd
+				margin 0
+				padding 0
+			dt, dd
+				padding-left 30px
+			dt
+				color #4C92C9
+				font-size 18px
+				font-weight bold
+				position relative
+				text-decoration underline
+				&:before
+					content 'Q.'
+					color $text
+					font-weight 600
+					left 0
+					position absolute
+					text-decoration none
+			dd
+				color #767676
+				display none
+				font-size 16px
+				line-height 20px
+				position relative
+				transition all 0.3s ease
+				&:before
+					content 'A.'
+					color $text
+					font-weight 600
+					left 0
+					position absolute
+			&.active
+				padding 30px
+				dt
+					margin-bottom 15px
+				dd
+					display block
+	#activities
+		.sub-footer
+			padding-bottom 45px
+			padding-top 45px
+			p
+				font-size 20px
+				&:first-of-type
+					margin-top 0
+				&:last-of-type
+					margin-bottom 0
+		h1
+			font-size 36px
+			font-weight 100
+			text-transform initial
+			&.idea
+				position relative
+				@extend .icon-idea
+				&:before
+					// content '\e800'
+					color $secondary
+					font-size 48px
+					@media (min-width: $sm)
+						left -65px
+						position absolute
+						top -5px
+					@extend .bbbs-icon
+		ul.calendars
+			list-style none
+			margin 15px 0 0
+			padding 0
+			li
+				display inline
+				@extend .col
+				@extend .col-sm-6
+				@extend .col-md-5
+				div
+					border 4px solid #c8c8c8
+					text-align center
+					h4
+						background #c8c8c8
+						color #FFF
+						font-size 16px
+						padding 5px
+					h1
+						color #c8c8c8
+						font-size 100px
+						margin 25px 0 15px
+					a
+						background $secondary
+						border 0
+						color #FFF
+						display inline-block
+						font-size 14px
+						margin-bottom 15px
+						padding 5px 15px
+						text-decoration none
+						transition all 300ms ease
+						@extend .tr-up
+						&:hover
+							background darken($secondary, 25%)

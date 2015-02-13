@@ -1,0 +1,15 @@
+theme:template(title="{post.title}", name="_default", :load=":api(3.0).posts({:url.2}) as post")
+  content
+    .page.page-post
+      .container.thin
+        article
+          section.article-title
+            a(href="/blog") &lt;&lt; Back To Blog Home
+            h1 {post.title}
+            p Posted: {post.timestamp.created.unix|date(F j)}, {post.timestamp.created.unix|date(Y)}
+            theme:embed(file="includes/social-buttons")
+          section.article-content
+            //- +rrssb
+            {post.content}
+            div(style="margin-top: 30px;")
+              theme:embed(file="includes/social-buttons")

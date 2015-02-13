@@ -1,0 +1,22 @@
+{
+  "name": "bbbsc",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-stylus": "^0.19.0",
+    "node-static": "~0.7.3",
+    "grunt-contrib-coffee": "^0.12.0",
+    "grunt-awspublish": "~0.1.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-newer": "~0.6.1",
+    "grunt-aws": "~0.3.0",
+    "grunt-newer-explicit": "~0.9.2",
+    "grunt-rainmaker": "^0.1.1",
+    "grunt-fontsmith": "~0.3.0",
+    "grunt-webfont": "~0.2.1",
+    "nib": "^1.0.2"
+  }
+}

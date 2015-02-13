@@ -1,0 +1,19 @@
+page:
+  path: /site
+  slug: index
+  name: Home Page
+pattern:
+  -
+    key: slides
+    format: blocks
+    name: Slides
+    singular: Slide
+    pattern: banner-slide
+    preview: header
+  -
+    key: programs
+    format: blocks
+    name: Featured Programs
+    singular: Featured Program
+    pattern: featured-programs
+    preview: title

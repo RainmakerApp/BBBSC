@@ -1,0 +1,79 @@
+.page.page-get-started
+	color $text
+	counter-reset li
+	.jumbotron
+		background-image url(../images/banners/mentor-support.png)
+	.container#main
+		padding-bottom 30px
+		padding-top 30px
+		.content
+			h4
+				font-size 24px
+				font-weight 300
+				margin-bottom 20px
+			p, strong
+				display block
+				font-size 18px
+				line-height 26px
+				margin-bottom 20px
+				a
+					border-bottom 0
+					text-decoration underline
+			ol.counter 
+				list-style none
+				margin 0
+				padding 0
+				@media (min-width: $sm)
+					padding 30px 0 0 65px
+				li
+					margin-bottom 75px
+					padding-left 75px
+					position relative
+					p
+						&:not(.head)
+							font-size 18px
+							line-height 26px
+						&.head
+							font-size 24px
+							font-weight 300
+							line-height 66px
+							margin-bottom -10px
+					&:before
+						border 2px solid $green
+						border-radius 50%
+						counter-increment li
+						content counter(li)
+						display inline-block
+						font-size 24px
+						height 60px
+						left 0
+						line-height 60px
+						position absolute
+						text-align center
+						width 60px
+			.actions
+				a
+					color #FFF
+					.orange
+						background-color $secondary
+						line-height 20px
+					.purple
+						background-color $primary
+						line-height 40px
+					.green
+						background-color $green
+						line-height 20px
+					&:hover						
+						.orange
+							background-color darken($secondary, 25%)
+						.purple
+							background-color darken($primary, 25%)
+						.green
+							background-color darken($green, 25%)
+				div
+					font-weight bold
+					padding-bottom 30px
+					padding-left 15px
+					padding-right 15px
+					padding-top 30px
+					transition all 300ms ease

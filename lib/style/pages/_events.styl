@@ -1,0 +1,99 @@
+.page.page-events
+	color $text
+	clearfix()
+	.jumbotron
+		background-image url(../images/banners/enroll.png)
+	.bar
+		&.subscribe
+			background-color #F5F5F5
+			padding 40px 15px 20px
+			text-align center
+			.group
+				margin 0 auto
+				position relative
+				@media (min-width $sm)
+					max-width 486px
+					width 40%
+					display table
+					table-layout fixed
+					input
+						width 68%
+					button
+						padding 0
+						text-align center
+						width 30%
+				@media (max-width ($sm - 1))
+					input
+						margin-bottom 10px
+					input, button
+						width 100%
+				input
+					border 2px solid lighten(#A6A6A6, 15%)
+					font-size 14px
+					line-height 34px
+					margin-right 2%
+					padding 0 10px
+					transition border 300ms ease
+					vertical-align bottom
+					&:active, &:focus
+						border 2px solid $text
+				input, button
+					outline 0
+				&:before
+					color #A6A6A6
+					content 'Subscribe to get the latest Featured Matches'
+					font-size 16px
+					font-weight 300
+					position absolute
+					top -25px
+	.container#main
+		padding-bottom 30px
+		padding-top 30px
+		.table h2
+			margin-bottom 30px
+		ul.events
+			list-style none
+			margin 0
+			padding 0
+			li
+				border-bottom 1px solid #E5E5E5
+				margin-bottom 30px
+				padding-bottom 30px
+				clearfix()
+				.date
+					span
+						display block
+					span.month
+						font-size 18px
+						font-weight 600
+						position relative
+						@extend .tr-up
+						&:after
+							background $primary
+							bottom -4px
+							content ''
+							height 3px
+							left 1px
+							position absolute
+							width 25px
+					span.day
+						font-size 50px
+						font-weight 700
+						line-height 60px
+				p
+					color #A1A1A1
+					font-size 18px
+					font-weight 100
+					line-height 32px
+					margin 15px 0
+					&.span
+						font-size 22px
+						font-weight 300
+						line-height auto
+						margin 0
+				a.btn-base.tiny
+					margin-bottom 0
+					padding 5px 15px
+					@extend .tr-init
+				
+		

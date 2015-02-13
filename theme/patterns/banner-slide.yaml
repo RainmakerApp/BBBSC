@@ -1,0 +1,21 @@
+pattern:
+  - 
+    key: header
+    format: title
+    name: Slide Header
+    description: This appears as the large text on each slide.
+  -
+    key: body
+    format: html
+    name: Lead
+    description: This text appears below the header. Try to keep it restricted to a couple lines.
+  -
+    key: action
+    format: button
+    name: Action Button
+    description: Provide button text and a link.
+  -
+    key: image
+    format: upload
+    name: "Upload a slide image."
+    description: "This covers the background of the slide. Make sure it's at least 1200px wide. Ideally, crop the image to 3:1 ratio prior to uploading. Otherwise the image will be centered vertically, possibly clipping off important content."

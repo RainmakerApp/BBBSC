@@ -1,0 +1,12 @@
+page:
+  path: /site
+  slug: support
+  name: Ways to Support
+pattern:
+  -
+    key: methods
+    format: blocks
+    name: Ways to Support
+    singular: Support Method
+    pattern: support-methods
+    preview: title

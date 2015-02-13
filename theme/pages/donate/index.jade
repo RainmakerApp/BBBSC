@@ -1,0 +1,22 @@
+theme:template(title="Volunteer", name="_default")
+  content
+    .page.page-donate
+      .jumbotron: .container
+        h1.tr-up Support The Cause
+      .container.thin
+        ul.donate-methods: .row
+          a(href='#/my/donate'): li.main
+            .col.col-sm-12.col-md-2.thumb
+              img(src='assets://images/thumbs/1.png')
+            .col.col-sm-12.col-md-10
+              h3.tr-up Donate Now
+              p Click here to make an online gift using your credit card. It's safe and secure and 100% of your gift goes directly to Big Brothers Big Sisters of Colorado to help the kids we serve. All money raised in Colorado stays in Colorado. Please consider a one-time gift today or a recurring monthly donation. Thanks for your support!
+          li(:load=":api(3.0).content(site.support).relationships(methods) as method", :iterate="self")
+            .col.col-sm-12.col-md-2.thumb
+              img(src='{method.relationships(icon,attachments).first.photo-url}')
+            .col.col-sm-12.col-md-10
+              h3.tr-up {method.content.title}
+              {method.content.description}
+        .center.promise
+          strong Big Brothers Big Sisters of Colorado's Donor Promise:
+          p Your contribution will always be used for the purpose you intended and you will always be recognized according to your wishes. At any time, you have the right to inquire about how your support has been used and how it has benefited the community.

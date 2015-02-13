@@ -1,0 +1,100 @@
+/*
+ * Colors
+ * ======
+ */
+
+/* Main Pallette */
+$primary   = #9B69B8
+$secondary = #F17722
+$text      = #575757
+$green     = #7AC142
+$blue      = #23C1F0
+
+/* Secondary Colors */
+$lightest-gray = #F5F5F5
+$light-gray    = #DDDDDD
+
+/*
+ * Font Styles
+ * ===========
+ */
+
+/* Helpers */
+.tr-init
+  text-transform initial
+.tr-up
+  text-transform uppercase
+ta(direction)
+  .ta-{direction}
+    text-align direction
+ta(left)
+ta(right)
+ta(center)
+tr-ls(spacing)
+  letter-spacing spacing
+ 
+/* Font Families */
+$proxima = 'Proxima-Nova', 'Proxima Nova', sans-serif
+
+/* Font Declarations */
+body
+  font-family $proxima
+  
+/*
+ * Helper Classes
+ * ==============
+ */
+.center
+  @media (min-width: $sm)
+    text-align center
+  @media (max-width: ($sm - 1))
+    text-align left
+.pull-left
+  float left
+.pull-right
+  float right
+
+/*
+ * Button Classes
+ * ==============
+ */
+btn(name, hex)
+  .btn-{name}
+    border 2px solid hex !important
+    border-radius 1px !important
+    color hex !important
+    display inline-block
+    font-size 18px
+    font-weight 600
+    margin-top 15px
+    padding 15px 40px
+    text-decoration none
+    transition all 0.3s ease
+    tr-ls(0.05em)
+    @extend .tr-up
+    &.small
+      font-size 16px
+      padding 15px 30px
+    &.tiny
+      margin-bottom 0
+      padding 5px 15px
+      @extend .tr-init
+    &.fill
+      background-color hex
+      color white !important
+      font-size 14px
+      line-height 34px
+      margin 0
+      padding 0 20px
+      &:hover
+        border 2px solid darken(hex, 15%) !important
+        background-color darken(hex, 15%)
+    &:hover
+      background-color rgba(hex, 0.15)
+
+btn('base', $text)
+btn('green', $green)
+btn('purple', $primary)
+btn('white', white)
+btn('orange', $secondary)
+btn('light-gray', #A1A1A1)

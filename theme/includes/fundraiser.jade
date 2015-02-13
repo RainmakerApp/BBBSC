@@ -1,0 +1,128 @@
+.create-fundraiser__wrapper
+  .close-modal
+  .wrapper_sizing
+    .wrapper__title
+      h1 Let’s Get Started
+      p.lead 
+        strong 347 
+        |people have already started fundraisers.
+    .wrapper__forms
+      .wrapper__forms-nav
+        .pull-left
+          ul(class='complete')
+            li(data-related='2')
+              span.num 1
+              span.text Get Your Fundraiser Started
+            li(data-related='3')
+              span.num 2
+              span.text Select Fundraiser Photo
+            li(data-related='4')
+              span.num 3
+              span.text Write A Headline
+            li(data-related='5')
+              span.num 4
+              span.text Write A Message
+        .pull-right
+          ul(class='pending')
+            li(data-related='3'): span.num 2
+            li(data-related='4'): span.num 3
+            li(data-related='5'): span.num 4
+      div(class='step', data-step='1')
+        a(href='#', class='facebook-login') Sign In with Facebook
+        span.or
+        form.form
+          div(class='input-group split', id='individual')
+            label(for='first') Your Name*
+            .input-column
+              input(type='text', name='contact[firstName]', placeholder='First Name', id='first')
+            .input-column
+              input(type='text', name='contact[lastName]', placeholder='Last Name', id='last')
+          div(class='input-group', id='group')
+            label(for='group-input') Group Name*
+            input(type='text', name='contact[firstName]', placeholder='Group Name', id='group-input')
+          div.input-group
+            label(for='email') Your Email*
+            input(type='text', name='contact[email]', placeholder='Email Address', id='email')
+          div.input-group
+            label(for='phone') Your Phone Number*
+            input(type='text', name='contact[phone]', placeholder='(000) 123 - 4567', id='phone')
+          button(type='submit', class='submit') Continue
+        .options
+          .pull-left
+            small: strong(id='toggle-type'): a(href='#') Sign Up As a Group
+          .pull-right
+            small: strong: a(href='#') Already have an account?
+      div(class='step', data-step='2')
+        h1 Create Your Fundraiser
+        form.form
+          div.input-group
+            label(for='name') Name Your Fundraiser*
+            input(type='text', name='fundraiser[name]', placeholder='Fundraiser Name', id='name')
+          div.input-group#money
+            label(for='goal') Fundraising Goal*
+            input(type='text', name='fundraiser[goal]', placeholder='7,000', id='goal')
+          div.input-group#select
+            label(for='type') Fundraiser Type*
+            select(name='fundraiser[type]', id='type')
+              option Event
+              option Another Option
+              option Something Else
+          button(type='submit', class='submit') Continue
+      div(class='step', data-step='3')
+        div(class='upload__wrapper')
+          h1 Choose Cover Photo
+          .row
+            .col.col-sm-12
+              .featured__image-container
+            .btn-row
+              .col.col-sm-6.btn
+                a(href='#') Upload
+                  br
+                  small Your Own Photo
+                  input(type='file')
+              .col.col-sm-6.btn
+                a(href='#', id='select__wrapper') Use Ours
+          form.form
+            input(type='hidden', name='url')
+            button(type='submit', class='submit') Continue
+        div(class='select__wrapper')
+          h1 Choose A Cover Photo
+          .select__wrapper-gallery
+            .col.col-sm-6.tab: .thumb(style='background-image: url(/images/dummy/big-thumb.png)')
+            .col.col-sm-6.tab: .thumb(style='background-image: url(/images/dummy/big-thumb.png)')
+            .col.col-sm-6.tab: .thumb(style='background-image: url(/images/dummy/big-thumb.png)')
+            .col.col-sm-6.tab: .thumb(style='background-image: url(/images/dummy/big-thumb.png)')
+            .col.col-sm-6.tab: .thumb(style='background-image: url(/images/dummy/big-thumb.png)')
+            .col.col-sm-6.tab: .thumb(style='background-image: url(/images/dummy/big-thumb.png)')
+            .col.col-sm-6.tab: .thumb(style='background-image: url(/images/dummy/big-thumb.png)')
+          .row: .btn-row
+            .col.col-sm-6.btn
+              a(href='#', id='upload__wrapper') Go Back
+            .col.col-sm-6.btn
+              a(href='#', class='submit') Continue
+      div(class='step', data-step='4')
+        h1 Write A Headline For Your Fundraiser
+        form.form
+          .input-group
+            textarea(rows='6') Testing - Sample One
+          .small-btn-row
+            .btn.tab.active
+              a(href='#', data-message='Testing - Sample One', class='sample') Sample 1
+            .btn.tab
+              a(href='#', data-message='Testing - Sample Two', class='sample') Sample 2
+            .btn.tab
+              a(href='#', data-message='Testing - Sample Three', class='sample') Sample 3
+          button(type='submit', class='submit') Continue
+      div(class='step', data-step='5')
+        h1 Write A Message For Your Fundraiser
+        form.form
+          .input-group
+            textarea(rows='6') Testing - Sample One
+          .small-btn-row
+            .btn.tab.active
+              a(href='#', data-message='Testing - Sample One', class='sample') Sample 1
+            .btn.tab
+              a(href='#', data-message='Testing - Sample Two', class='sample') Sample 2
+            .btn.tab
+              a(href='#', data-message='Testing - Sample Three', class='sample') Sample 3
+          button(type='submit', class='submit') Create

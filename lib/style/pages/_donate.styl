@@ -1,0 +1,47 @@
+.page.page-donate
+	color $text
+	.jumbotron
+		background-image url(../images/banners/enroll.png)
+	ul.donate-methods
+		list-style none
+		margin 0
+		padding 0
+		clearfix()
+		a li.main
+			color #FFF
+			&:hover
+				background-color darken($green, 15%)
+		li
+			border-bottom 1px solid #E6E6E6
+			margin-bottom 15px
+			margin-top 15px
+			padding-bottom 25px
+			padding-top 15px
+			clearfix()
+			.col
+				padding-bottom 0
+				h3, p
+					margin 0 0 5px 0
+				&.thumb
+					@media (min-width: $sm)
+						text-align center
+					@media (max-width: ($sm - 1))
+						margin-bottom 10px
+			&.main
+				background-color $green
+				border-bottom 0
+				color #FFF
+				margin-left -15px
+				margin-right -15px
+				margin-top 30px
+				padding 30px 15px
+				transition all 300ms ease
+			&:nth-child(2)
+				border-top 1px solid #E6E6E6
+				margin-top 30px
+				padding-top 30px
+	.promise
+		line-height 24px
+		margin 15px 0 60px
+		p
+			margin 0

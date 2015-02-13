@@ -1,0 +1,13 @@
+page:
+  path: /site
+  slug: programs
+  name: Our Programs
+pattern:
+  -
+    key: denver
+    format: html
+    name: Denver Programs
+  -
+    key: pikes
+    format: html
+    name: Pikes Peak Programs

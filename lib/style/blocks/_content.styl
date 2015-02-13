@@ -1,0 +1,35 @@
+.page
+	.content
+		color $text
+		h1, h2, h3, h4, h5, h6
+			margin-bottom 5px
+			margin-top 5px
+			&:first-of-type
+				margin-top 0
+		h1, h2, h3
+			@extend .tr-up
+		h1
+			font-size 24px
+		h2
+			font-size 18px
+		h3
+			font-size 16px
+		p
+			font-size 16px
+			line-height 22px
+			margin-bottom 15px
+			margin-top 0
+			padding 0
+		ul, ol
+			list-style-position inside
+			padding 0
+		a
+			border-bottom 1px solid
+			color $blue
+			text-decoration none
+			transition color 300s ease
+			&:hover
+				color darken($blue, 25%)
+				border-bottom 1px solid
+		&:last-child
+			margin-bottom 60px

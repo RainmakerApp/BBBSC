@@ -1,0 +1,37 @@
+.page.page-volunteer
+	color $text
+	clearfix()
+	.jumbotron
+		background-image url(../images/banners/volunteer.png)
+	.container#main
+		padding-bottom 60px
+		padding-top 60px
+		.content
+			color #575757
+			h1
+				font-size 32px
+				font-weight 300
+			p
+				font-size 18px
+				line-height 30px
+			iframe
+				margin 60px 0
+			hr
+				border 1px solid
+				color $text
+				height 0
+				margin-bottom 60px
+			ul.stars.thin
+				float none
+				margin 0 auto
+				@media (min-width: $sm)
+					width 70%
+		@media (min-width: $sm)
+			.right
+				text-align right
+			.left
+				text-align left
+	.sub-footer
+		h1, p, a.btn-base
+			margin 0 !important
+		

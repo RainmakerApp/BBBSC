@@ -1,0 +1,46 @@
+theme:template(title="Volunteer", name="_default")
+  content
+    div(class='page page-enroll', :load=":api(3.0).content(site.programs) as programs")
+      .jumbotron: .container
+        h1(class='tr-up') Enroll A Child
+      .container#main: .row
+        .col.col-sm-12.col-md-6
+          .table.programs
+            h2.tr-up Denver Programs
+            {programs.content.denver}
+        .col.col-sm-12.col-md-6
+          .table.programs
+            h2.tr-up Pikes peak Programs
+            {programs.content.pikes}
+      .section.center: .container.thin
+        p.sub Our programs are designed to serve youth by providing them with safe, quality mentoring relationships that help them reach their full potential by:
+        .col.col-sm-12.col-md-4 
+          img(src='assets://images/community.png' width='100' height='100')
+          p improving their sense of self and community
+        .col.col-sm-12.col-md-4
+          img(src='assets://images/school.png', width='87', height='100')
+          p improving their school performance
+        .col.col-sm-12.col-md-4 
+          img(src='assets://images/cal.png', width='84', height='100')
+          p achieving a greater sense and awareness of their future
+      .sub-footer.inverse: .container: .row
+        .col.col-sm-12.center
+          h1 Get Involved
+            p Click here to 
+              a(href='#') volunteer in Denver and Pikes Peak.
+        .col.col-sm-12.col-md-6
+          h3 Nationally Recognized
+          p The Center for the Study and Prevention of Violence at University of Colorado at Boulder recognizes Big Brothers Big Sisters as a "Blueprint" program with proven results.
+          p The Center for the Study and Prevention of Violence at University of Colorado at Boulder recognizes Big Brothers Big Sisters as a "Blueprint" program with proven results.
+        .col.col-sm-2-offset.col-sm-1
+          |&nbsp;
+        .col.col-sm-12.col-md-5
+          h3 Program Impact
+          small As a result of participation, our Little Brothers and Little Sisters:
+          ul.stars
+            li Have better attitudes towards school
+            li Get along better with adults and peers
+            li Have better self-esteem
+            li Have a better sense of their future.
+
+          

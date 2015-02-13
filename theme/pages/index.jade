@@ -1,0 +1,85 @@
+theme:template(title="Home", name="_index")
+  content
+    .page.index
+      .slides(:load=":api(3.0).content(site.index).relationships(slides) as slides")
+        //@IF slides|count >= 2
+        span.right
+          i.fa.fa-angle-right
+        span.left
+          i.fa.fa-angle-left
+        //@ENDIF
+        ul
+          li.jumbotron.home(:load=":api(3.0).content(site.index).relationships(slides) as slide", :iterate="self", style="background-image: url({slide.relationships(image,attachments).first.photo-url})"): .container: .row
+            .col.col-sm-12.col-md-8
+              h1 {slide.content.header}
+              {slide.content.body}
+              a(href='{slide.content.action.href}' class='btn-white') {slide.content.action.text}
+      .newsletter-banner: .container: .row
+        .col.col-sm-12.col-md-6
+          form.subscribe
+            h1 Subscribe To Our Newsletter
+            input(type='email', placeholder='Enter your email address here...')
+            button(type='submit')
+              i.fa.fa-paper-plane
+              | Submit
+        .col.col-sm-12.col-md-6
+          ul.social
+            li.instagram
+              i.fa.fa-instagram
+              |<a href="http://instagram.com/{:settings.socialInstagram}?ref=badge" class="ig-b"><img src="//badges.instagram.com/static/images/ig-badge-view-24.png" alt="Instagram" /></a>
+            li.linkedin
+              i.fa.fa-linkedin
+              |<script type="IN/FollowCompany" data-id="293224"></script>
+            li.youtube
+              i.fa.fa-youtube-play
+              |<script src="https://apis.google.com/js/platform.js"></script>
+              |<div class="g-ytsubscribe" data-channel="{:settings.socialYoutube}" data-count="hidden"></div>
+            li.facebook
+              i.fa.fa-facebook
+              div(class='fb-like', data-share='false', data-show-faces='false', data-layout='button')
+            li.twitter
+              i.fa.fa-twitter
+              |<a href="https://twitter.com/{:settings.twitter}" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false"></a>
+      .slider-area
+        .col.col-sm-12.col-md-6#story
+          ul(:load=":api(3.0).posts().tags(post:featured).status(published) as posts")
+            li(:load="posts as post", :iterate="self", style="background-image: url({post.attachments().first.version(,)})")
+              .flag Featured Story
+              .body
+                h1 {post.title}
+                p {post.excerpt|limitstring(148,...)|strip_tags}
+                a(href='/blog/{post.id}' class='btn-white small') Learn More Now
+        .col.col-sm-12.col-md-6#program
+          ul(:load=":api(3.0).content(site.index).relationships(programs) as programs")
+            li(:load="programs as program", :iterate="self", style="background-image: url({program.relationships(image,attachments).first.photo-url})")
+              .flag Featured Program
+              .body
+                h1 {program.content.title}
+                p {program.content.body|limitstring(148,...)|strip_tags}
+                a(href='{program.content.action.href}' class='btn-white small') {program.content.action.text}
+      .container: .row: .posts
+        .col.col-sm-12.col-md-6
+          h1.green Featured Events 
+            i.fa.fa-angle-right.circle
+          ul.events(:load=":api(3.0).groups().type(event) as events")
+            li(:load="events as event", :iterate="self")
+              .col.col-md-3.col-sm-12
+                img(src='{event.photo-url}')
+              .col.col-md-9.col-sm-12
+                h1 {event.name}
+                  small presented by: 
+                    span.green {event.prop.presented-by}
+                h2
+                  i.fa.fa-calendar 
+                  | {event.timestamp.until.unix|date(M j)}, {event.timestamp.until.unix|date(Y)}
+                h2
+                  i.fa.fa-map-marker 
+                  | {event.location|split(b64:LA==,0)}
+                a(href='{event.prop.link}' class='btn-pill') Event Details
+        .col.col-sm-12.col-md-6
+          h1.orange Recent Blog Posts 
+            i.fa.fa-angle-right.circle
+          ul.blog(:load=":api(3.0).posts().limit(5).status(published) as posts")
+            li(:load="posts as post", :iterate="self"): a(href='/blog/{post.id}') {post.title}
+            a(href='/blog', class='read__more') Read More 
+              i.fa.fa-angle-right

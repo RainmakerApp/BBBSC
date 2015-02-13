@@ -1,0 +1,24 @@
+page:
+  path: /site
+  slug: volunteer
+  name: Volunteer Page
+pattern:
+  -
+    key: content
+    format: html
+    name: Overview
+  -
+    key: video
+    format: html
+    name: Video Embed Code
+    description: You can get the embed code for the video from the share options 
+  -
+    key: denver
+    format: button
+    name: Mentor in Denver Button
+    description: You can link a the PDF or form by checking the "external" box
+  -
+    key: pikes
+    format: button
+    name: Mentor in Pikes Peak Button
+    description: You can link a the PDF or form by checking the "external" box

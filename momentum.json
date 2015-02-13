@@ -1,0 +1,13 @@
+{
+  "aws": {
+    "key": "AKIAIBXP3ZPNTP5PVO5A",
+    "secret": "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",
+    "bucket": "rainmakerapp",
+    "client": "bbsc"
+  },
+  "momentum": {
+    "key": "bbbsc-dev",
+    "secret": "n8tBcVGE0sOJHLRymOzkoeklCjZjHRW7INO1SbZWH0jEZjsB85aqGpw1",
+    "client": "bbbsc"
+  }
+}

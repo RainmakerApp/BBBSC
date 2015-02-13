@@ -1,0 +1,48 @@
+theme:template(title="Volunteer", name="_default")
+  content
+    div(class='page page-volunteer', :load=":api(3.0).content(site.volunteer) as page")
+      .jumbotron: .container
+        h1(class='tr-up') Volunteer
+      .container.thin#main: .content
+        .center
+          h1 Volunteer in Denver or Pikes Peak
+          {page.content.content}
+          .row
+            //@IF page.content.denver.external
+            .col.col-sm-12.col-md-6.right: a(href='{page.content.denver.href}', class='btn-green', target='_blank') {page.content.denver.text}
+            //@ELSE
+            .col.col-sm-12.col-md-6.right: a(href='{page.content.denver.href}', class='btn-green') {page.content.denver.text}
+            //@ENDIF
+            //@IF page.content.pikes.external
+            .col.col-sm-12.col-md-6.left: a(href='{page.content.pikes.href}', class='btn-green', target='_blank') {page.content.pikes.text}
+            //@ELSE
+            .col.col-sm-12.col-md-6.left: a(href='{page.content.pikes.href}', class='btn-green') {page.content.pikes.text}
+            //@ENDIF
+          {page.content.video}
+          hr
+          h1 The Impact You Can have
+          p Because of positive Big Brothers and Big Sisters, Little Brothers and Little Sisters in our programs are MORE LIKELY to:
+          ul.stars.thin: .row
+            .col.col-sm-12.col-md-6
+              li Have better attitudes towards school
+              li Get along better with adults and peers
+            .col.col-sm-12.col-md-6.left
+              li Have better self-esteem
+              li Have a better sense of their future.
+          .row
+            //@IF page.content.denver.external
+            .col.col-sm-12.col-md-6.right: a(href='{page.content.denver.href}', class='btn-green', target='_blank') {page.content.denver.text}
+            //@ELSE
+            .col.col-sm-12.col-md-6.right: a(href='{page.content.denver.href}', class='btn-green') {page.content.denver.text}
+            //@ENDIF
+            //@IF page.content.pikes.external
+            .col.col-sm-12.col-md-6.left: a(href='{page.content.pikes.href}', class='btn-green', target='_blank') {page.content.pikes.text}
+            //@ELSE
+            .col.col-sm-12.col-md-6.left: a(href='{page.content.pikes.href}', class='btn-green') {page.content.pikes.text}
+            //@ENDIF
+      .sub-footer: .container.thin: .row
+        .col.col-sm-12.col-md-8
+          h1 Want to Learn More?
+          p Check out this helpful PDF with the whole mentor process outlined.
+        .col.col-sm-12.col-md-4.rightv
+          a(href='#' class='btn-base') Download Guide 

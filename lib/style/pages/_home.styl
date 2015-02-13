@@ -1,0 +1,460 @@
+$border = #E7E7E7
+.slides
+  margin-bottom -116px
+  position relative
+  top -116px
+  ul
+    display table
+    list-style none
+    margin 0
+    overflow auto
+    padding 0
+    position relative
+    z-index 0
+    li
+      display table-cell
+      float left
+      list-style none
+  span.right, span.left, ol.dots
+    display none
+  @media (min-width: $sm)
+    span.right, span.left
+      color rgba(white, 0.5)
+      cursor pointer
+      display block
+      font-size 72px
+      position absolute
+      top 50%
+      transform translateY(-50%)
+      transition color 300ms ease
+      z-index 1
+      &:hover
+        color rgba(white, 1)
+    span.right
+      right 25px
+    span.left
+      left 25px
+  @media (max-width: $sm)
+    ol.dots
+      display block
+      bottom 30px
+      li:nth-child(n+2)
+        margin-left 10px
+.page.index
+  color $text
+  .jumbotron.home
+    background-color $primary
+    background-image url(../images/banners/home.png)
+    background-size cover
+    color #FFF
+    position relative
+    text-align left
+    z-index 1
+    @media (min-width: $md)
+      padding-bottom 125px
+      padding-top 216px
+    @media (max-width: 991px)
+      padding-bottom 160px
+      padding-top 166px
+    h1
+      margin 0
+      padding 0
+      @media (min-width: $md)
+        font-size 80px
+      @media (max-width: 991px)
+        font-size 32px
+    p
+      margin-bottom 10px
+      margin-top 10px
+      @media (min-width: $md)
+        font-size 30px
+        line-height 38px
+      @media (max-width: 991px)
+        font-size 20px
+        line-height 28px
+    a.btn-white
+      font-size 16px
+      padding 15px 40px 12px
+      i
+        font-size 22px
+        margin-left 10px
+        position relative
+        &.circle
+          border 2px solid
+          border-radius 50%
+          font-size 10px
+          height 24px
+          line-height 20px
+          position relative
+          text-align center
+          top -3px
+          width 24px
+          &:before
+            position relative
+            right -1px
+  .newsletter-banner
+    background-color #703795
+    color #FFF
+    overflow hidden
+    padding-bottom 30px
+    padding-top 25px
+    position relative
+    .col
+      padding-bottom 0
+      position initial
+    .subscribe
+      clearfix()
+      h1
+        font-size 18px
+        font-weight 600
+        margin-bottom 5px
+        margin-top 0
+        @extend .tr-up
+      input, button
+        appearance none
+        border 0 solid
+        border-radius 0
+        float left
+        height 40px
+        line-height 40px
+        margin 0
+        outline 0
+        padding 0
+      input
+        background transparent
+        border 2px solid #FFF
+        color #FFF
+        padding-left 15px
+        padding-right 15px
+        width 68%
+      button
+        background transparent
+        border 2px solid #FFF
+        line-height 20px
+        margin-left 2%
+        padding-left 15px
+        padding-right 20px
+        max-width 30%
+        transition background 300ms ease
+        &:hover
+          background rgba(white, 0.15)
+        @extend .tr-up
+        i
+          margin-right 5px
+          @media (max-width: $md)
+            display none
+    ul.social
+      font-size 0
+      list-style none
+      margin 0
+      padding 0
+      position absolute
+      right 0
+      top 0
+      z-index 1
+      @media (max-width: 900px)
+        left 0
+        top -35px
+      li:hover
+        transform translateY(-76px)
+        font-size 24px
+        i
+          transform translateY(32px)
+        &.instagram
+          background-color darken(#2E5E86, 10%)
+        &.linkedin
+          background-color darken(#0177B5, 10%)
+        &.youtube
+          background-color darken(#C3191E, 10%)
+        &.facebook
+          background-color darken(#3C5A96, 10%)
+        &.twitter
+          background-color darken(#1DACEE, 10%)
+      li
+        background rgba(white, 0.75)
+        display inline-block
+        font-size 48px
+        height 132px
+        line-height 142px
+        transform translateY(-10px)
+        @media (max-width: 900px)
+          font-size 24px
+          height 42px
+          line-height 42px
+        text-align center
+        transition background 300ms ease, transform 300ms ease
+        i
+          transition all 300ms ease
+        &:before
+          top -20px
+          content ''
+          left 0
+          position absolute
+          height 20px
+          width 100%
+        &:after
+          bottom -60px
+          content ''
+          left 0
+          position absolute
+          height 60px
+          width 100%
+        &.instagram
+          background-color #2E5E86
+          &:after
+            background-color darken(#2E5E86, 30%)
+          .ig-b
+            bottom -104px
+            left 50%
+            position absolute
+            transform translateX(-50%)
+            width 90%
+            z-index 3
+        &.linkedin
+          background-color #0177B5
+          &:after
+            background-color darken(#0177B5, 30%)
+          .IN-widget
+            bottom -44px
+            left 50%
+            position absolute
+            transform translateX(-50%)
+            z-index 3
+        &.youtube
+          background-color #C3191E
+          &:after
+            background-color darken(#C3191E, 30%)
+          #___ytsubscribe_0
+            bottom -42px
+            left 50%
+            position absolute
+            transform translateX(-50%)
+            z-index 3
+            iframe
+              margin 0 auto
+              width 90%
+        &.facebook
+          background-color #3C5A96
+          &:after
+            background-color darken(#3C5A96, 30%) 
+          .fb-like
+            bottom -40px
+            left 50%
+            position absolute
+            transform translateX(-50%)
+            z-index 3
+        &.twitter
+          background-color #1DACEE
+          &:after
+            background-color darken(#1DACEE, 30%)
+          iframe
+            bottom -40px
+            left 50%
+            position absolute
+            transform translateX(-50%)
+            z-index 3
+        @media (min-width: $lg)
+          width 123px
+        @media (max-width: ($lg - 1))
+          width 100px
+        @media (max-width: 900px)
+          width 20%
+  .slider_area
+    @media (min-width: $sm)
+      display table-row
+    clearfix()        
+  #story,
+  #program
+    background-color lighten($blue, 50%)
+    color #FFF
+    padding 0
+    position relative
+    overflow auto
+    @media (min-width: $sm)
+      display table-cell
+      float none
+    ul, ul li
+      height 100%
+    ul, ol
+      list-style none
+      padding 0
+      margin 0
+      li
+        background-repeat no-repeat
+        background-size cover
+        float left
+        &:nth-child(n+2)
+          .flag
+            display none
+    @media (max-width: $sm)
+      ol.dots li:nth-child(n+2)
+        margin-left 10px
+    .flag
+      background #FFF
+      color #010101
+      display block
+      font-size 14px
+      font-weight 700
+      height auto
+      padding-bottom 5px
+      padding-left 30px
+      padding-right 30px
+      padding-top 5px
+      position absolute
+      left 0
+      top 15px
+      width auto
+      @extend .tr-up
+      &:after
+        content ''
+        position absolute
+        top 0
+        right -14px
+        width 0
+        height 0
+        border-right 14px solid transparent
+        border-top 14px solid #FFF
+        border-bottom 13px solid #FFF
+    .body
+      margin 0 auto
+      padding-bottom 60px
+      padding-top 200px
+      position relative
+      z-index 1
+      @media (min-width: $sm)
+        width 80%
+      @media (max-width: $sm)
+        padding-left 15px
+        padding-right 15px
+      h1
+        color #FFF
+        font-size 40px
+        @extend .tr-up
+      p
+        font-size 20px
+        line-height 30px
+    &:after
+      background-image linear-gradient(bottom, rgba(black, 0.7), rgba(black, 0))
+      bottom 0
+      content ''
+      height 100%
+      left 0
+      position absolute
+      right 0
+      top 0
+      z-index 0
+  .posts
+    margin-bottom 60px
+    margin-top 60px
+    clearfix()
+    /* Helpers */
+    .green
+      color $green
+    .orange
+      color $secondary
+    i.circle
+      border 2px solid
+      border-radius 50%
+      font-size 18px
+      height 25px
+      line-height 20px
+      position relative
+      text-align center
+      top -2px
+      width 25px
+    h1
+      font-size 28px
+      margin-bottom 15px
+      margin-top 0
+    ul, ol
+      list-style none
+      margin 0
+      padding 0
+      li
+        border-bottom 1px solid #C4C4C4
+        margin-bottom 25px
+        padding-bottom 20px
+        clearfix()
+        .col-md-3
+          padding-bottom 0
+          padding-left 0
+          padding-right 0
+        .col-md-9
+          padding-bottom 0
+          padding-right 0
+          @media (max-width: $sm)
+            padding-left 0
+            padding-top 15px
+          h1
+            font-size 22px
+            line-height 20px
+            margin 0
+            padding 0
+            small
+              color #C4C4C4
+              display block
+              font-size 14px
+              font-style italic
+              span
+                font-style initial
+          h2
+            font-size 20px
+            line-height 18px
+            margin 10px 0
+            i
+              border 2px solid
+              border-radius 50%
+              font-size 16px
+              height 30px
+              line-height 25px
+              margin-right 10px
+              text-align center
+              width 30px
+              @media (max-width: $sm)
+                &:before
+                  position relative
+                  right -1px
+          a.btn-pill
+            border 2px solid
+            border-radius 20px
+            color inherit
+            font-weight bold
+            height auto
+            line-height 40px
+            margin-top 5px
+            padding 3px 15px
+            text-decoration none
+            transition all 300ms ease
+            width auto
+            @extend .tr-up
+            &:hover
+              background rgba($text, 0.25)
+      &.blog
+        li
+          display table
+          font-size 20px
+          font-weight 700
+          margin-bottom 15px
+          padding-bottom 15px
+          position relative
+          width 100%
+          a, &:before
+            vertical-align middle
+          a
+            color inherit
+            display table-cell
+            text-decoration none
+            &:hover
+              color darken($text, 25%)
+          &:before
+            content '\e800'
+            display table-cell
+            font-size 48px
+            left -12px
+            position relative
+            @extend .bbbs-icon
+        a.read__more
+          color #C4C4C4
+          font-weight 600
+          text-decoration none
+          @extend .tr-up

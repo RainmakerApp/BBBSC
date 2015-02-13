@@ -1,0 +1,41 @@
+page:
+  path: /site
+  slug: About
+  name: About Us Page
+pattern:
+  -
+    key: overview
+    format: html
+    name: Overview
+  -
+    key: history
+    format: html
+    name: History
+  -
+    key: finances
+    format: html
+    name: Finances
+  -
+    key: partners
+    format: html
+    name: Partners
+  -
+    key: resources
+    format: html
+    name: Resources
+  -
+    key: denver
+    format: html
+    name: Denver Staff
+  -
+    key: pikes
+    format: html
+    name: Pikes Peak Staff
+  -
+    key: newsroom
+    format: html
+    name: Newsroom
+  -
+    key: careers
+    format: html
+    name: Careers

@@ -1,0 +1,48 @@
+.page.page-contact
+	color $text
+	.container#main
+		padding-bottom 60px
+		padding-top 60px
+	.jumbotron
+		background-image url(../images/banners/contact.png)
+		color white
+		padding-bottom 80px
+		padding-top 186px
+		h1
+			color white
+			font-size 60px
+			p
+				font-size 20px
+				font-weight 300
+				margin-bottom 60px
+				@extend .tr-init
+		a.btn
+			@media (min-width $sm)
+				margin 0 15px 10px
+				&:last-of-type
+					margin 0 15px 0
+			@media (max-width ($sm - 1))
+				margin 0 0 10px
+	.content
+		h2.tr-up
+			font-size 16px
+		form
+			margin-top 15px
+	.sidebar
+		h2:first-of-type
+			font-size 16px
+			margin-top 0
+		.table h2
+			margin-bottom 20px
+			@extend .tr-up
+		section
+			margin-bottom 20px
+			padding-left 10px
+			padding-right 10px
+			strong
+				display inline-block
+				margin 0 0 5px
+				@extend .tr-up
+			address
+				color #A1A1A1
+				font-style normal

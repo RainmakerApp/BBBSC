@@ -1,0 +1,67 @@
+/*
+ * Breakpoints
+ * ===========
+ */
+$sm = 768px
+$md = 992px
+$lg = 1200px
+
+.container
+  margin 0 auto
+  padding-left 15px
+  padding-right 15px
+  @media (min-width $sm)
+    width 90%
+    max-width 1300px
+    &.thin
+    	max-width 960px
+
+.container-fluid
+  display block
+  margin 0 auto
+  padding-left 15px
+  padding-right 15px
+
+.row
+  list-style none
+  margin 0 -15px
+  clearfix()
+    
+.col
+  float left
+  position relative
+  padding 0 15px 15px
+  img
+    max-width 100%
+    height auto
+    
+grid(class = 'sm', columns = 12)
+  for colCount in (1 .. columns)
+    percentWidth = 1% * ((colCount / columns) * 100)
+    .col-{class}-{colCount}
+      width percentWidth
+
+/* Base Grid */
+grid()
+
+/* Medium Size */
+@media (min-width: $sm)
+  grid('md')
+
+/* Large Size */
+@media (min-width: $md)
+  grid('lg')
+  
+/*
+ * Helpers
+ * =======
+ */
+.show-sm
+	display none
+.show-md
+	display block
+@media (max-width: $sm)
+	.show-sm
+		display block
+	.show-md
+		display none

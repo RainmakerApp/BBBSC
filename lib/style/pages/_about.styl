@@ -1,0 +1,184 @@
+$border = #E7E7E7
+.page.page-about
+	color $text
+	.jumbotron
+		background-image url(../images/banners/about-us.png)
+	.content
+		padding 30px 0
+		&:last-of-type
+			margin-bottom 0
+		h1.title
+			border-bottom 2px solid $text
+			font-size 32px
+			font-weight 500
+			margin-bottom 15px
+			@extend .tr-init
+	.tab-area
+		position relative
+		.tabs
+			border-bottom 1px solid $border
+			overflow-x scroll
+			overflow-y auto
+			position relative
+			text-align center
+			ul
+				background $border
+				font-size 0
+				justify-content center
+				margin 0
+				padding 0
+				position relative
+				clearfix()
+				@media (max-width: ($lg - 1))
+					width 1173px
+				li
+					background #FFF
+					color #959595
+					cursor pointer
+					display inline-block
+					font-size 12px
+					font-weight 600
+					@media (min-width: $lg)
+						padding 20px 40px
+					@media (max-width: ($lg - 1))
+						// Float Left on Mobile
+						float left
+						padding 20px 40px
+					transition all 300ms ease
+					&:nth-child(n+2)
+						border-left 1px solid $border
+					&:first-child
+						border-left 1px solid $border
+					&:last-child
+						border-right 1px solid $border
+					&:hover, &.active
+						background $blue
+						color #FFF
+						&:nth-child(n+2)
+							border-left 1px solid $blue
+						&:first-child
+							border-left 1px solid $blue
+						&:last-child
+							border-right 1px solid $blue
+					tr-ls(0.1em)
+		@media (max-width: ($lg - 1))
+			span.fade
+				background-image linear-gradient(left, rgba(white, 0), rgba(white, 1))
+				content ''
+				display block
+				height 52px
+				position absolute
+				right 0
+				top 0
+				width 50px
+				z-index 1
+	.tabs.big
+		border-bottom 2px solid $text
+		margin-top 60px
+		clearfix()
+		.tab
+			cursor pointer
+			float left
+			padding-bottom 10px
+			padding-top 10px
+			position relative
+			@media (min-width: $sm)
+				&:not(.active)
+					border-left 2px solid transparent
+					border-right 2px solid transparent
+					border-top 2px solid transparent
+					color lighten($text, 75%)
+					&:nth-child(n+2):before
+						background lighten($text, 75%)
+						content ''
+						height 25px
+						left -4px
+						position absolute
+						top 50%
+						transform translateY(-50%)
+						width 2px
+						z-index -1
+				&:nth-child(1)
+					padding-left 0
+					padding-right 30px
+					&.active
+						border-right 2px solid $text
+				&:nth-child(2)
+					padding-left 30px
+					padding-right 30px
+					text-align center
+					&.active
+						border-left 2px solid $text
+						border-right 2px solid $text
+				&:nth-child(3)
+					padding-left 30px
+					padding-right 30px
+					text-align right
+					&.active
+						border-left 2px solid $text
+						border-right 2px solid $text
+				&.active
+					border-top 2px solid $text
+					&:after
+						background #FFF
+						bottom -2px
+						content ''
+						height 2px
+						left 0
+						position absolute
+						width 100%
+				p
+					font-size 50px
+					font-weight 100
+					margin 0
+					tr-ls(0.015em)
+			@media (max-width: ($sm - 1))
+				&:not(.active)
+					border-left 2px solid transparent
+					border-right 2px solid transparent
+					border-top 2px solid transparent
+					color lighten($text, 75%)
+					&:nth-child(n+2):before
+						background lighten($text, 75%)
+						content ''
+						height 25px
+						left -4px
+						position absolute
+						top 50%
+						transform translateY(-50%)
+						width 2px
+						z-index -1
+				&:nth-child(1)
+					padding-left 0
+					padding-right 15px
+					&.active
+						border-right 2px solid $text
+				&:nth-child(2)
+					padding-left 15px
+					padding-right 15px
+					text-align center
+					&.active
+						border-left 2px solid $text
+						border-right 2px solid $text
+				&:nth-child(3)
+					padding-left 15px
+					padding-right 15px
+					text-align right
+					&.active
+						border-left 2px solid $text
+						border-right 2px solid $text
+				&.active
+					border-top 2px solid $text
+					&:after
+						background #FFF
+						bottom -2px
+						content ''
+						height 2px
+						left 0
+						position absolute
+						width 100%
+				p
+					font-size 14px
+					font-weight 500
+					margin 0
+					tr-ls(0.015em)

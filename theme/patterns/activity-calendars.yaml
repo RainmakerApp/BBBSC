@@ -1,0 +1,10 @@
+pattern:
+  - 
+    key: title
+    format: title
+    name: Calendar Title
+  -
+    key: action
+    format: button
+    name: Action Button
+    description: Provide button text and a link. Check external to open in new tab.

@@ -1,0 +1,43 @@
+theme:template(title="Blog", name="_default")
+  content
+    div(class='page page-events', :load=":api(3.0).posts().status(published).page({:get.page ? :get.page : 1},10) as posts")
+      .jumbotron: .container
+        h1.tr-up Our Blog
+      .bar.subscribe
+        form: .group
+          input(type='text', name='email', placeholder='Email Address')
+          button(class='btn fill btn-orange') Subscribe
+      .container#main
+        .table: h2: span.tr-up Latest Blog Posts
+        ul.events: .content.row
+          li(:load="posts as post", :iterate="self")
+            .col.col-sm-4.col-md-1
+              .date
+                span.month {post.timestamp.created.unix|date(M)}
+                span.day {post.timestamp.created.unix|date(j)}
+            .col.col-sm-8.col-md-5.thumb
+              img(src='{post.attachments().first.version(,)}')
+            .col.col-sm-12.col-md-6
+              h1 {post.title}
+              p {post.excerpt|limitstring(180,...)|strip_tags}
+              a(href='/blog/{post.id}' class='btn-base tiny') Read Full Article
+        .pagination: .row
+          .show-sm
+            .col.col-sm-1.ta-center.prev
+              h4.tr-up
+                {posts.paging_html(page,pg)}
+            .col.col-sm-10.ta-center
+              h4
+                {posts.paging_html(page,pg)}
+            .col.col-sm-1.ta-center.next
+              h4.tr-up
+                {posts.paging_html(page,pg)}
+          .show-md
+            .col.col-md-3.ta-left.prev
+              h4.tr-up: {posts.paging_html(page,pg)}
+            .col.col-md-6.ta-center
+              h4
+                {posts.paging_html(page,pg)}
+            .col.col-md-3.ta-right.next
+              h4.tr-up: {posts.paging_html(page,pg)}
+

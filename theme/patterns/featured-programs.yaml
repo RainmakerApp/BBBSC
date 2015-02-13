@@ -1,0 +1,21 @@
+pattern:
+  - 
+    key: title
+    format: title
+    name: Program Title
+    description: This will be the headline text. Best kept between one and two lines.
+  -
+    key: body
+    format: html
+    name: Description
+    description: This text appears below the header. Try to keep it restricted to a couple lines as well.
+  -
+    key: action
+    format: button
+    name: Action Button
+    description: Provide button text and a link.
+  -
+    key: image
+    format: upload
+    name: Background Image
+    description: "This covers the background of the slide. Make sure it's at least 600px wide. Ideally, crop the image to 1:1 ratio prior to uploading. Otherwise the image will be centered vertically, possibly clipping off important content."

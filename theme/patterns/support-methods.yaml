@@ -1,0 +1,13 @@
+pattern:
+  - 
+    key: title
+    format: title
+    name: Way to Support
+  -
+    key: description
+    format: html
+    name: Description
+  -
+    key: icon
+    format: image
+    name: Icon

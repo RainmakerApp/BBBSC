@@ -1,0 +1,71 @@
+theme:template(title="Volunteer", name="_default")
+  content
+    div(class='page page-about', :load=":api(3.0).content(site.about) as page")
+      .jumbotron: .container
+        h1(class='tr-up') About Us
+      .tab-area
+        span.fade
+        .tabs
+          ul(class='tr-up')
+            li(class='active tab', data-target='overviewMain') Overview
+            li(class='tab', data-target='partners') Partners
+            li(class='tab', data-target='resources') Resources
+            li(class='tab', data-target='denverStaff') Staff - Denver
+            li(class='tab', data-target='pikesStaff') Staff - Pikes Peak
+            li(class='tab', data-target='newsroom') Newsroom
+            li(class='tab', data-target='careers') Careers
+      .container.thin
+        div(class='pane active', id='overviewMain')
+          .tabs.big
+            div(class='tr-up tab active', data-target='overview')
+              p Overview
+            div(class='tr-up tab', data-target='history')
+              p History
+            div(class='tr-up tab', data-target='finances')
+              p Finances
+          .content.pane.active#overview
+            {page.content.overview}
+          .content.pane#history
+            {page.content.history}
+          .content.pane#finances(style='margin-bottom: 0 !important;')
+            {page.content.finances}
+        div(class='pane content', id='partners')
+          h1.title Partners
+          {page.content.partners}
+        div(class='pane content', id='resources')
+          h1.title Resources
+          {page.content.resources}
+        div(class='pane content', id='denverStaff')
+          h1.title Denver Staff
+          {page.content.denver}
+        div(class='pane content', id='pikesStaff')
+          h1.title Pikes Peak Staff
+          {page.content.pikes}
+        div(class='pane content', id='newsroom')
+          h1.title Newsroom
+          {page.content.newsroom}
+        div(class='pane content', id='careers')
+          h1.title Careers
+          {page.content.careers}
+
+    div.sub-footer: .container: .row
+      .col.col-sm-12.center
+        h1 Get Involved
+          p Click here to 
+            a(href='#') volunteer in Denver and Pikes Peak.
+      .col.col-sm-12.col-md-6
+        h3 Nationally Recognized
+        p The Center for the Study and Prevention of Violence at University of Colorado at Boulder recognizes Big Brothers Big Sisters as a "Blueprint" program with proven results.
+        p The Center for the Study and Prevention of Violence at University of Colorado at Boulder recognizes Big Brothers Big Sisters as a "Blueprint" program with proven results.
+      .col.col-sm-2-offset.col-sm-1
+        |&nbsp;
+      .col.col-sm-12.col-md-5
+        h3 Program Impact
+        small As a result of participation, our Little Brothers and Little Sisters:
+        ul.stars
+          li Have better attitudes towards school
+          li Get along better with adults and peers
+          li Have better self-esteem
+          li Have a better sense of their future.
+
+        
