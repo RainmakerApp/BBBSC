@@ -1,0 +1,11 @@
+.modal#background
+  .modal-container
+    .main
+      a(href='#', class='btn facebook-login', id='facebook__login') Use Facebook Photo
+      span.or
+      a(href='#', class='btn btn-green upload-button') Upload Your Own Photo
+        //@IF team.id
+        input(type='file', name='file', id='customPhoto', data-id='{team.id}')
+        //@ELSEIF group.id
+        input(type='file', name='file', id='customPhoto', data-id='{group.id}')
+        //@ENDIf

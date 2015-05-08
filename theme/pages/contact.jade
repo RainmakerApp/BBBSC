@@ -1,15 +1,24 @@
-theme:template(title="Volunteer", name="_default")
+theme:template(title="Contact Us", name="_default")
   content
     div(class='page page-contact')
-      .jumbotron: .container
+      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1(class='tr-up') We're eager to hear from you
           p Simply call, email, or use the form below to get in touch.
-        a(href='#', class='btn btn-white') Volunteer As A Mentor
-        a(href='#', class='btn btn-white') Enroll A Child
+        a(href='/volunteer', class='btn btn-white') Volunteer As A Mentor
+        a(href='/enroll-a-child', class='btn btn-white') Enroll A Child
       .container.thin#main: .row
         .col.col-sm-12.col-md-8.content
           h2.tr-up Send Us a Message
-          form.form
+          //@IF :get.success
+          h1 Thanks for getting in touch!
+          //@ELSE
+          form(action='/api/3.0/form-completions', role='form', id='form', method='post', class='form')
+            | <:module slug="messages-display" namespace="contact-form" />
+            | <input type="hidden" name="--namespace" value="contact-form" />
+            | <input type="hidden" name="--failure" value="/contact#form" />
+            | <input type="hidden" name="--form" value="contact" />
+            | <input type="hidden" name="--success" value="/contact?success=true" />
+            | <input type="hidden" name="--conversation" value="message" />
             div.input-group.split
               label(for='first') Your Name*
               .input-column
@@ -25,13 +34,27 @@ theme:template(title="Volunteer", name="_default")
                 input(type='text', name='contact[phone]', placeholder='(000) 123 - 4567', id='phone')
               .input-column
                 label(for='zip') Your Zip Code*
-                input(type='text', name='contact[email]', placeholder='Zip Code', id='zip')
+                input(type='text', name='contact[]', placeholder='Zip Code', id='zip')
             div.input-group
               label(for='message') Message*
-              textarea(id='message', rows='6')
+              textarea(id='message', rows='6', name='message')
             button(type='submit', class='tr-up form-button') Submit Message
+            //@ENDIF
         .col.col-sm-12.col-md-4.sidebar
-          h2.tr-up Connect on Social Media
+          .info-group
+            h2.tr-up Connect on Social Media
+            a(href='{:settings.facebook-page}'): div.facebook
+              span.icon
+                i.fa.fa-facebook
+              span Facebook
+            a(href='https://twitter.com/{:settings.social-twitter}'): div.twitter
+              span.icon
+                i.fa.fa-twitter
+              span Twitter
+            a(href='http://www.youtube.com/user/{:settings.social-youtube}'): div.pinterest
+              span.icon
+                i.fa.fa-play
+              span Youtube
           .table: h2.tr-up Denver
           //- GENERAL CONTACT
           section.general

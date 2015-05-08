@@ -1,0 +1,35 @@
+page:
+  path: /site
+  slug: createfundraiser
+  name: Fundraiser Creation Placeholder Content
+pattern:
+  -
+    key: photos
+    format: blocks
+    name: Banner Photos
+    singular: Banner Photo
+    pattern: banner-photos
+  -
+    key: headlineone
+    format: html
+    name: Prewritten Headline One
+  -
+    key: headlinetwo
+    format: html
+    name: Prewritten Headline Two
+  -
+    key: headlinethree
+    format: html
+    name: Prewritten Headline Three
+  -
+    key: messageone
+    format: html
+    name: Prewritten Description One
+  -
+    key: messagetwo
+    format: html
+    name: Prewritten Description Two
+  -
+    key: messagethree
+    format: html
+    name: Prewritten Description Three

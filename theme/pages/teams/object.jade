@@ -1,0 +1,141 @@
+theme:template(title="{team.name}", name="_fundraiser", :load=":api(3.0).groups({:url.2}, team) as team")
+  redirect(:eval="team.type != 'team'") /fundraising/{team.id}
+  content
+    div(class='page page-fundraiser')
+      .fundraiser-info: .container.thin: .row
+        .col.col-sm-12.col-md-5
+          .funds-raised
+            p.left {team.progress.money|money}
+              small Raised Already
+            p.right
+              small {team.target|money}
+          .progress-bar
+            .progress-bar-fill(style="width: {team.progress.percent};")
+        .col.col-sm-12.col-md-2
+          a(href='#', data-action='donate', data-group='{team.id}' data-tags='group:team', class='rain btn') Donate Now
+        .col.col-sm-12.col-md-5.align-right
+          p
+            span.ends Ends:
+            span.num-group#months
+              span.num {team.timestamp.until.countdown.week|lpad(2,0)|substr(0,1)}
+              span.num {team.timestamp.until.countdown.week|lpad(2,0)|substr(1,1)}
+            span.num-group#weeks
+              span.num {team.timestamp.until.countdown.day|lpad(2,0)|substr(0,1)}
+              span.num {team.timestamp.until.countdown.day|lpad(2,0)|substr(1,1)}
+      .container.thin#main
+        .row: .banner-area(:load="team.owner as owner")
+          //@IF :member.id === team.id
+          a(class='btn btn-purple fill position-absolute', href='#/my/account/fundraisers/{team.id}/details') Manage Team
+          //@ENDIF
+          div.banner-area_grid: .item(:load="team.photos as photo", :iterate="self"): img(src='{photo.photo-url}')
+          //@IF team.owner.id == :member.id && owner.photos.count == 0 && !owner.facebook
+          .banner-area_featured.upload(style="background-image: url('//rainmakerapp.s3.amazonaws.com/bbsc/images/dummy/tall-thumb.png')")
+          //@ELSEIF team.owner.id == :member.id && owner.photos.count > 0 && team.owner.prop.prefer_facebook != 1
+          .banner-area_featured.upload.change(style="background-image: url({:e.url.link([owner.photo_url])})")
+          //@ELSEIF team.owner.id == :member.id && owner.facebook
+          .banner-area_featured.upload(src='//graph.facebook.com/{owner.facebook.userID}/picture?type=large&width=300&height=300')
+          //@ELSEIF team.owner.id != :member.id && owner.photos.count < 1 && !owner.facebook
+          .banner-area_featured(style="background-image: url(//rainmakerapp.s3.amazonaws.com/bbsc/images/public-profile.png)")
+          //@ELSEIF team.owner.id != :member.id && owner.photos.count > 0 && team.owner.prop.prefer_facebook != 1
+          .banner-area_featured(style="background-image: url({:e.url.link([owner.photo_url])})")
+          //@ELSEIF team.owner.id != :member.id && owner.facebook
+          .banner-area_featured(style="background-image: url(//graph.facebook.com/{owner.facebook.userID}/picture?type=large&width=300&height=300)")
+          //@ELSE
+          .banner-area_featured(style="background-image: url(//rainmakerapp.s3.amazonaws.com/bbsc/images/public-profile.png)")
+          //@ENDIF
+          div.banner-area_meta
+            .meta_title
+              h1 {team.name}
+              a(href='#', data-action='donate', data-group='{team.id}' data-tags='group:team', class='rain btn btn-green fill') Donate Now
+              a(href='/#/create/fundraiser', class='btn fill btn-orange', id='create__fundraiser') Join Team
+              a(href='#', class='btn fill btn-light-gray') Share
+            .meta_info
+              span.num#supporters {team.members.length}
+              span.num#updates {team.posts.length}
+              span.num#shares 1,109
+        .mobile-title
+          h1 {team.name}
+          a(href='#', class='btn fill btn-green') Donate
+          a(href='/#/create/fundraiser', class='btn fill btn-orange', id='create__fundraiser') Join Team
+          a(href='#', class='btn fill btn-light-gray') Share
+        .row
+          .col.col-md-12.col-lg-3: .sidebar: .row
+            section.supports.col.col-sm-12.col-md-6.col-lg-12
+              h4 Supporters 
+                small {team.members.length}
+              ul
+                li(:load='team.members.page(1,5).limit(10) as supporter', :iterate='self')
+                  .left {supporter.name}
+                  .right {supporter.context-donation-total|money}
+            section.fundraisers.col.col-sm-12.col-md-6.col-lg-12(:load="team.groups() as fundraisers")
+              //- {fundraisers|dump}
+              h4 Fundraisers 
+                small {fundraisers.length}
+              ul
+                li(:load="fundraisers as fundraiser", :iterate="self")
+                  .thumb
+                    img(src='{fundraiser.attachments().first.version(,)}')
+                  .title
+                    a(href='#') {fundraiser.name}
+                    strong {fundraiser.target|money}
+          .col.col-md-12.col-lg-9
+            ul.tabs: .track
+              li(class='tab active', data-target='details') Event Details
+              li(class='tab', data-target='for') What is the money for?
+              li(class='tab', data-target='posts') Updates 
+                span.badge {team.posts.length}
+            .pane.active#details
+              strong {team.prop.headline}
+              //- form#ticket
+                .ticket
+                  .ticket__left
+                    .ticket__left-punchout
+                  .ticket__right
+                    h2 Your Ticket For
+                    h1 Volley For Kids’ Sake Tournament
+                    .row.tr-up.icons
+                      .col.col-sm-12.col-md-6
+                        p
+                          i.fa.fa-calendar
+                          span.head 23 Dec 2014 | 7:00pm - 8:00pm
+                          span.lead Event Date
+                      .col.col-sm-12.col-md-6
+                        p
+                          i.fa.fa-map-marker
+                          span.head Bear Creek Park
+                          span.lead Colorado Springs, CO 80922
+                    .row.tr-up.input
+                      .col.col-sm-12.col-md-6
+                        p: span.lead Ticket Type
+                        .icon-select
+                          select(name='ticket-type')
+                            option(value='25') $25 - One Team Entry
+                          i.fa.fa-sort-desc
+                      .col.col-sm-12.col-md-2
+                        p: span.lead Quantity
+                        .icon-select
+                          select(name='ticket-amount')
+                            option(value='1') 01
+                            option(value='2') 02
+                            option(value='3') 03
+                            option(value='4') 04
+                            option(value='5') 05
+                          i.fa.fa-sort-desc
+                      .col.col-sm-12.col-md-4.total
+                        p $25
+                .pull-right
+                  a(href='#', class='btn fill btn-green') Confirm
+              {team.description|ormarkdown}
+            .pane#for
+              br
+              {team.project().description}
+            .pane#posts
+              br
+              //@IF team.posts.length == 0
+              strong No updates yet.
+              //@ELSE
+              ul
+                li(class="update", :load="team.posts.status(published) as update", :iterate="self")
+                  h6 {update.title}
+                  p {update.content}
+              //@ENDIF

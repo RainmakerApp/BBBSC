@@ -1,0 +1,53 @@
+page:
+  path: /site
+  slug: enroll
+  name: Enroll a Child
+pattern:
+  -
+    key: spanish
+    format: string
+    name: Information in Spanish
+    description: 'Should be a full link to the information in Spanish, ex.) http://www.biglittlecolorado.org/information.pdf'
+  -
+    key: denverref
+    format: button
+    name: Denver - Youth Referral Form
+  -
+    key: denverapp
+    format: button
+    name: Denver - Youth Application Form
+  -
+    key: pikesref
+    format: button
+    name: Pikes Peak - Youth Referral Form
+  -
+    key: pikesapp
+    format: button
+    name: Pikes Peak - Youth Application Form
+  -
+    key: colone
+    format: button
+    name: 'First Column - Text & Link'
+    description: 'First link at the bottom of the page. The "text" will be used as the overlay text, and the "link" will dictate where the image links to.'
+  -
+    key: coloneimg
+    format: image
+    name: 'First Column - Background Image'
+  -
+    key: coltwo
+    format: button
+    name: 'Second Column - Text & Link'
+    description: 'Second link at the bottom of the page. The "text" will be used as the overlay text, and the "link" will dictate where the image links to.'
+  -
+    key: coltwoimg
+    format: image
+    name: 'Second Column - Background Image'
+  -
+    key: colthree
+    format: button
+    name: 'Third Column - Text & Link'
+    description: 'Third link at the bottom of the page. The "text" will be used as the overlay text, and the "link" will dictate where the image links to.'
+  -
+    key: colthreeimg
+    format: image
+    name: 'Third Column - Background Image'

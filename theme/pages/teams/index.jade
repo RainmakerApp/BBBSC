@@ -1,91 +1,72 @@
 theme:template(title="Fundraising Teams", name="_default")
   content
     div(class='page page-teams page-sidebar')
-      .jumbotron: .container
+      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1(class='tr-up') Fundraising Teams
       .container#main: .content: .row
         .col.col-sm-12.col-md-8
+          //@IF :get.q
+          .table.tr-up: h2.tr-up Showing Results for: {:get.q}
+          ul.search-results.teams
+            li(:load=":api(3.0).groups().type(team).search({:get.q}) as result", :iterate="self"): .row
+              .col.col-sm-4
+                img(src='{result.attachments().first.version(,)}')
+              .col.col-sm-8
+                h1 {result.name}
+                {result.description|limitstring(300,...)}
+                div(style="margin-top: 15px;")
+                .progress-bar
+                  .progress-bar-fill(style='width: {result.progress.percent};')
+                .stat-row
+                  .stat
+                    span.num {result.progress.percent}
+                    span.text Funded
+                  .stat
+                    span.num {result.progress.amount|money}
+                    span.text Pledged
+                  .stat
+                    span.num {result.groups.count}
+                    span.text Members
+                  .stat
+                    span.num {result.stats.followers}
+                    span.text Givers
+                  .stat
+                    span.num {result.posts.length}
+                    span.text Updates
+                a(href='/fundraising/{result.id}' class='btn btn-purple tiny') View Fundraiser
+          //@ELSE
           .table.tr-up: h2.tr-up Our Teams
           ul.teams: .row
-            li
+            li(:load=":api(3.0).groups().type(team) as team", :iterate="self")
               .col.col-sm-12.col-md-4
-                img(src='assets://images/dummy/tall-thumb.png')
+                img(src='{team.photo_url}')
               .col.col-sm-12.col-md-8
-                h1 Team Name Goes Here
+                h1: a(href='/teams/{team.id}') {team.name}
                 p Team description goes here...Lorem ipsum dolor sit amet, tempor incididunt ut labore et dolore magna aliqua. Ut enniam, quis nostrud exercitation ullamco laboris nisi ut aliq...
                 .progress-bar
-                  .progress-bar-fill(style='width: 35%;')
+                  .progress-bar-fill(style='width: {team.progress.percent};')
                 .stat-row
                   .stat
-                    span.num 43%
+                    span.num {team.progress.percent}
                     span.text Funded
                   .stat
-                    span.num $7,394
+                    span.num {team.progress.amount|money}
                     span.text Pledged
                   .stat
-                    span.num 11
+                    span.num {team.groups.count}
                     span.text Members
                   .stat
-                    span.num 273
+                    span.num {team.stats.followers}
                     span.text Givers
                   .stat
-                    span.num 01
+                    span.num {team.posts.length}
                     span.text Updates
-                a(href='#' class='btn-base tiny') Join This Team
-            li
-              .col.col-sm-12.col-md-4
-                img(src='assets://images/dummy/tall-thumb.png')
-              .col.col-sm-12.col-md-8
-                h1 Team Name Goes Here
-                p Team description goes here...Lorem ipsum dolor sit amet, tempor incididunt ut labore et dolore magna aliqua. Ut enniam, quis nostrud exercitation ullamco laboris nisi ut aliq...
-                .progress-bar
-                  .progress-bar-fill(style='width: 90%;')
-                .stat-row
-                  .stat
-                    span.num 90%
-                    span.text Funded
-                  .stat
-                    span.num $90,000
-                    span.text Pledged
-                  .stat
-                    span.num 11
-                    span.text Members
-                  .stat
-                    span.num 273
-                    span.text Givers
-                  .stat
-                    span.num 01
-                    span.text Updates
-                a(href='#' class='btn-base tiny') Join This Team
-            li
-              .col.col-sm-12.col-md-4
-                img(src='assets://images/dummy/tall-thumb.png')
-              .col.col-sm-12.col-md-8
-                h1 Team Name Goes Here
-                p Team description goes here...Lorem ipsum dolor sit amet, tempor incididunt ut labore et dolore magna aliqua. Ut enniam, quis nostrud exercitation ullamco laboris nisi ut aliq...
-                .progress-bar
-                  .progress-bar-fill(style='width: 60%;')
-                .stat-row
-                  .stat
-                    span.num 60%
-                    span.text Funded
-                  .stat
-                    span.num $8,000
-                    span.text Pledged
-                  .stat
-                    span.num 11
-                    span.text Members
-                  .stat
-                    span.num 273
-                    span.text Givers
-                  .stat
-                    span.num 01
-                    span.text Updates
-                a(href='#' class='btn-base tiny') Join This Team
+                a(href='/teams/{team.id}/#/fundraiser/create' class='btn-base tiny') Join This Team
+          //@ENDIF
         .col.col-sm-12.col-md-4
           .sidebar
             .action: a(href='#')
-              div.orange.tr-up
+              div.orange.tr-up.create__fundraiser(data-team='true')
                 table
                   tr
                     td: img(src='assets://images/team.png')
@@ -97,54 +78,15 @@ theme:template(title="Fundraising Teams", name="_default")
             section.donations
               h3 Recent Donations
               ul
-                li
-                  .pull-left Joe Baker
-                  .pull-right $50.00
-                li
-                  .pull-left Paul Isaacs
-                  .pull-right $1,500.00
-                li
-                  .pull-left Marcie Little
-                  .pull-right $25.00
-                li
-                  .pull-left Jon Bell
-                  .pull-right $100.00
-                li
-                  .pull-left Chris McIntire
-                  .pull-right $250.00
-                li
-                  .pull-left Katie Ellis
-                  .pull-right $50.00
-                li
-                  .pull-left Sylvia Sedrik
-                  .pull-right $15.00
-                li
-                  .pull-left Jessica Taylor
-                  .pull-right $25.00
-                li
-                  .pull-left Rita DeFord
-                  .pull-right $100.00
-                li
-                  .pull-left Daniel Price
-                  .pull-right $250.00
+                li(:load=':api(3.0).designations().tags(group:team) as donation', :iterate='self')
+                  .pull-left {donation.contact.name}
+                  .pull-right {donation.amount|money}
             section.fundraisers
               h3 Top Fundraisers
               ul
-                li: .row
-                  .col.col-sm-12.col-md-4
-                    img(src='assets://images/dummy/thumb.png')
-                  .col.col-sm-12.col-md-8
-                    a(href='#') John Doe
-                    p Testing
-                li: .row
-                  .col.col-sm-12.col-md-4
-                    img(src='assets://images/dummy/thumb.png')
-                  .col.col-sm-12.col-md-8
-                    a(href='#') Chris McIntire
-                    p $1,500.00
-                li: .row
-                  .col.col-sm-12.col-md-4
-                    img(src='assets://images/dummy/thumb.png')
-                  .col.col-sm-12.col-md-8
-                    a(href='#') Matthew and Mary Williams
-                    p $1,500.00
+                li(:load=':api(3.0).groups().type(team).sort(progress,desc).limit(5) as group', :iterate='self'): .row
+                  .col.col-sm-12.col-md-4(style="vertical-align: middle; float: none; display: table-cell;")
+                    img(src='{group.photo_url}', style='vertical-align: middle;')
+                  .col.col-sm-12.col-md-8(style="padding-top: 0; vertical-align: middle; float: none; margin: 0; display: table-cell;")
+                    a(href='/teams/{group.id}') {group.name}
+                    p(style="margin: 0;") {group.progress.amount|money}

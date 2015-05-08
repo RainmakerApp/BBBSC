@@ -1,0 +1,100 @@
+theme:template(title="Enroll a Child", name="_default")
+  content
+    div(class='page page-enroll', :load=":api(3.0).content(site.enroll) as page")
+      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+        h1(class='tr-up') Enroll a Child
+        .language: a(href='{page.content.spanish}', target='_blank') Información en Español
+      .center.container.thin.main
+        p We match youth in the Metro Denver and Colorado Springs areas who are between the ages of 7 and 12, are from a single parent or kinship care household, and receive free or reduced lunch at school.
+      .section.center: .container.thin.icons.enroll-icons
+        h2(style='margin-bottom: 0;') Common Challenges
+        p.sub(style='margin-top: 0;') Our programs are designed to serve youth by providing them with safe, quality mentoring relationships that help them reach their full potential by:
+        .row 
+          .col.col-sm-12.col-md-4
+            img(src='assets://images/enroll/single.png')
+            .tr-up Single Parent
+            p.text Children of a single parent.
+          .col.col-sm-12.col-md-4
+            img(src='assets://images/enroll/incarcerated.png')
+            .tr-up Incarceration
+            p.text Children of an incarcerated parent.
+          .col.col-sm-12.col-md-4 
+            img(src='assets://images/enroll/deceased.png')
+            .tr-up Deceased Parent
+            p.text Children with one or both parents deceased.
+        .row(style="margin-top: 30px;")
+          .col.col-sm-12.col-md-4
+            img(src='assets://images/enroll/extended.png')
+            .tr-up Extended Family
+            p.text Children in the custody of extended family members.
+          .col.col-sm-12.col-md-4
+            img(src='assets://images/enroll/mentor.png')
+            .tr-up Mentor Help
+            p.text Children needing guidance from a mentor outside their family.
+          .col.col-sm-12.col-md-4 
+            img(src='assets://images/enroll/military.png')
+            .tr-up Military Parent
+            p.text Children with a deployed military parent.
+      .section.inverse: .container.thin.main(style='padding-bottom: 0; padding-top: 45px;')
+        .center 
+          h2(style='margin-bottom: 0;') Program Impact
+          p(style='margin-top: 0; margin-bottom: 30px;') Our programs are delivered 100% by community volunteers who generously give of their time to help youth. Children who may not be suited for our program are as follows:
+        ul.stars.thin(style="line-height: 26px;"): .row
+          .col.col-sm-12.col-md-6
+            li Children currently in an abusive situation or who have not had outside counseling regarding an abusive situation (these children should seek professional counseling).
+            li Children who do not want to be enrolled in the Big Brothers Big Sisters Program.
+          .col.col-sm-12.col-md-6.left
+            li Children who do not have permission from their legal guardian to be enrolled in the Big Brothers Big Sisters Program.
+            li Children of parents who are merely looking for a babysitter for their children.
+      .section: .container.thin.main
+        .row
+          .col.col-sm-12.col-md-6
+            .table
+              h2.tr-up(style='font-weight: 600;') To Enroll a Child in Denver
+              ul.table
+                li If you would like to refer a child in Denver and are not a parent or gaurdian please fill out:
+                  br
+                  a(class='btn btn-base tiny', href='{page.content.denverref.href}', target='_blank') {page.content.denverref.text}
+                li If you are the parent or guardian in and would like to enroll your child in Denver please fill out:
+                  br
+                  a(class='btn btn-base tiny', href='{page.content.denverapp.href}', target='_blank') {page.content.denverapp.text}
+          .col.col-sm-12.col-md-6
+            .table
+              h2.tr-up(style='font-weight: 600;') To Enroll a Child in Pikes Peak
+              ul.table
+                li If you would like to refer a child in Colorado Springs and are not a parent or guardian please fill out:
+                  br
+                  a(class='btn btn-base tiny', href='{page.content.pikesref.href}', target='_blank') {page.content.pikesref.text}
+                li If you are the parent or guardian in and would like to enroll your child in Colorado Springs please fill out:
+                  br
+                  a(class='btn btn-base tiny', href='{page.content.pikesapp.href}', target='_blank') {page.content.pikesapp.text}
+        .center.note: small: em *Please note children must meet our requirements in order to be eligible for our programs. Completing an application does not guarantee acceptance into the program. Some programs may not be available in your area or could have a wait list.
+      .container: .row.thumbs(style='padding-top: 15px; padding-bottom: 25px;')
+        .col.col-sm-12.col-md-4.center: a(href='{page.content.colone.href}')
+          .thumb(style='background-image: url({page.relationships(coloneimg,attachments).first.version(,)})')
+            h2: span {page.content.colone.text}
+        .col.col-sm-12.col-md-4.center: a(href='{page.content.coltwo.href}')
+          .thumb(style='background-image: url({page.relationships(coltwoimg,attachments).first.version(,)})')
+            h2: span {page.content.coltwo.text}
+        .col.col-sm-12.col-md-4.center: a(href='{page.content.colthree.href}')
+          .thumb(style='background-image: url({page.relationships(colthreeimg,attachments).first.version(,)})')
+            h2: span {page.content.colthree.text}
+      //- .sub-footer.inverse: .container: .row
+      //-   .col.col-sm-12.center
+      //-     h1 Get Involved
+      //-       p Click here to 
+      //-         a(href='#') volunteer in Denver and Pikes Peak.
+      //-   .col.col-sm-12.col-md-6
+      //-     h3 Nationally Recognized
+      //-     p The Center for the Study and Prevention of Violence at University of Colorado at Boulder recognizes Big Brothers Big Sisters as a "Blueprint" program with proven results.
+      //-     p The Center for the Study and Prevention of Violence at University of Colorado at Boulder recognizes Big Brothers Big Sisters as a "Blueprint" program with proven results.
+      //-   .col.col-sm-2-offset.col-sm-1
+      //-     |&nbsp;
+      //-   .col.col-sm-12.col-md-5
+      //-     h3 Program Impact
+      //-     small As a result of participation, our Little Brothers and Little Sisters:
+      //-     ul.stars
+      //-       li Have better attitudes towards school
+      //-       li Get along better with adults and peers
+      //-       li Have better self-esteem
+      //-       li Have a better sense of their future.

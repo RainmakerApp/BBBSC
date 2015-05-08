@@ -1,7 +1,7 @@
 theme:template(title="Volunteer", name="_default")
   content
     .page.page-donate
-      .jumbotron: .container
+      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1.tr-up Support The Cause
       .container.thin
         ul.donate-methods: .row

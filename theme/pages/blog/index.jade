@@ -1,12 +1,15 @@
 theme:template(title="Blog", name="_default")
   content
     div(class='page page-events', :load=":api(3.0).posts().status(published).page({:get.page ? :get.page : 1},10) as posts")
-      .jumbotron: .container
+      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1.tr-up Our Blog
       .bar.subscribe
-        form: .group
+        form.subscribe: .group
+          h1(style='display: none; margin: 0 0 25px;')
+          input(type='hidden', name='tags', value='list:newsletter')
           input(type='text', name='email', placeholder='Email Address')
           button(class='btn fill btn-orange') Subscribe
+          .messages.error(style='display: none; margin-top: 10px;')
       .container#main
         .table: h2: span.tr-up Latest Blog Posts
         ul.events: .content.row

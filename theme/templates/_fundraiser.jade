@@ -30,24 +30,39 @@ html(lang="en")
 
   body(class=page)
     theme:embed(file="includes/fundraiser")
+    theme:embed(file="includes/photo-modal")
+    .overlay
+      .pane.center
+        p As an organization dedicated to inclusiveness, Big Brothers Big Sisters of Colorado values and celebrates the diversity and individuality of every child, volunteer, employee, board member, family and community partner.
+        a(class='btn tiny btn-purple btn-outline', href='/about-us') Learn More
     #canvas
-      header(class='nav nav-main nav-dark'): .container.thin
+      header(class='nav nav-main dark'): .container
         div(class='logo pull-left'): a(href='/')
-          .show-md
+          .show-large
             img(src='assets://images/bbbs-logo-white.png' alt='Big Brothers Big Sisters of Colorado' width='344' height='66')
-          .show-sm
+          .show-laptop
             img(src='assets://images/bbbs-icon-white.png' alt='Big Brothers Big Sisters of Colorado' width='' height='66')
         ul(class='pull-right tr-up lg-navigation')
           li: a(href='/enroll-a-child') Enroll a Child
           li: a(href='/volunteer') Volunteer
-          li: a(href='#') Our Programs
+          li: a(href='/our-programs') Our Programs
           li: a(href='/about-us') About Us
-          li: a(href='/donate') Support Us
+          li.dropdown-menu
+            a(href='/donate') Support Us
+            ul
+              li: a(href='/donate') Ways To Give
+              li: a(href='/fundraising') Fundraise
           li: a(href='/events') Events
           li: a(href='/for-bigs') For Bigs
           li: a(href='#/my/donate', class='donate-button') Donate
           li.buttons: .place
-            span.login Login
+            //@IF :member.id
+            a(href='#/my/logout')
+              span.login LOGOUT
+            //@ELSE
+            a(href='#/my/login')
+              span.login LOGIN 
+            //@ENDIF
             span.lgbt
               table
                 tr: td(style="background:#e30505;")  
@@ -58,13 +73,26 @@ html(lang="en")
                 tr: td(style="background:#720885")  
         ul(class='pull-right tr-up md-navigation')
           li: a(href='/volunteer') Volunteer
-          li: a(href='#') Our Programs
+          li: a(href='/our-programs') Our Programs
           li: a(href='/about-us') About Us
           li: a(href='/events') Events
+          li: a(href='/enroll-a-child') Enroll a Child
+          li.dropdown-menu
+            a(href='/donate') Support Us
+            ul
+              li: a(href='/donate') Ways To Give
+              li: a(href='/fundraising') Fundraise
+          li: a(href='/for-bigs') For Bigs
           li: a(href='#/my/donate', class='donate-button') Donate
-          li.toggle-navigation: i#md-navigation: span
+          //- li.toggle-navigation: i#md-navigation: span
           li.buttons: .place
-            span.login Login
+            //@IF :member.id
+            a(href='#/my/logout')
+              span.login LOGOUT
+            //@ELSE
+            a(href='#/my/login')
+              span.login LOGIN  
+            //@ENDIF
             span.lgbt
               table
                 tr: td(style="background:#e30505;")  
@@ -78,13 +106,19 @@ html(lang="en")
           li: a(href='#/my/donate', class='donate-button') Donate
           li.toggle-navigation: i#sm-navigation: span
           li.buttons: .place
-            span.login Login
+            //@IF :member.id
+            a(href='#/my/logout')
+              span.login LOGOUT
+            //@ELSE
+            a(href='#/my/login')
+              span.login LOGIN
+            //@ENDIF
             span.lgbt
               table
                 tr: td(style="background:#e30505;")  
                 tr: td(style="background:#f80;")  
                 tr: td(style="background:#ffea00;")  
-                tr: td(style="background:#008024")  
+                tr: td(style="background:#008024")
                 tr: td(style="background:#0051ff")  
                 tr: td(style="background:#720885")  
 
@@ -99,7 +133,8 @@ html(lang="en")
           ul.menu
             li: a(href='/enroll-a-child') Enroll a Child
             li: a(href='/volunteer') Volunteer
-            li: a(href='#') Our Programs
+            li: a(href='/fundraising') Fundraise
+            li: a(href='/our-programs') Our Programs
             li: a(href='/about-us') About Us
             li: a(href='/donate') Support Us
             li: a(href='/events') Events
@@ -114,27 +149,27 @@ html(lang="en")
             ul(class='menu bold')
               li: a(href='/') Home
               li: a(href='/about-us') About
-              li: a(href='#') Our Programs
-              li: a(href='#') Get Involved
+              li: a(href='/our-programs') Our Programs
+              li: a(href='/volunteer') Get Involved
               li: a(href='/events') Events
               li: a(href='/for-bigs') For Bigs
           div(class='col col-sm-6 col-md-7')
             ul(class='menu')
-              li: a(href='#') Our Staff
-              li: a(href='#') Our History
+              li: a(href='/about-us') Our Staff
+              li: a(href='/about-us#history') Our History
               li: a(href='#') Board of Directors
-              li: a(href='#') Careers
+              li: a(href='/about-us#careers') Careers
               li: a(href='#') FAQ's
-              li: a(href='/contact-us') Contact Us
+              li: a(href='/contact') Contact Us
         div(class='col col-sm-12 col-md-4 center')
           p &nbsp;
         div(class='col col-sm-12 col-md-4 right meta')
-          a(href='#' class='donate-button tr-up') Donate
+          a(href='#/my/donate' class='donate-button tr-up') Donate
           ul.social
-            li: a(href='#'): i.fa.fa-facebook
-            li: a(href='#'): i.fa.fa-twitter
-            li: a(href='#'): i.fa.fa-linkedin
-            li: a(href='#'): i.fa.fa-youtube-play
+            li: a(href='https://{:settings.facebook-page}'): i.fa.fa-facebook
+            li: a(href='https://twitter.com/{:settings.social-twitter}'): i.fa.fa-twitter
+            li: a(href='https://www.linkedin.com/company/{:settings.social-linkedin}'): i.fa.fa-linkedin
+            li: a(href='https://www.youtube.com/channel/{:settings.social-youtube}'): i.fa.fa-youtube-play
           div.meta-copyright
             p(class='tr-up') Made with &#10084; in Colorado
             small &copy; Copyright 2014 Big Brothers Big Sisters of Colorado
@@ -145,32 +180,41 @@ html(lang="en")
     script(src='assets://js/rrssb.min.js')
     script(src='assets://js/unslider.min.js')
     script(src='assets://js/freewall.min.js')
+    script(src='assets://js/jquery.fine-uploader.min.js')
+    script(src='assets://js/imagesloaded.min.js')
     // endbuild
 
     // build:js /scripts/main.js
     script(src='assets://js/main.js')
 
+    script(src="https://assets.donate.io/static/widget/embed.js", :ignore="true")
+    script(:ignore="true").
+      var __rmSettings = { organization:'bbbsc', domain:'bbbsc.donate.io' }
+
     script.
-      var w = 1, h = 1, html = '', color = '', limitItem = 10;
-      for (var i = 6; i < 12; ++i) {
-        h = 1 + 3 * Math.random() << 0;
-        w = 1 + 3 * Math.random() << 0;
-        string = '<div class="item" style="text-align: center; width:' + (w*150) + 'px; height:' + (h*150) + 'px; background-color:#E6E6E6;"><div style="display: inline-block; height: 100%; vertical-align: middle;"></div><img src="//rainmakerapp.s3.amazonaws.com/bbsc/images/dummy/thumb.png" style="vertical-align: middle;"></div>'
-        html  += string;
-      }
-      $(".banner-area_grid").html(html);
+      //- var w = 1, h = 1, html = '', color = '', limitItem = 10;
+      //- for (var i = 6; i < 12; ++i) {
+      //-   h = 1 + 3 * Math.random() << 0;
+      //-   w = 1 + 3 * Math.random() << 0;
+      //-   string = '<div class="item" style="text-align: center; width:' + (w*150) + 'px; height:' + (h*150) + 'px; background-color:#E6E6E6;"><div style="display: inline-block; height: 100%; vertical-align: middle;"></div><img src="//rainmakerapp.s3.amazonaws.com/bbsc/images/dummy/thumb.png" style="vertical-align: middle;"></div>'
+      //-   html  += string;
+      //- }
+      //- $(".banner-area_grid").html(html);
 
       $(function() {
-        var wall = new freewall(".banner-area_grid");
-        wall.reset({
-          selector: '.item',
-          animate: false,
-          cellW: 160,
-          cellH: 160,
-          onResize: function() {
-            wall.refresh();
-          }
+        imagesLoaded('.item', function() {
+          //- var wall = new freewall(".banner-area_grid");
+          $('.banner-area_grid').collagePlus();
+          //- wall.reset({
+          //-   selector: '.item',
+          //-   animate: false,
+          //-   cellW: 160,
+          //-   cellH: 160,
+          //-   onResize: function() {
+          //-     wall.refresh();
+          //-   }
+          //- });
+          //- // caculator width and height for IE7;
+          //- wall.fitZone();
         });
-        // caculator width and height for IE7;
-        wall.fitZone();
       });

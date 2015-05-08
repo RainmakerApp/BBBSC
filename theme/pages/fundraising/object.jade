@@ -1,0 +1,92 @@
+theme:template(title="{group.name}", name="_fundraiser", :load=":api(3.0).groups({:url.2}, fundraiser) as group")
+  redirect(:eval="group.type == 'team'") /teams/{group.id}
+  content
+    div(class='page page-fundraiser')
+      .fundraiser-info: .container.thin: .row
+        .col.col-sm-12.col-md-5
+          .funds-raised
+            p.left {group.progress.money|money}
+              small Raised Already
+            p.right
+              small {group.target|money}
+          .progress-bar
+            .progress-bar-fill(style="width: {group.progress.percent};")
+        .col.col-sm-12.col-md-2
+          a(href='#', data-action='donate', data-group='{group.id}' data-tags='group:team:fundraiser', class='rain btn btn-green fill') Donate
+        .col.col-sm-12.col-md-5.align-right
+          p
+            span.ends Ends:
+            span.num-group#months
+              span.num {group.timestamp.until.countdown.week|lpad(2,0)|substr(0,1)}
+              span.num {group.timestamp.until.countdown.week|lpad(2,0)|substr(1,1)}
+            span.num-group#weeks
+              span.num {group.timestamp.until.countdown.day|lpad(2,0)|substr(0,1)}
+              span.num {group.timestamp.until.countdown.day|lpad(2,0)|substr(1,1)}
+      .container.thin#main
+        .row: .banner-area(:load="group.owner as owner")
+          //@IF :member.id == owner.id
+          a(class='btn btn-purple fill position-absolute', href='#/my/account/fundraisers/{team.id}/details') Manage Fundraiser
+          //@ENDIF
+          div.banner-area_grid(:load="group.photos as photo", :iterate="contents"): img(src='{photo.photo-url}', class='item')
+          //@IF owner.id == :member.id && owner.photos.count == 0 && !owner.facebook
+          .banner-area_featured.upload(style="background-image: url('//rainmakerapp.s3.amazonaws.com/bbsc/images/dummy/tall-thumb.png')")
+          //@ELSEIF owner.id == :member.id && owner.photos.count >= 1 && !owner.facebook
+          .banner-area_featured.upload.change(style="background-image: url({:e.url.link([owner.photo_url])})")
+          //@ELSEIF owner.id == :member.id && owner.photos.count >= 1 && owner.facebook && group.owner.prop.prefer_facebook != 1
+          .banner-area_featured.upload.change(style="background-image: url({:e.url.link([owner.photo_url])})")
+          //@ELSEIF owner.id == :member.id && owner.facebook
+          .banner-area_featured.upload.change(style="background-image: url(//graph.facebook.com/{owner.facebook.userID}/picture?type=large&width=300&height=300)")
+          //@ELSEIF owner.id != :member.id && owner.photos.count < 1 && !owner.facebook
+          .banner-area_featured(style="background-image: url(//rainmakerapp.s3.amazonaws.com/bbsc/images/public-profile.png)")
+          //@ELSEIF owner.id != :member.id && owner.photos.count >= 1 && group.owner.prop.prefer_facebook != 1
+          .banner-area_featured(style="background-image: url({:e.url.link([owner.photo_url])})")
+          //@ELSEIF owner.id != :member.id && owner.facebook
+          .banner-area_featured(style="background-image: url(//graph.facebook.com/{owner.facebook.userID}/picture?type=large&width=300&height=300)")
+          //@ELSE
+          .banner-area_featured(style="background-image: url(//rainmakerapp.s3.amazonaws.com/bbsc/images/public-profile.png)")
+          //@ENDIF
+          div.banner-area_meta
+            .meta_title
+              h1 {group.name}
+              a(href='#', data-action='donate', data-group='{group.id}' data-tags='group:team:fundraiser', class='rain btn btn-green fill') Donate Now
+              a(href='#', class='btn fill btn-light-gray') Share
+            .meta_info
+              span.num#supporters {group.members.length}
+              span.num#updates {group.posts.length}
+              span.num#shares 1,109
+        .mobile-title
+          h1 {group.name}
+          a(href='#/my/donate', class='btn fill btn-green') Donate
+          a(href='#', class='btn fill btn-light-gray') Share
+        .row
+          .col.col-md-12.col-lg-3: .sidebar: .row
+            section.supports.col.col-sm-12.col-md-6.col-lg-12
+              h4 Supporters 
+                small {group.members.length}
+              ul
+                li(:load='group.members.page(1,5).limit(10) as supporter', :iterate='self')
+                  .left {supporter.name}
+                  .right {supporter.context-donation-total|money}
+          .col.col-md-12.col-lg-9
+            ul.tabs: .track
+              li(class='tab active', data-target='details') Event Details
+              li(class='tab', data-target='for') What is the money for?
+              li(class='tab', data-target='posts') Updates 
+                span.badge {group.posts.length}
+            .pane.active#details
+              br
+              strong {group.prop.headline}
+              {group.description|ormarkdown}
+            .pane#for
+              br
+              {group.project().description}
+            .pane#posts
+              br
+              //@IF group.posts.length == 0
+              strong No updates yet.
+              //@ELSE
+              ul
+                li(class="update", :load="group.posts.status(published) as update", :iterate="self")
+                  h6 {update.title}
+                  p {update.content}
+              //@ENDIF

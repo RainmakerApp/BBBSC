@@ -1,7 +1,7 @@
-theme:template(title="Volunteer", name="_default")
+theme:template(title="About Us", name="_default")
   content
     div(class='page page-about', :load=":api(3.0).content(site.about) as page")
-      .jumbotron: .container
+      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1(class='tr-up') About Us
       .tab-area
         span.fade

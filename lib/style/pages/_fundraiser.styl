@@ -66,9 +66,9 @@
 							position absolute
 							top 20px
 						&#months:after
-							content 'Months'
-						&#weeks:after
 							content 'Weeks'
+						&#weeks:after
+							content 'Days'
 	.container#main
 		padding-bottom 60px
 		@media (min-width $sm)
@@ -81,11 +81,17 @@
 				margin-bottom 100px
 			position relative
 			clearfix()
+			.position-absolute
+				bottom 15px
+				position absolute
+				right 15px
 			.banner-area_grid
 				height 400px
 				margin 0 auto
 				overflow hidden
 				width 100%
+				.item img
+					max-width 100%
 			.banner-area_featured
 				background-color darken(#EEE, 25%)
 				background-image url(../images/dummy/tall-thumb.png)
@@ -100,6 +106,30 @@
 					bottom -75px
 					height 125px
 					width 125px
+				&.upload.change:after
+					content 'Change Photo'
+				&.upload
+					overflow hidden
+					transition all 300ms ease
+					z-index 2
+					&:hover:after
+						transform translateY(75%)
+					&:after
+						background-color rgba(black, 0.5)
+						bottom 0
+						color #FFF
+						content 'Add Photo'
+						cursor pointer
+						font-weight 600
+						left 0
+						padding 15px 0 0
+						position absolute
+						right 0
+						text-align center
+						text-transform uppercase
+						top 0
+						transform translateY(100%)
+						transition all 300ms ease
 			.banner-area_meta
 				margin 15px 0 0
 				padding-left 130px
@@ -131,8 +161,9 @@
 						font-size 24px
 						font-weight 600
 						position relative
-						&:nth-child(n+2)
-							margin-left 30px
+						// &:nth-child(n+2)
+						// 	margin-left 30px
+						@extend .col-sm-4
 						&:after
 							bottom -12px
 							color #A1A1A1
@@ -140,8 +171,12 @@
 							font-weight 300
 							left 0
 							position absolute
+						&#supporters, &#updates
+							display inline-block
+							text-align left
 						&#supporters:after
 							content 'Supporters'
+							margin-right 15px
 						&#updates:after
 							content 'Updates'
 						&#shares:after

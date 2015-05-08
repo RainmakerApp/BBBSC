@@ -9,16 +9,20 @@ theme:template(title="Home", name="_index")
           i.fa.fa-angle-left
         //@ENDIF
         ul
-          li.jumbotron.home(:load=":api(3.0).content(site.index).relationships(slides) as slide", :iterate="self", style="background-image: url({slide.relationships(image,attachments).first.photo-url})"): .container: .row
-            .col.col-sm-12.col-md-8
-              h1 {slide.content.header}
-              {slide.content.body}
-              a(href='{slide.content.action.href}' class='btn-white') {slide.content.action.text}
+          li.jumbotron.home(:load=":api(3.0).content(site.index).relationships(slides) as slide", :iterate="self", style="background-image: url({slide.relationships(image,attachments).first.photo-url})")
+            .gradient
+            .container: .row
+              .col.col-sm-12.col-md-8
+                h1 {slide.content.header}
+                {slide.content.body}
+                a(href='{slide.content.action.href}' class='btn-white') {slide.content.action.text}
       .newsletter-banner: .container: .row
         .col.col-sm-12.col-md-6
           form.subscribe
             h1 Subscribe To Our Newsletter
-            input(type='email', placeholder='Enter your email address here...')
+            .messages.error(style='display: none;')
+            input(type='hidden', name='tags', value='list:newsletter')
+            input(type='email', name='email', placeholder='Enter your email address here...')
             button(type='submit')
               i.fa.fa-paper-plane
               | Submit
@@ -26,20 +30,20 @@ theme:template(title="Home", name="_index")
           ul.social
             li.instagram
               i.fa.fa-instagram
-              |<a href="http://instagram.com/{:settings.socialInstagram}?ref=badge" class="ig-b"><img src="//badges.instagram.com/static/images/ig-badge-view-24.png" alt="Instagram" /></a>
+              |<a href="http://instagram.com/{:settings.social-instagram}?ref=badge" class="ig-b"><img src="//badges.instagram.com/static/images/ig-badge-view-24.png" alt="Instagram" /></a>
             li.linkedin
               i.fa.fa-linkedin
               |<script type="IN/FollowCompany" data-id="293224"></script>
             li.youtube
               i.fa.fa-youtube-play
               |<script src="https://apis.google.com/js/platform.js"></script>
-              |<div class="g-ytsubscribe" data-channel="{:settings.socialYoutube}" data-count="hidden"></div>
+              |<div class="g-ytsubscribe" data-channel="{:settings.social-youtube}" data-count="hidden"></div>
             li.facebook
               i.fa.fa-facebook
               div(class='fb-like', data-share='false', data-show-faces='false', data-layout='button')
             li.twitter
               i.fa.fa-twitter
-              |<a href="https://twitter.com/{:settings.twitter}" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false"></a>
+              |<a href="https://twitter.com/{:settings.social-twitter}" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false"></a>
       .slider-area
         .col.col-sm-12.col-md-6#story
           ul(:load=":api(3.0).posts().tags(post:featured).status(published) as posts")
@@ -59,7 +63,7 @@ theme:template(title="Home", name="_index")
                 a(href='{program.content.action.href}' class='btn-white small') {program.content.action.text}
       .container: .row: .posts
         .col.col-sm-12.col-md-6
-          h1.green Featured Events 
+          a(href='/events'): h1.green Featured Events 
             i.fa.fa-angle-right.circle
           ul.events(:load=":api(3.0).groups().type(event) as events")
             li(:load="events as event", :iterate="self")
@@ -75,9 +79,11 @@ theme:template(title="Home", name="_index")
                 h2
                   i.fa.fa-map-marker 
                   | {event.location|split(b64:LA==,0)}
-                a(href='{event.prop.link}' class='btn-pill') Event Details
+                //- a(href='{event.prop.link}' class='btn-pill') Event Details
+                a(href='#/event/{event.id}' class='btn-pill tiny show__event', data-target='{event.id}') View Event Details
+              theme:embed(file="includes/event")
         .col.col-sm-12.col-md-6
-          h1.orange Recent Blog Posts 
+          a(href='/blog'): h1.orange Recent Blog Posts 
             i.fa.fa-angle-right.circle
           ul.blog(:load=":api(3.0).posts().limit(5).status(published) as posts")
             li(:load="posts as post", :iterate="self"): a(href='/blog/{post.id}') {post.title}

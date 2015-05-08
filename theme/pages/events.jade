@@ -1,7 +1,7 @@
-theme:template(title="Volunteer", name="_default")
+theme:template(title="Events", name="_default")
   content
     div(class='page page-events')
-      .jumbotron: .container
+      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1.tr-up Our Events
       .container#main(:load=":api(3.0).groups().type(event).page({:get.page ? :get.page : 1},10) as events")
         .table: h2.tr-up: span.tr-up Upcoming Events
@@ -12,14 +12,15 @@ theme:template(title="Volunteer", name="_default")
                 span.month {event.timestamp.until.unix|date(M)}
                 span.day {event.timestamp.until.unix|date(j)}
             .col.col-sm-8.col-md-5.thumb
-              img(src='assets://images/dummy/big-thumb.png')
+              img(src='{event.photo-url}')
             .col.col-sm-12.col-md-6
               h1 {event.name}
               p.span {event.location}
                 br
                 |{event.prop.time}
               p {event.summary}
-              a(href='{event.prop.link}' class='btn-base tiny') View Event Details
+              a(href='#/event/{event.id}' class='btn-base tiny show__event', data-target='{event.id}') View Event Details
+            theme:embed(file="includes/event")
         .pagination: .row
           .show-sm
             .col.col-sm-1.ta-center.prev

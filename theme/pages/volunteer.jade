@@ -1,7 +1,7 @@
 theme:template(title="Volunteer", name="_default")
   content
     div(class='page page-volunteer', :load=":api(3.0).content(site.volunteer) as page")
-      .jumbotron: .container
+      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1(class='tr-up') Volunteer
       .container.thin#main: .content
         .center

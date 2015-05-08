@@ -1,0 +1,5 @@
+pattern:
+  - 
+    key: image
+    format: upload
+    name: Banner Photo

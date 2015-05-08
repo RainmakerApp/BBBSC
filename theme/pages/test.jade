@@ -1,0 +1,11 @@
+theme:template(title="Volunteer", name="_default")
+  content
+    .container(:load=":api(3.0).groups().type(event).page({:get.page ? :get.page : 1},10) as events")
+      ul.events: .content.row.columns
+        li(:load="events as event", :iterate="self")
+          .col.col-sm-8.col-md-5.thumb
+            img(src='assets://images/dummy/big-thumb.png')
+          .col.col-sm-12.col-md-6
+            h1 {event.name}
+            a(href='#/event/{event.id}' class='btn-base tiny show__event', data-target='{event.id}') View Event Details
+          theme:embed(file="includes/event")

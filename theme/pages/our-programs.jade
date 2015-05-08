@@ -1,8 +1,8 @@
-theme:template(title="Volunteer", name="_default")
+theme:template(title="Our Programs", name="_default")
   content
     div(class='page page-enroll', :load=":api(3.0).content(site.programs) as programs")
-      .jumbotron: .container
-        h1(class='tr-up') Enroll A Child
+      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+        h1(class='tr-up') Our Programs
       .container#main: .row
         .col.col-sm-12.col-md-6
           .table.programs

@@ -89,8 +89,11 @@ btn(name, hex)
       &:hover
         border 2px solid darken(hex, 15%) !important
         background-color darken(hex, 15%)
+        color white !important
     &:hover
-      background-color rgba(hex, 0.15)
+      color darken(hex, 15%) !important
+      border 2px solid darken(hex, 15%) !important
+      
 
 btn('base', $text)
 btn('green', $green)

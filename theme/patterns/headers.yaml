@@ -1,0 +1,10 @@
+page:
+  path: /site
+  slug: headers
+  name: Header Images
+pattern:
+  -
+    key: images
+    format: gallery
+    name: Header Images
+    description: The header images will be sorted through and assigned to each individual page at random.

@@ -132,7 +132,7 @@ body.show-mobile
 		ul.md-navigation
 			li
 				display inline
-				font-size 14px
+				font-size 12px
 				font-weight 600
 				line-height 66px
 				margin-left 15px
@@ -270,4 +270,16 @@ body.show-mobile
 				display none
 			div.laptop-menu
 				display none !important
+
+@media (max-width 1200px)
+	.show-large
+		display none
+	.show-laptop
+		display block
+		
+@media (min-width 1201px)
+	.show-large
+		display block
+	.show-laptop
+		display none
 				

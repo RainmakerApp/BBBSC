@@ -43,6 +43,13 @@ $border = #E7E7E7
 .page.index
   color $text
   .jumbotron.home
+    .gradient
+      background-image linear-gradient(rgba(black, 0), rgba(black, 0.75))
+      bottom 0
+      left 0
+      position absolute
+      right 0
+      top 0
     background-color $primary
     background-image url(../images/banners/home.png)
     background-size cover
@@ -60,15 +67,15 @@ $border = #E7E7E7
       margin 0
       padding 0
       @media (min-width: $md)
-        font-size 80px
+        font-size 48px
       @media (max-width: 991px)
         font-size 32px
     p
       margin-bottom 10px
       margin-top 10px
       @media (min-width: $md)
-        font-size 30px
-        line-height 38px
+        font-size 20px
+        line-height 26px
       @media (max-width: 991px)
         font-size 20px
         line-height 28px
@@ -347,6 +354,8 @@ $border = #E7E7E7
     margin-bottom 60px
     margin-top 60px
     clearfix()
+    .col-md-6 > a
+      text-decoration none
     /* Helpers */
     .green
       color $green

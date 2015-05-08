@@ -1,10 +1,40 @@
 theme:template(title="Start a Fundraiser", name="_default")
   content
-    div(class='page page-get-started page-sidebar')
-      .jumbotron: .container
+    div(class='page page-get-started page-sidebar page-teams')
+      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1(class='tr-up') Start A Fundraiser
       .container#main: .content: .row
         .col.col-sm-12.col-md-8
+          //@IF :get.q
+          .table.tr-up: h2.tr-up Showing Results for: {:get.q}
+          ul.search-results.teams
+            li(:load=":api(3.0).groups().type(fundraiser).search({:get.q}) as result", :iterate="self"): .row
+              .col.col-sm-4
+                img(src='{result.attachments().first.version(,)}')
+              .col.col-sm-8
+                h1 {result.name}
+                {result.description|limitstring(300)}
+                div(style="margin-top: 15px;")
+                .progress-bar
+                  .progress-bar-fill(style='width: {result.progress.percent};')
+                .stat-row
+                  .stat
+                    span.num {result.progress.percent}
+                    span.text Funded
+                  .stat
+                    span.num {result.progress.amount|money}
+                    span.text Pledged
+                  .stat
+                    span.num {result.groups.count}
+                    span.text Members
+                  .stat
+                    span.num {result.stats.followers}
+                    span.text Givers
+                  .stat
+                    span.num {result.posts.length}
+                    span.text Updates
+                a(href='/fundraising/{result.id}' class='btn btn-purple tiny') View Fundraiser
+          //@ELSE
           h4 Help support Big Brothers Big sisters of Colorado by fundraising for us.
           strong You choose how, anything from running a marathon to hosting a birthday party and everything in between. You ask your friends, family and co-workers to support you in your adventure while supporting Big Brothers Big Sisters of Colorado.
           p You can get started today by following these 3 simple steps:
@@ -21,74 +51,36 @@ theme:template(title="Start a Fundraiser", name="_default")
           h1 Get Started Now
           .row.tr-up.center.actions
             .col.col-sm-6.col-md-4
-              a(href='#')
+              a(href='#', class='create__fundraiser', data-team='true')
                 div.orange Start Your<br>Own Team
             .col.col-sm-6.col-md-4
-              a(href='#')
+              a(href='/teams')
                 div.purple Join A Team
             .col.col-sm-6.col-md-4
-              a(href='#')
+              a(href='#', class='create__fundraiser')
                 div.green Register As<br>An Individual
           p If you have any questions regarding Big Brothers Big Sisters of Colorado ability to help you fundraise please click 
             a(href='#') here
             |&nbsp;to view our Third Party Event Agreement or call Dustin at (303) 433-6002 x511.
+          //@ENDIF
         .col.col-sm-12.col-md-4
           .sidebar
             .input-icon
               form
-                input(type='search' name='q' placeholder='Find a Team or Participant by name...')
+                input(type='search' name='q' placeholder='Find a Fundraiser by name...')
               i.icon-search
             section.donations
               h3 Recent Donations
               ul
-                li
-                  .pull-left Joe Baker
-                  .pull-right $50.00
-                li
-                  .pull-left Paul Isaacs
-                  .pull-right $1,500.00
-                li
-                  .pull-left Marcie Little
-                  .pull-right $25.00
-                li
-                  .pull-left Jon Bell
-                  .pull-right $100.00
-                li
-                  .pull-left Chris McIntire
-                  .pull-right $250.00
-                li
-                  .pull-left Katie Ellis
-                  .pull-right $50.00
-                li
-                  .pull-left Sylvia Sedrik
-                  .pull-right $15.00
-                li
-                  .pull-left Jessica Taylor
-                  .pull-right $25.00
-                li
-                  .pull-left Rita DeFord
-                  .pull-right $100.00
-                li
-                  .pull-left Daniel Price
-                  .pull-right $250.00
+                li(:load=':api(3.0).designations().tags(group:team:fundraiser) as donation', :iterate='self')
+                  .pull-left {donation.contact.name}
+                  .pull-right {donation.amount|money}
             section.fundraisers
               h3 Top Fundraisers
               ul
-                li: .row
-                  .col.col-sm-12.col-md-4
-                    img(src='assets://images/dummy/thumb.png')
-                  .col.col-sm-12.col-md-8
-                    a(href='#') John Doe
-                    p Testing
-                li: .row
-                  .col.col-sm-12.col-md-4
-                    img(src='assets://images/dummy/thumb.png')
-                  .col.col-sm-12.col-md-8
-                    a(href='#') Chris McIntire
-                    p $1,500.00
-                li: .row
-                  .col.col-sm-12.col-md-4
-                    img(src='assets://images/dummy/thumb.png')
-                  .col.col-sm-12.col-md-8
-                    a(href='#') Matthew and Mary Williams
-                    p $1,500.00
+                li(:load=':api(3.0).groups().type(fundraiser).sort(progress,desc).limit(5) as group', :iterate='self'): .row
+                  .col.col-sm-12.col-md-4(style="vertical-align: middle; float: none; display: table-cell;")
+                    img(src='{group.photo_url}', style='vertical-align: middle;')
+                  .col.col-sm-12.col-md-8(style="padding-top: 0; vertical-align: middle; float: none; margin: 0; display: table-cell;")
+                    a(href='/fundraising/{group.id}') {group.name}
+                    p(style="margin: 0;") {group.progress.amount|money}
