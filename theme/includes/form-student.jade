@@ -12,7 +12,7 @@
     .body__content: form.form
       .container-fluid.tab.tab-1.in
         h1 YOUTH INFO
-          small We’d love to get to know you...tell us about yourself.
+          small *This form is to be completed by the child's parent or guardian. To qualify for our programs, a child must be between the ages of 7 and 12, from a single parent household, and must qualify for free or reduced lunch at school.
         .row.columns
           .col.col-sm-12.col-md-5
             .form-group.two
@@ -45,142 +45,146 @@
               input(type='text', name='gender')
           //- End Group Four
         .row.columns
-          .col.col-sm-12.col-md-6.select
+          .col.col-sm-6.col-md-6.select
             .form-group
               label Ethnicity
+                span *
               select
                 option Caucasian
                 option African American
                 option Native American
                 option Other Ethnicities?
           //- End Group One
-          .col.col-sm-12.col-md-6
+          .col.col-sm-6.col-md-6
             .form-group
               label If Native American, What Tribe?
               input(type='text', name='tribe')
           //- End Group Two
         .row.columns
-          .col.col-sm-12.col-md-4
+          .col.col-sm-3.col-md-4
             .form-group
               label Child's School
+                span *
               input(type='text')
           //- End Group One
-          .col.col-sm-12.col-md-3
+          .col.col-sm-3.col-md-3
             .form-group
               label School District
+                span *
               input(type='text')
           //- End Group Two
-          .col.col-sm-12.col-md-2
+          .col.col-sm-2.col-md-2
             .form-group
               label Grade
               input(type='text')
           //- End Group Three
-          .col.col-sm-12.col-md-3
+          .col.col-sm-4.col-md-3
             .form-group
               label Student ID Number
               input(type='text')
           //- End Group Four
         .row.columns
-          .col.col-sm-12.col-md-6
+          .col.col-sm-6.col-md-6
             .form-group
               label Teacher Name
               input(type='text')
-          .col.col-sm-12.col-md-6
+          .col.col-sm-6.col-md-6
             .form-group
               label School Counselor's Name
               input(type='text')
       .container-fluid.tab.tab-2
-        h1 PARENT / GAURDIAN INFO
+        h1 PARENT / GUARDIAN INFO
           small Tell us a little bit about you
         .row.columns
-          .col.col-sm-12.col-md-6
+          .col.col-sm-6.col-md-6
             .form-group.two
-              label PARENT / GAURDIAN NAME
+              label PARENT / GUARDIAN NAME
                 span *
-              .col.col-sm-6.col-md-6.first
+              .col.col-sm-3.col-md-6.first
                 input(type='text', placeholder='First Name')
-              .col.col-sm-6.col-md-6
+              .col.col-sm-3.col-md-6
                 input(type='text', placeholder='Last Name')
           //- End Group One
-          .col.col-sm-12.col-md-6
+          .col.col-sm-6.col-md-6
             .form-group.three
               label RELATIONSHIP TO CHILD
                 span *
               input(type='text')
           //- End Group Two
         .row.columns
-          .col.col-sm-12.col-md-6
+          .col.col-sm-6.col-md-6
             .form-group.two
-              label PARENT / GAURDIAN NAME
-              .col.col-sm-6.col-md-6.first
+              label PARENT / GUARDIAN NAME
+              .col.col-sm-2.col-md-6.first
                 input(type='text', placeholder='First Name')
-              .col.col-sm-6.col-md-6
+              .col.col-sm-2.col-md-6
                 input(type='text', placeholder='Last Name')
           //- End Group One
-          .col.col-sm-12.col-md-6
+          .col.col-sm-6.col-md-6
             .form-group.three
               label RELATIONSHIP TO CHILD
               input(type='text')
           //- End Group Two
         .row.columns
-          .col.col-sm-12.col-md-6
+          .col.col-sm-6.col-md-6
             .form-group
               label Street Address
                 span *
               input(type='text')
           //- End Group One
-          .col.col-sm-6.col-md-3
+          .col.col-sm-3.col-md-3
             .form-group
               label City
                 span *
               input(type='text')
           //- End Group Two
-          .col.col-sm-6.col-md-3
+          .col.col-sm-3.col-md-3
             .form-group
               label Zip Code
                 span *
               input(type='text')
           //- End Group Two
         .row.columns
-          .col.col-sm-12.col-md-6
+          .col.col-sm-4.col-md-6
             .form-group
               label Home Phone Number
                 span *
               input(type='text')
-          .col.col-sm-12.col-md-6
+          .col.col-sm-4.col-md-6
             .form-group
               label Cell Phone Number
               input(type='text')
+          .col.col-sm-4.col-md-12
+              .form-group
+                label Email Address
+                input(type='text')
         .row.columns
-          .col.col-sm-12.col-md-12
-            .form-group
-              label Email Address
-              input(type='text')
+          
         hr
         .row.columns
-          .col.col-sm-12.col-md-5.select
+          .col.col-sm-5.col-md-5.select
             .form-group
               label Marital Status
               select
                 option Married
                 option Single
                 option Other Options (?)
-          .col.col-sm-12.col-md-7.select
+          .col.col-sm-7.col-md-7.select
             .form-group
               label Are One or Both Parents Currently or Recently Incarcerated?
               select
                 option Yes
                 option No
         .row.columns
-          .col.col-sm-12.col-md-6
+          .col.col-sm-6.col-md-6
             .form-group
               label 1. PARENT / GUARDIAN’S EMPLOYERS (if applicable)
               input(type='text')
-          .col.col-sm-6.col-md-2
+          .col.col-sm-2.col-md-2
             .form-group
               label Work Phone
               input(type='text')
-          .col.col-sm-6.col-md-4
+          .col.col-sm-4.col-md-4
             .form-group.check
               label May We Contact You At Work?
               .options
@@ -191,15 +195,15 @@
                   input(type='checkbox')
                   | Yes
         .row.columns
-          .col.col-sm-12.col-md-6
+          .col.col-sm-5.col-md-6
             .form-group
               label 2. PARENT / GUARDIAN’S EMPLOYERS (if applicable)
               input(type='text')
-          .col.col-sm-6.col-md-2
+          .col.col-sm-3.col-md-2
             .form-group
               label Work Phone
               input(type='text')
-          .col.col-sm-6.col-md-4
+          .col.col-sm-4.col-md-4
             .form-group.check
               label May We Contact You At Work?
               .options
@@ -218,7 +222,7 @@
               label Names and Ages of Family Members in the Home
               input(type='text')
         .row.columns
-          .col.col-sm-12.col-md-6
+          .col.col-sm-6.col-md-6
             .form-group.check
               label Are you currently recieving any of the following assistance?
                 span *
@@ -242,7 +246,7 @@
                 label
                   input(type='checkbox')
                   | Food Stamps
-          .col.col-sm-12.col-md-6
+          .col.col-sm-6.col-md-6
             .form-group.check
               label Is the child involved with any of the following services? (Click All that applies)
               .options
@@ -266,6 +270,7 @@
           .col.col-sm-12.col-md-6
             .form-group.check
               label Has your Child had any Contact with Law Enforcement?
+                span *
               .options
                 label
                   input(type='checkbox')
@@ -306,29 +311,29 @@
                   input(type='text')
       .container-fluid.tab.tab-4
         h1 STRENGTHS
-        .row.columns: .col.col-sm-12: .form-group
+        .row.columns: .col.col-sm-4.col-md-12: .form-group
           label School
           input(type='text')
-        .row.columns: .col.col-sm-12: .form-group
+        .row.columns: .col.col-sm-4.col-md-12: .form-group
           label Home
           input(type='text')
-        .row.columns: .col.col-sm-12: .form-group
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
           label Behaviors
           input(type='text')
-        .row.columns: .col.col-sm-12: .form-group
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
           label Others
           input(type='text')
         h1 CHALLENGES
-        .row.columns: .col.col-sm-12: .form-group
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
           label School
           input(type='text')
-        .row.columns: .col.col-sm-12: .form-group
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
           label Home
           input(type='text')
-        .row.columns: .col.col-sm-12: .form-group
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
           label Behaviors
           input(type='text')
-        .row.columns: .col.col-sm-12: .form-group
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
           label Others
           input(type='text')
       .container-fluid.tab.tab-5

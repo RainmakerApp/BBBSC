@@ -1,0 +1,222 @@
+.glass-form__wrapper#student
+  .wrapper__body
+    span.shut
+    .body__header
+      ul
+        li.active(id='1') Youth Info
+        li(id='2') Parent Info
+        li(id='3') General Info
+    .body__content: form.form
+      .container-fluid.tab.tab-1.in
+        h1 YOUTH INFO
+          small Children must be between the ages of 7-12 at the time of enrollment.
+        .row.columns
+          .col.col-sm-12.col-md-5
+            .form-group.two
+              label Full Name
+                span *
+              .col.col-sm-6.col-md-6.first
+                input(type='text', placeholder='First Name')
+              .col.col-sm-6.col-md-6
+                input(type='text', placeholder='Last Name')
+          //- End Group One
+          .col.col-sm-6.col-md-3
+            .form-group.three
+              label Birth Date
+              .col.col-sm-3.first
+                input(type='text', placeholder='MM')
+              .col.col-sm-3.second
+                input(type='text', placeholder='DD')
+              .col.col-sm-6
+                input(type='text', placeholder='YYYY')
+          //- End Group Two
+          .col.col-sm-3.col-md-1
+            .form-group
+              label Age
+                span *
+              input(type='text', name='age')
+          //- End Group Three
+          .col.col-sm-3.col-md-3
+            .form-group
+              label Gender
+              input(type='text', name='gender')
+          //- End Group Four
+        .row.columns
+          .col.col-sm-6.col-md-6.select
+            .form-group
+              label Ethnicity
+              select
+                option Caucasian
+                option African American
+                option Native American
+                option Other Ethnicities?
+          //- End Group One
+          .col.col-sm-6.col-md-6
+            .form-group
+              label If Native American, What Tribe?
+              input(type='text', name='tribe')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-3.col-md-6
+            .form-group
+              label Child's School
+              input(type='text')
+          //- End Group One
+          .col.col-sm-3.col-md-4
+            .form-group
+              label School District
+              input(type='text')
+          //- End Group Two
+          .col.col-sm-2.col-md-2
+            .form-group
+              label Grade
+              input(type='text')
+          //- End Group Three
+      .container-fluid.tab.tab-2
+        h1 PARENT / GUARDIAN INFO
+          small Tell us a little bit about you
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.two
+              label PARENT / GUARDIAN NAME
+                span *
+              .col.col-sm-3.col-md-6.first
+                input(type='text', placeholder='First Name')
+              .col.col-sm-3.col-md-6
+                input(type='text', placeholder='Last Name')
+          //- End Group One
+          .col.col-sm-6.col-md-6
+            .form-group.three
+              label RELATIONSHIP TO CHILD
+                span *
+              input(type='text')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group
+              label Street Address
+                span *
+              input(type='text')
+          //- End Group One
+          .col.col-sm-3.col-md-3
+            .form-group
+              label City
+                span *
+              input(type='text')
+          //- End Group Two
+          .col.col-sm-3.col-md-3
+            .form-group
+              label Zip Code
+                span *
+              input(type='text')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-4.col-md-6
+            .form-group
+              label Home Phone Number
+                span *
+              input(type='text')
+          .col.col-sm-4.col-md-6
+            .form-group
+              label Cell Phone Number
+              input(type='text')
+          .col.col-sm-4.col-md-12
+              .form-group
+                label Email Address
+                input(type='text')
+      .container-fluid.tab.tab-3
+        h1 General Info
+          small We'd love to get to know you.. tell us about yourself.
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.check
+              label Does the child qualify or receive free or reduced lunch at school?
+                span *
+              .options
+                label
+                  input(type='checkbox')
+                  | Yes
+                br
+                label
+                  input(type='checkbox')
+                  | No
+                br
+                label
+                  input(type='checkbox')
+                  | Unsure
+          .col.col-sm-6.col-md-6
+            .form-group.check
+              label What is the primary language spoken in the home?
+                span *
+              .options
+                label
+                  input(type='checkbox')
+                  | English
+                br
+                label
+                  input(type='checkbox')
+                  | Spanish
+                br
+                label
+                  input(type='checkbox')
+                  | Other
+                  input(type='text')
+        .row.columns
+          .col.col-sm-12.col-md-12
+            .form-group
+              label What is your primary reason for you wanting this child to have a Big Brother / Big Sister?
+              input(type='text')
+        hr
+        .row.columns
+          .col.col-sm-12.col-md-12
+            label If you are submitting this referral form, but you are not the child's parent/guardian, the following information is required:
+              span *
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group
+              label Name
+              input(type='text')
+          //- End Group One
+          .col.col-sm-6.col-md-6
+            .form-group
+              label How do you know or work with this child?
+              input(type='text')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group
+              label Phone Number
+              input(type='text')
+          .col.col-sm-6.col-md-6
+            .form-group
+              label Email Address
+              input(type='text')
+        .row.columns
+          .col.col-sm-12.col-md-12
+            .form-group
+              label If you are a professional that works with this child (teacher, social worker, counselor, other), what organization/school/agency do you represent?
+              input(type='text')
+        .row.columns
+          .col.col-sm-12.col-md-12
+            .form-group.check
+              label Tell us which of these is true
+              .options
+                label
+                  input(type='checkbox')
+                  | I have spoken with the child's parent/guardian about this referral. Contact the parent/guardian directly.
+                br
+                label
+                  input(type='checkbox')
+                  | I have not spoken with the parent/guardian about this referral. Please contact me directly to discuss this referral.
+      .container-fluid.tab.tab-6
+        .success-message
+          div.check
+            span
+          h1 Success message!
+    .body__footer
+      .nav.container-fluid
+        hr
+        .pull-left
+          a(class='back', href='#') Back
+        .pull-right
+          a(class='next', href='#') Next
