@@ -25,9 +25,19 @@ theme:template(title="{group.name}", name="_fundraiser", :load=":api(3.0).groups
       .container.thin#main
         .row: .banner-area(:load="group.owner as owner")
           //@IF :member.id == owner.id
-          a(class='btn btn-purple fill position-absolute', href='#/my/account/fundraisers/{team.id}/details') Manage Fundraiser
+          a(class='btn btn-purple fill position-absolute', href='#/my/account/fundraisers/{group.id}/details') Manage Fundraiser
+          a(class='btn btn-purple fill position-absolute edit-photos-trigger', href='#', style='right: 230px; padding: 0 15px;'): i.fa.fa-picture-o
           //@ENDIF
-          div.banner-area_grid(:load="group.photos as photo", :iterate="contents"): img(src='{photo.photo-url}', class='item')
+          //@IF group.photos.length <= 0
+          div(style='margin-top: 125px;')
+          //@ENDIF
+          div(style='margin-top: 125px;', id='remove')
+          div.banner-area_grid(:load="group.photos as photo", :iterate="contents")
+            .item(style='background-image: url({photo.photo-url})')
+              img(src='{photo.photo-url}', style='max-width: 100%;')
+              //@IF owner.id == :member.id
+              i.delete(data-photo='{photo.id}', data-group='{group.id}')
+              //@ENDIF
           //@IF owner.id == :member.id && owner.photos.count == 0 && !owner.facebook
           .banner-area_featured.upload(style="background-image: url('//rainmakerapp.s3.amazonaws.com/bbsc/images/dummy/tall-thumb.png')")
           //@ELSEIF owner.id == :member.id && owner.photos.count >= 1 && !owner.facebook
@@ -49,15 +59,25 @@ theme:template(title="{group.name}", name="_fundraiser", :load=":api(3.0).groups
             .meta_title
               h1 {group.name}
               a(href='#', data-action='donate', data-group='{group.id}' data-tags='group:team:fundraiser', class='rain btn btn-green fill') Donate Now
-              a(href='#', class='btn fill btn-light-gray') Share
+              a(href='/#/create/fundraiser', class='btn fill btn-orange', id='create__fundraiser') Join This Group
+              //- a(href='#', class='btn btn btn-light-gray') Resources
+              div(class='btn fill btn-light-gray share') 
+                | Share
+                .share-list
+                  a(href='https://www.facebook.com/dialog/feed?app_id=929983597012726&display=popup&href=http://www.biglittlecolorado.org/teams/{group.id}&redirect_uri=http://www.biglittlecolorado.org/teams/{group.id}&description={group.description|strip_tags}&caption={group.name}&picture={:e.url.link([group.photo_url])}', class='facebook popup'): i.fa.fa-facebook
+                  a(href='http://twitter.com/home?status={group.description|strip_tags|limitstring(80,...)} - www.biglittlecolorado.org/groups/{group.id}', class='twitter popup'): i.fa.fa-twitter
             .meta_info
               span.num#supporters {group.members.length}
               span.num#updates {group.posts.length}
-              span.num#shares 1,109
+              //- span.num#shares 1,109
         .mobile-title
           h1 {group.name}
           a(href='#/my/donate', class='btn fill btn-green') Donate
-          a(href='#', class='btn fill btn-light-gray') Share
+          button(class='btn fill btn-light-gray share') 
+            | Share
+            .share-list
+              a(href='https://www.facebook.com/dialog/feed?app_id=929983597012726&display=popup&href=http://www.biglittlecolorado.org/teams/{group.id}&redirect_uri=http://www.biglittlecolorado.org/teams/{group.id}&description={group.description|strip_tags}&caption={group.name}&picture={:e.url.link([group.photo_url])}', class='facebook popup'): i.fa.fa-facebook
+              a(href='http://twitter.com/home?status={group.description|strip_tags|limitstring(80,...)} - www.biglittlecolorado.org/groups/{group.id}', class='twitter popup'): i.fa.fa-twitter
         .row
           .col.col-md-12.col-lg-3: .sidebar: .row
             section.supports.col.col-sm-12.col-md-6.col-lg-12
@@ -65,7 +85,7 @@ theme:template(title="{group.name}", name="_fundraiser", :load=":api(3.0).groups
                 small {group.members.length}
               ul
                 li(:load='group.members.page(1,5).limit(10) as supporter', :iterate='self')
-                  .left {supporter.name}
+                  .left {supporter.display_name}
                   .right {supporter.context-donation-total|money}
           .col.col-md-12.col-lg-9
             ul.tabs: .track
@@ -85,7 +105,7 @@ theme:template(title="{group.name}", name="_fundraiser", :load=":api(3.0).groups
               //@IF group.posts.length == 0
               strong No updates yet.
               //@ELSE
-              ul
+              ul.updates
                 li(class="update", :load="group.posts.status(published) as update", :iterate="self")
                   h6 {update.title}
                   p {update.content}

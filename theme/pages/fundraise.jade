@@ -1,0 +1,169 @@
+theme:template(title="Fundraise for Parent Name", name="_no-header", :load=":api.getObject(project or group, {:url.2}) as project")
+  content
+    .create-fundraiser__wrapper(style='visibility: visible; opacity: 1; position: relative; background-color: ')
+      .close-modal
+      .wrapper_sizing(style='position: relative; display: block;')
+        .wrapper__title
+          h1 Let’s Get Started
+          p.lead 
+            strong(:load=":api(3.0).groups().status(active,completed).type(fundraiser) as group") {group.length} 
+            |people have already started fundraisers.
+        .wrapper__forms(:load=":api(3.0).content(site.createfundraiser) as page")
+          .wrapper__forms-nav
+            .pull-left
+              ul(class='complete')
+                li(data-related='1')
+                  span.num 1
+                  span.text Get Your Fundraiser Started
+                li(data-related='2')
+                  span.num 2
+                  span.text Write A Headline
+                li(data-related='3')
+                  span.num 3
+                  span.text Write A Message
+                li(data-related='4')
+                  span.num 4
+                  span.text Select Fundraiser Photo
+            .pull-right
+              ul(class='pending')
+                li(data-related='2'): span.num 2
+                li(data-related='3'): span.num 3
+                li(data-related='4'): span.num 4
+          div(class='step', data-step='0')
+            a(href='#', class='facebook-login', rel='facebook-login') Sign In with Facebook
+            span.or
+            form(action='/api/3.0/contacts/', method='post', class='form ajax', id='create-contact')
+              input(type='hidden', name='type', value='individual', id='type')
+              input(type='hidden', name='--namespace', value='create-contact')
+              input(type='hidden', name='--login', value='true')
+              |<:module slug="messages-display" namespace="create-contact" />
+              div(class='messages error', style='display: none;')
+              div(class='input-group split', id='individual')
+                label(for='first') Your Name*
+                .input-column
+                  input(type='text', name='firstName', placeholder='First Name', id='first')
+                .input-column
+                  input(type='text', name='lastName', placeholder='Last Name', id='last')
+              div(class='input-group', id='group')
+                label(for='group-input') Group Name*
+                input(type='text', placeholder='Group Name', id='group-input')
+              div.input-group
+                label(for='email') Your Email*
+                input(type='text', name='email', placeholder='Email Address', id='email')
+              div.input-group
+                label(for='phone') Your Phone Number*
+                input(type='text', name='phone', placeholder='(000) 123 - 4567', id='phone')
+              button(type='submit', class='submit') Continue
+            .options
+              .pull-left
+                small: strong(id='toggle-type'): a(href='#') Sign Up As a Group
+              .pull-right
+                small: strong: a(href='#') Already have an account?
+          div(class='step', data-step='1')
+            h1 Create Your Fundraiser
+            form(action='/api/3.0/groups', method='post', class='form ajax', id='create-fundraiser')
+              //- input(type='hidden', name='type', value='individual')
+              input(type='hidden', name='--namespace', value='create-fundraiser')
+              input(type='hidden', name='description', value='Placeholder description')
+              input(type='hidden', name='status', value='active')
+              //@IF team.id
+              h1 Fundraise for {team.name}
+              //@ELSEIF group.id
+              h1 Fundraiser for {group.name}
+              //@ELSEIF parent.id
+              h1 Fundraise for {parent.name}
+              //@ELSE
+              h1 Create Your Fundraiser
+              //@ENDIF
+              div(class='messages error', style='display: none;')
+              div.input-group
+                label(for='name') Name Your Fundraiser*
+                input(type='text', name='name', placeholder='Fundraiser Name', id='name')
+              div.input-group#money
+                label(for='goal') Fundraising Goal*
+                input(type='text', name='target', placeholder='7,000', id='goal')
+              div.input-group#select
+                label(for='type') Fundraiser Type*
+                select(name='type', id='type')
+                  option(value='fundraiser') Fundraiser
+                  option(value='event_fundraiser') Event
+                  option(value='team') Team
+              .hide.event-list: div.input-group#select
+                label(for='eventName') Choose an Event
+                select(name='prop.eventName')
+                  option(:load=':api(3.0).groups().type(event).status(active,completed) as event', :iterate='self', value='{event.id}', data-end='{event.timestamp.until.date}') {event.name}
+              div.input-group.date#date
+                label End Date
+                .row
+                  .col.col-sm-2: input(type='text', placeholder='MM', id="m", maxlength="2")
+                  .col.col-sm-2: input(type='text', placeholder='DD', id="d", maxlength="2")
+                  .col.col-sm-3: input(type='text', placeholder='YYYY', id="y", maxlength="4")
+                input(type='hidden', name='date_until')
+              button(type='submit', class='submit') Continue
+          div(class='step', data-step='2')
+            h1 Write A Headline For Your Fundraiser
+            form(action='/api/3.0/groups/[group]', method='post', class='form ajax')
+              //- input(type='hidden', name='type', value='individual')
+              input(type='hidden', name='--namespace', value='fundraiser-headline')
+              //- input(type='hidden', name='project', value='249')
+              |<:module slug="messages-display" namespace="fundraiser-headline" />
+              div(class='messages error', style='display: none;')
+              .input-group
+                textarea(rows='6', name='prop[headline]') {page.content.headlineone|strip_tags|unsafe}
+              .small-btn-row
+                .btn.tab.active
+                  a(href='#', data-message='{page.content.headlineone|strip_tags|unsafe}', class='sample') Sample 1
+                .btn.tab
+                  a(href='#', data-message='{page.content.headlinetwo|strip_tags|unsafe}', class='sample') Sample 2
+                .btn.tab
+                  a(href='#', data-message='{page.content.headlinethree|strip_tags|unsafe}', class='sample') Sample 3
+              button(type='submit', class='submit') Continue
+          div(class='step', data-step='3')
+            h1 Write A Message For Your Fundraiser
+            form(action='/api/3.0/groups/[group]', method='post', class='form ajax')
+              input(type='hidden', name='--namespace', value='fundraiser-description')
+              div(class='messages error', style='display: none;')
+              .input-group
+                textarea(rows='6', name='description') {page.content.messageone|strip_tags|unsafe}
+              .small-btn-row
+                .btn.tab.active
+                  a(href='#', data-message='{page.content.messageone|strip_tags|unsafe}', class='sample') Sample 1
+                .btn.tab
+                  a(href='#', data-message='{page.content.messagetwo|strip_tags|unsafe}', class='sample') Sample 2
+                .btn.tab
+                  a(href='#', data-message='{page.content.messagethree|strip_tags|unsafe}', class='sample') Sample 3
+              button(type='submit', class='submit') Continue
+          div(class='step', data-step='4')
+            div(class='upload__wrapper')
+              h1 Choose Cover Photo
+              form(action='/api/3.0/groups/[group]/attachments', method='post', enctype='multipart/form-data', name='customPhoto').row
+                .col.col-sm-12
+                  .featured__image-container
+                .btn-row
+                  .col.col-sm-6.btn
+                    input(type='hidden', name='--success', value='/fundraiser/[group]/')
+                    input(type='hidden', name='--failure', value='/fundraiser/[group]/#/fundraiser/create?error')
+                    input(type='hidden', name='--namespace', value='fundraiser-photo')
+                    input(type='hidden', name='fileUrl')
+                    |<:module slug="messages-display" namespace="fundraiser-photo" />
+                    a(href='#', class='upload-button')
+                      span.text Upload
+                        br
+                        small Your Own Photo
+                      input(type='file', name='file', id='upload', data-id='null')
+                  .col.col-sm-6.btn
+                    a(href='#', id='select__wrapper') Use Ours
+                .form(style="padding: 0 15px;")
+                  input(type='hidden', name='url')
+                  a(href='#', class='submit button tr-up') Create
+            div(class='select__wrapper')
+              h1 Choose A Cover Photo
+              .select__wrapper-gallery
+                .col.col-sm-6.tab(:load=":api(3.0).content(site.createfundraiser).relationships(photos) as photo", :iterate="self"): .thumb(style='background-image: url({photo.relationships(image,attachments).first.version()})')
+              .row: .btn-row
+                .col.col-sm-12.btn
+                  a(href='#', id='upload__wrapper') Go Back
+    //@IF :member
+    script.
+      var user = true;
+    //@ENDIF

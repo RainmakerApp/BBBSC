@@ -1,0 +1,9 @@
+pattern:
+  -
+    key: topic
+    format: title
+    name: Topic
+  -
+    key: desc
+    format: html
+    name: Description

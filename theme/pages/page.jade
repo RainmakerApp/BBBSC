@@ -1,0 +1,18 @@
+theme:template(name="_default", :load=":api(3.0).content(site.pages.{:url.2}) as page", title="{page.content.title}")
+  content
+    //@IF !page
+    .jumbotron.sixteen-nine(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+        h1(class='tr-up') 404 - Not Found
+    .container(style='text-align: center; padding: 60px 0;'): .content
+      h1 Sorry, no page could be found at this address.
+    //@ELSE
+    div.custom-page
+      //@IF page.content.banner
+      .jumbotron.sixteen-nine(style='background-image: url({page.relationships(banner,attachments).first.version(,)})'): .container
+        h1(class='tr-up') {page.content.title}
+      //@ELSE
+      .container: h1.page-title {page.content.title}
+      //@ENDIF
+      .container: .row: .content(style='padding: 30px 15px;')
+        {page.content.content}
+    //@ENDIF

@@ -1,0 +1,120 @@
+theme:template(title="Fundraising Teams", name="_bowl-pikes")
+  content
+    div(class='page page-teams page-sidebar')
+      div(class='page page-bowl', :load=":api(3.0).projects(420) as project")
+        //- {project|dump}
+        .jumbotron.sixteen-nine
+          .container
+            h1.tr-up Bowl for Kids' Sake
+              .thin-text Pikes Peak
+          .progress
+            span(style='width: {project.progress.percent};')
+            p.raised RAISED: 
+              strong {project.progress.money|money}
+            p.goal GOAL: 
+              strong {project.target|money}
+      .container#main: .content: .row
+        .col.col-sm-12.col-md-8
+          //@IF :get.q
+          .table.tr-up: h2.tr-up Showing Results for: {:get.q}
+          ul.search-results.teams
+            li(:load=":api(3.0).projects(420).groups().status(active,completed).search({:get.q|urlencode}) as result", :iterate="self"): .row
+              .col.col-sm-4
+                //@IF result.owner.photo_url
+                img(src='{result.owner.photo_url}')
+                //@ELSEIF result.owner.facebook && owner.prop.prefer-facebook == 1
+                img(src='//graph.facebook.com/{result.owner.facebook.userID}/picture?type=large&width=300&height=300')
+                //@ELSE
+                img(src='//rainmakerapp.s3.amazonaws.com/bbsc/images/public-profile.png')
+                //@ENDIF
+              .col.col-sm-8
+                h1 {result.name}
+                {result.description|limitstring(300,...)}
+                div(style="margin-top: 15px;")
+                .progress-bar
+                  .progress-bar-fill(style='width: {result.progress.percent};')
+                .stat-row
+                  .stat
+                    span.num {result.progress.percent}
+                    span.text Funded
+                  .stat
+                    span.num {result.progress.money|money}
+                    span.text Pledged
+                  .stat
+                    span.num {result.groups.count}
+                    span.text Members
+                  .stat
+                    span.num {result.stats.followers}
+                    span.text Givers
+                  .stat
+                    span.num {result.posts.length}
+                    span.text Updates
+                a(href='/fundraising/{result.id}' class='btn btn-purple tiny') View Fundraiser
+          //@ELSE
+          .table.tr-up: h2.tr-up Teams for Bowl for the Kids' Sake - Pikes Peak
+          ul.teams: .row
+            li(:load=":api(3.0).projects(420).groups().status(active,completed).type(team) as team", :iterate="self")
+              .col.col-sm-12.col-md-4
+                //@IF team.owner.photo_url
+                img(src='{team.owner.photo_url}')
+                //@ELSEIF team.owner.facebook && team.owner.prop.prefer-facebook == 1
+                img(src='//graph.facebook.com/{team.owner.facebook.userID}/picture?type=large&width=300&height=300')
+                //@ELSE
+                img(src='//rainmakerapp.s3.amazonaws.com/bbsc/images/public-profile.png')
+                //@ENDIF
+              .col.col-sm-12.col-md-8
+                h1: a(href='/teams/{team.id}') {team.name}
+                p {team.description|limitstring(300)}
+                .progress-bar
+                  .progress-bar-fill(style='width: {team.progress.percent};')
+                .stat-row
+                  .stat
+                    span.num {team.progress.percent}
+                    span.text Funded
+                  .stat
+                    span.num {team.progress.money|money}
+                    span.text Pledged
+                  .stat
+                    span.num {team.groups.count}
+                    span.text Members
+                  .stat
+                    span.num {team.stats.followers}
+                    span.text Givers
+                  .stat
+                    span.num {team.posts.length}
+                    span.text Updates
+                a(href='/teams/{team.id}/#/fundraiser/create' class='btn-base tiny') Join This Team
+          //@ENDIF
+        .col.col-sm-12.col-md-4
+          .sidebar
+            .action: a(href='#')
+              div.orange.tr-up.create__fundraiser(data-team='true')
+                table
+                  tr
+                    td: img(src='assets://images/team.png')
+                    td Start Your<br>Own Team
+            .input-icon
+              form
+                input(type='search' name='q' placeholder='Find a Team or Fundraiser...')
+              i.icon-search
+            section.donations
+              h3 Recent Donations
+              ul
+                li(:load=':api(3.0).projects(420).designations().limit(5) as donation', :iterate='self')
+                  .pull-left {donation.contact.display_name}
+                  .pull-right {donation.amount|money}
+            section.fundraisers
+              h3 Top Fundraisers
+              ul
+                li(:load=':api(3.0).projects(420).groups().status(active,completed).type(team).sort(progress,desc).limit(5) as group', :iterate='self'): .row
+                  .col.col-sm-12.col-md-4(style="vertical-align: middle; float: none; display: table-cell;")
+                    //@IF group.owner.photo_url
+                    img(src='{group.owner.photo_url}', style='vertical-align=middle;')
+                    //@ELSEIF group.owner.facebook
+                    img(src='//graph.facebook.com/{group.owner.facebook.userID}/picture?type=large&width=300&height=300', style='vertical-align=middle;')
+                    //@ELSE
+                    img(src='//rainmakerapp.s3.amazonaws.com/bbsc/images/public-profile.png', style='vertical-align=middle;')
+                    //@ENDIF
+                  .col.col-sm-12.col-md-8(style="padding-top: 0; vertical-align: middle; float: none; margin: 0; display: table-cell;")
+                    a(href='/teams/{group.id}') {group.name}
+                    p(style="margin: 0;") {group.progress.money|money}

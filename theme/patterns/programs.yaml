@@ -11,3 +11,11 @@ pattern:
     key: pikes
     format: html
     name: Pikes Peak Programs
+  -
+    key: invovledc1
+    format: html
+    name: Get Involved - Column One
+  -
+    key: invovledc2
+    format: html
+    name: Get Involved - Column Two

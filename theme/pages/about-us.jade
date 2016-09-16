@@ -1,7 +1,7 @@
 theme:template(title="About Us", name="_default")
   content
     div(class='page page-about', :load=":api(3.0).content(site.about) as page")
-      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+      .jumbotron.sixteen-nine(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1(class='tr-up') About Us
       .tab-area
         span.fade
@@ -9,7 +9,7 @@ theme:template(title="About Us", name="_default")
           ul(class='tr-up')
             li(class='active tab', data-target='overviewMain') Overview
             li(class='tab', data-target='partners') Partners
-            li(class='tab', data-target='resources') Resources
+            //- li(class='tab', data-target='resources') Resources
             li(class='tab', data-target='denverStaff') Staff - Denver
             li(class='tab', data-target='pikesStaff') Staff - Pikes Peak
             li(class='tab', data-target='newsroom') Newsroom
@@ -32,6 +32,24 @@ theme:template(title="About Us", name="_default")
         div(class='pane content', id='partners')
           h1.title Partners
           {page.content.partners}
+          h1 A BIG Thank You to our Corporate Sponsors
+          //- {page.content.partners}
+          h2 $50,000 and Above
+          .row: .logo-table(:load="page.relationships(corpsponsors) as sponsor", :iterate="contents")
+            .col.col-sm-6.col-md-4
+              a(href='{sponsor.content.link}', target='_blank')
+                .logo: img(src="{sponsor.relationships(logo,attachments).first.version(,)}")
+              h4(style="margin-top: 10px; margin-bottom: 0;") {sponsor.content.name}
+              p(style="margin-top: 5px;") {sponsor.content.desc}
+          h2 $25,000 and Above
+          .row: .logo-table(:load="page.relationships(smsponsors) as sponsor", :iterate="contents")
+            .col.col-sm-6.col-md-4: a(href='{sponsor.content.link}', target='_blank'): .logo: img(src="{sponsor.relationships(logo,attachments).first.version(,)}")
+          h2(style='margin-top: 25px;') $10,000 and Above
+          ul
+            li(:load="page.relationships(smmsponsors) as sponsor", :iterate="self"): a(href='{sponsor.content.link}', target='_blank') {sponsor.content.name}
+          h2(style='margin-top: 25px;') $5,000 and Above
+          ul
+            li(:load="page.relationships(smmmsponsors) as sponsor", :iterate="self"): a(href='{sponsor.content.link}', target='_blank') {sponsor.content.name}
         div(class='pane content', id='resources')
           h1.title Resources
           {page.content.resources}
@@ -52,10 +70,9 @@ theme:template(title="About Us", name="_default")
       .col.col-sm-12.center
         h1 Get Involved
           p Click here to 
-            a(href='#') volunteer in Denver and Pikes Peak.
+            a(href='/volunteer') volunteer in Denver and Pikes Peak.
       .col.col-sm-12.col-md-6
         h3 Nationally Recognized
-        p The Center for the Study and Prevention of Violence at University of Colorado at Boulder recognizes Big Brothers Big Sisters as a "Blueprint" program with proven results.
         p The Center for the Study and Prevention of Violence at University of Colorado at Boulder recognizes Big Brothers Big Sisters as a "Blueprint" program with proven results.
       .col.col-sm-2-offset.col-sm-1
         |&nbsp;

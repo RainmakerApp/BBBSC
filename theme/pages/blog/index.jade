@@ -1,7 +1,7 @@
 theme:template(title="Blog", name="_default")
   content
     div(class='page page-events', :load=":api(3.0).posts().status(published).page({:get.page ? :get.page : 1},10) as posts")
-      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+      .jumbotron.sixteen-nine(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1.tr-up Our Blog
       .bar.subscribe
         form.subscribe: .group

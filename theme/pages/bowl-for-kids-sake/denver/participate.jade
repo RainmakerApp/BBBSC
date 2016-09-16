@@ -1,0 +1,76 @@
+theme:template(title="Start a Fundraiser", name="_bowl-denver")
+  content
+    div(class='page page-bowl', :load=':api(3.0).projects(421) as parent')
+      .jumbotron.sixteen-nine: .container
+        h1(class='tr-up') Bowl for Kids' Sake
+          .thin-text DENVER
+    div(class='page page-get-started page-sidebar page-teams')
+      .container#main: .content: .row
+        .col.col-sm-12.col-md-8
+          //@IF :get.q
+          .table.tr-up: h2.tr-up Showing Results for: {:get.q}
+          ul.search-results.teams
+            li(:load=":api(3.0).projects(421).groups().type(fundraiser).status(active,completed).search({:get.q}) as result", :iterate="self"): .row
+              .col.col-sm-4
+                img(src='{result.attachments().first.version(,)}')
+              .col.col-sm-8
+                h1 {result.name}
+                {result.description|limitstring(300)}
+                div(style="margin-top: 15px;")
+                .progress-bar
+                  .progress-bar-fill(style='width: {result.progress.percent};')
+                .stat-row
+                  .stat
+                    span.num {result.progress.percent}
+                    span.text Funded
+                  .stat
+                    span.num {result.progress.money|money}
+                    span.text Pledged
+                  .stat
+                    span.num {result.groups.count}
+                    span.text Members
+                  .stat
+                    span.num {result.stats.followers}
+                    span.text Givers
+                  .stat
+                    span.num {result.posts.length}
+                    span.text Updates
+                a(href='/fundraising/{result.id}' class='btn btn-purple tiny') View Fundraiser
+          //@ELSE
+          p Bowl For Kids’ Sake is Big Brothers Big Sisters’ signature fundraiser. Each year half-a-million people across America come together to have fun and raise money to support Big Brothers Big Sisters as we change how children grow up! Bowl For Kids’ Sake is the perfect way for individuals to make an impact on our community - it takes minimal effort to raise the money that is so vital to our program’s success.
+          h1 Get Started Now
+          .row.tr-up.center.actions
+            .col.col-sm-6.col-md-4
+              a(href='#', class='create__fundraiser', data-team='true')
+                div.orange Start Your<br>Own Team
+            .col.col-sm-6.col-md-4
+              a(href='/teams')
+                div.purple Join A Team
+            .col.col-sm-6.col-md-4
+              a(href='#', class='create__fundraiser')
+                div.green Register As<br>An Individual
+          //@ENDIF
+        .col.col-sm-12.col-md-4
+          .sidebar
+            .input-icon
+              form
+                input(type='search' name='q' placeholder='Find a Team or Fundraiser...')
+              i.icon-search
+            section.fundraisers
+              h3 Top Teams
+              ul
+                li(:load=':api(3.0).projects(421).groups().type(team).status(active,completed).sort(progress,desc).limit(5) as group', :iterate='self'): .row
+                  .col.col-sm-12.col-md-4(style="vertical-align: middle; float: none; display: table-cell;")
+                    img(src='{group.photo_url}', style='vertical-align: middle;')
+                  .col.col-sm-12.col-md-8(style="padding-top: 0; vertical-align: middle; float: none; margin: 0; display: table-cell;")
+                    a(href='/fundraising/{group.id}') {group.name}
+                    p(style="margin: 0;") {group.progress.money|money}
+            section.fundraisers
+              h3 Top Individuals
+              ul
+                li(:load=':api(3.0).projects(421).groups().status(active,completed).type(fundraiser).sort(progress,desc).limit(5) as group', :iterate='self'): .row
+                  .col.col-sm-12.col-md-4(style="vertical-align: middle; float: none; display: table-cell;")
+                    img(src='{group.photo_url}', style='vertical-align: middle;')
+                  .col.col-sm-12.col-md-8(style="padding-top: 0; vertical-align: middle; float: none; margin: 0; display: table-cell;")
+                    a(href='/fundraising/{group.id}') {group.name}
+                    p(style="margin: 0;") {group.progress.money|money}

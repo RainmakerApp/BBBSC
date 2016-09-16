@@ -1,0 +1,230 @@
+//- include ../includes/_mixins.jade
+
+doctype html
+html(lang="en")
+  head
+    title {:options.title} - Big Brothers Big Sisters of Colorado
+    meta(charset='UTF-8')
+    meta(content='The Mission of Big Brothers Big Sisters is to provide children facing adversity with strong and enduring, professionally supported one-to-one relationships', name='description')
+    meta(content='', name='author')
+    meta(content='3 days', name='revisit-after')
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+
+    //- Facebook
+    meta(content='The Mission of Big Brothers Big Sisters is to provide children facing adversity with strong and enduring, professionally supported one-to-one relationships', name='og:description')
+    meta(content='assets://images/bbbsc-share.png', name='og:image')
+
+    script(src="https://assets.donate.io/static/widget/embed.js", :ignore="true")
+    script(:ignore="true").
+      var __rmSettings = { organization:'bbbsc', domain:'www.biglittlecolorado.org' }
+
+    // build:css /styles/main.css
+    link(href='assets://css/main.css', rel='stylesheet')
+    // endbuild
+
+    // Ridiculously Responsive Social Sharing Buttons
+    link(href='assets://css/rrssb.css', rel='stylesheet')
+
+    // Font Awesome Icon Font
+    link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
+
+    // Typekit
+    script(src="//use.typekit.net/duk0vdw.js")
+    script.
+      try{Typekit.load();}catch(e){}
+
+  body(class=page)
+    .overlay
+      .pane.center
+        p As an organization dedicated to inclusiveness, Big Brothers Big Sisters of Colorado values and celebrates the diversity and individuality of every child, volunteer, employee, board member, family and community partner.
+        a(class='btn tiny btn-purple btn-outline', href='/about-us') Learn More
+    theme:embed(file='includes/pikes-fundraiser')
+    #canvas(:load=":api(3.0).content(site.headers) as header")
+      header(class='nav nav-main'): .container
+        div(class='logo pull-left'): a(href='/')
+          .show-large
+            img(src='assets://images/bbbs-logo-white.png' alt='Big Brothers Big Sisters of Colorado' width='300' height='58')
+          .show-laptop
+            img(src='assets://images/bbbs-icon-white.png' alt='Big Brothers Big Sisters of Colorado' width='' height='66')
+        ul(class='pull-right tr-up lg-navigation')
+          li: a(href='/about-us') About Us
+          li: a(href='/our-programs') Our Programs
+          li: a(href='/volunteer') Volunteer
+          li: a(href='/enroll-a-child') Enroll a Child
+          li.dropdown-menu
+            a(href='/events') Events
+            ul
+              li: a(href='/events') All Events
+              li: a(href='/bowl-for-kids-sake/pikes-peak') Bowl for Kids' Sake - Pikes Peak
+              li: a(href='/bowl-for-kids-sake/denver') Bowl for Kids' Sake - Denver
+          li.dropdown-menu
+            a(href='/donate') Support Us
+            ul
+              li: a(href='/page/giving-society') G1VING Society
+              li: a(href='/donate') Ways To Give
+              li: a(href='/fundraising') Fundraise
+              li: a(href='#/my/account/fundraisers') Manage Fundraisers
+          li: a(href='/for-bigs-and-families') For Bigs &amp; Families
+          li: a(href='#/my/donate', class='donate-button') Donate
+          li.buttons: .place
+            //@IF :member.id
+            a(href='#/my/portal')
+              span.login ACCOUNT
+            //@ELSE
+            a(href='#/my/login')
+              span.login LOGIN 
+            //@ENDIF
+            span.lgbt
+              table
+                tr: td(style="background:#e30505;")  
+                tr: td(style="background:#f80;")  
+                tr: td(style="background:#ffea00;")  
+                tr: td(style="background:#008024")  
+                tr: td(style="background:#0051ff")  
+                tr: td(style="background:#720885")  
+        ul(class='pull-right tr-up md-navigation')
+          li: a(href='/about-us') About Us
+          li: a(href='/our-programs') Our Programs
+          li: a(href='/volunteer') Volunteer
+          li: a(href='/enroll-a-child') Enroll a Child
+          li.dropdown-menu
+            a(href='/events') Events
+            ul
+              li: a(href='/events') All Events
+              li: a(href='/bowl-for-kids-sake/pikes-peak') Bowl for Kids' Sake - Pikes Peak
+              li: a(href='/bowl-for-kids-sake/denver') Bowl for Kids' Sake - Denver
+          li.dropdown-menu
+            a(href='/donate') Support Us
+            ul
+              li: a(href='/page/giving-society') G1VING Society
+              li: a(href='/donate') Ways To Give
+              li: a(href='/fundraising') Fundraise
+              li: a(href='#/my/account/fundraisers') Manage Fundraisers
+          li: a(href='/for-bigs-and-families') For Bigs &amp; Families
+          li: a(href='#/my/donate', class='donate-button') Donate
+          //- li.toggle-navigation: i#md-navigation: span
+          li.buttons: .place
+            //@IF :member.id
+            a(href='#/my/portal')
+              span.login ACCOUNT
+            //@ELSE
+            a(href='#/my/login')
+              span.login LOGIN
+            //@ENDIF
+            span.lgbt
+              table
+                tr: td(style="background:#e30505;")  
+                tr: td(style="background:#f80;")  
+                tr: td(style="background:#ffea00;")  
+                tr: td(style="background:#008024")  
+                tr: td(style="background:#0051ff")  
+                tr: td(style="background:#720885")
+        ul(class='pull-right sm-navigation')
+          li: a(href='#/my/donate', class='donate-button') Donate
+          li.toggle-navigation: i#sm-navigation: span
+          li.buttons: .place
+            //@IF :member.id
+            a(href='#/my/portal')
+              span.login ACCOUNT
+            //@ELSE
+            a(href='#/my/login')
+              span.login LOGIN
+            //@ENDIF
+            span.lgbt
+              table
+                tr: td(style="background:#e30505;")  
+                tr: td(style="background:#f80;")  
+                tr: td(style="background:#ffea00;")  
+                tr: td(style="background:#008024")
+                tr: td(style="background:#0051ff")  
+                tr: td(style="background:#720885")  
+
+        div(class='laptop-menu bar'): .container
+          ul.menu
+            li: a(href='/enroll-a-child') Enroll a Child
+            li: a(href='/donate') Support Us
+            li: a(href='/for-bigs-and-families') For Bigs &amp; Families
+
+        div(class='mobile-menu modal')
+          i.close.active: span
+          ul.menu
+            li: a(href='/about-us') About Us
+            li: a(href='/our-programs') Our Programs
+            li: a(href='/volunteer') Volunteer
+            li: a(href='/enroll-a-child') Enroll a Child
+            li: a(href='/events') Events
+            li: a(href='/donate') Support Us
+            li: a(href='/for-bigs-and-families') For Bigs &amp; Families
+
+      <:jolt placeholder="content" />
+
+      // Footer
+      footer: .container: .row
+        div(class='col col-sm-12 col-md-4 menus'): .row
+          div(class='col col-sm-6 col-md-5')
+            ul(class='menu bold')
+              li: a(href='/about-us') About Us
+              li: a(href='/our-programs') Our Programs
+              li: a(href='/volunteer') Volunteer
+              li: a(href='/events') Events
+              li: a(href='/donate') Donate
+              li: a(href='/fundraising') Fundraise
+          div(class='col col-sm-6 col-md-7')
+            ul(class='menu')
+              li: a(href='/for-bigs-and-families') For Bigs &amp; Families
+              li: a(href='/about-us#history') Our History
+              li: a(href='/about-us#denverStaff') Our Staff
+              li: a(href='/page/board-of-directors') Board of Directors
+              li: a(href='/about-us#careers') Careers
+              li: a(href='/contact') Contact Us
+        div(class='col col-sm-12 col-md-4 center')
+          p &nbsp;
+        div(class='col col-sm-12 col-md-4 right meta')
+          a(href='#/my/donate' class='donate-button tr-up') Donate
+          ul.social
+            li: a(href='https://{:settings.facebook-page}'): i.fa.fa-facebook
+            li: a(href='https://twitter.com/{:settings.social-twitter}'): i.fa.fa-twitter
+            li: a(href='https://www.linkedin.com/company/{:settings.social-linkedin}'): i.fa.fa-linkedin
+            li: a(href='https://www.youtube.com/channel/{:settings.social-youtube}'): i.fa.fa-youtube-play
+          div.meta-copyright
+            p(class='tr-up') Made with &#10084; in Colorado
+            small &copy; Copyright 2015 Big Brothers Big Sisters of Colorado
+
+    // build:js /scripts/vendor.min.js
+    script(src='assets://js/jquery.min.js')
+    script(src='assets://js/modernizr-2.6.2-respond-1.1.0.min.js')
+    script(src='assets://js/rrssb.min.js')
+    script(src='assets://js/freewall.min.js')
+    script(src='assets://js/unslider.min.js')
+    script(src='assets://js/jquery.fine-uploader.min.js')
+    script(src='assets://js/optiscroll.min.js')
+    // endbuild
+
+    script(src='assets://js/calendar.min.js')
+
+    // build:js /scripts/main.js
+    script(src='assets://js/main.js')
+    // endbuild
+
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-64993402-1', 'auto');
+      ga('send', 'pageview');
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '929983597012726',
+          xfbml      : true,
+          version    : 'v2.2'
+        });
+      };
+      (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));

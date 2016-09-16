@@ -1,6 +1,6 @@
 theme:template(title="Volunteer", name="_default")
   content
-    .container(:load=":api(3.0).groups().type(event).page({:get.page ? :get.page : 1},10) as events")
+    .container(:load=":api(3.0).groups().type(event).status(active,completed).page({:get.page ? :get.page : 1},10) as events")
       ul.events: .content.row.columns
         li(:load="events as event", :iterate="self")
           .col.col-sm-8.col-md-5.thumb

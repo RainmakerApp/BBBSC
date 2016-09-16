@@ -1,0 +1,13 @@
+pattern:
+  -
+    key: name
+    format: title
+    name: Sponsor Name
+  -
+    key: image
+    format: upload
+    name: Sponsor Logo
+  -
+    key: link
+    format: title
+    name: Link to Sponsor Website

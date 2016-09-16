@@ -1,0 +1,8 @@
+pattern:
+  -
+    key: sponsors
+    format: blocks
+    name: Sponsors
+    singular: Sponsor
+    pattern: sponsor
+    preview: name

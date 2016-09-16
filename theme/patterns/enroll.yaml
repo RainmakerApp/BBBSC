@@ -51,3 +51,10 @@ pattern:
     key: colthreeimg
     format: image
     name: 'Third Column - Background Image'
+  -
+    key: faq
+    format: blocks
+    name: FAQ Style Section
+    singular: Block
+    pattern: question
+    preview: question

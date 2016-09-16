@@ -42,7 +42,7 @@ $('.tab').on 'click', ->
   return
 
 $('.faq li').on 'click', ->
-  $(this).addClass('active').siblings().removeClass 'active'
+  $(this).toggleClass('active').siblings().removeClass 'active'
   return
 
 $('.ticket select').on 'change', ->
@@ -104,6 +104,15 @@ $(window).load ->
             .slideUp '150'
         # else if (step >= 2)
         #   window.location.hash = '/fundraiser/create/1'
+    else if typeof user != 'undefined'
+      $('.step[data-step="1"]')
+        .show()
+        .siblings('.step')
+        .hide()
+      $('.wrapper__forms-nav')
+        .slideDown '150'
+      $('.wrapper__title')
+        .slideUp '150'
     else
       $('.step[data-step=0]')
         .show()
@@ -121,6 +130,35 @@ $(window).load ->
       .hide()
 
 $(window).on 'hashchange', ->
+  if window.location.href.indexOf('about') > -1
+    hash = window.location.hash.substr(1)
+    elem = document.getElementById(hash)
+    if hash == 'history'
+      $('[data-target="overviewMain"]').click()
+      $('#history')
+        .addClass 'active'
+        .siblings '.tab'
+        .removeClass 'active'
+      $(elem)
+        .fadeIn '150'
+        .siblings '.tab'
+        .removeClass 'active'
+      $('html, body').animate
+        scrollTop: $('#' + hash).offset().top
+      , 1000
+    else
+      $('[data-target="'+hash+'"]')
+        .addClass 'active'
+        .siblings '.tab'
+        .removeClass 'active'
+      $(elem)
+        .fadeIn '150'
+        .siblings '.pane'
+        .hide()
+      $('html, body').animate
+        scrollTop: $('#' + hash).offset().top
+      , 1000
+$(window).on 'hashchange', ->
   hash = window.location.hash.substr(1)
   arr  = hash.split('/')
   step = arr[(arr.length - 1)]
@@ -131,6 +169,9 @@ $(window).on 'hashchange', ->
       .slideUp '150'
   return
 
+$('.edit-photos-trigger').on 'click', ->
+  $('#banner').addClass 'active'
+
 $(window).on 'resize', ->
   canvas  = document.getElementById('canvas')
   process = document.getElementsByClassName('create-fundraiser__wrapper')
@@ -140,7 +181,7 @@ $(window).on 'resize', ->
     $(canvas)
       .css({
         'max-height': height + 'px'
-        'overflow': 'hidden'
+        'overflow': 'scroll'
       })
 
 next = (x)->
@@ -284,7 +325,7 @@ fundraiserModal = (team)->
     $(canvas)
       .css({
         'max-height': height + 'px'
-        'overflow': 'hidden'
+        'overflow': 'scroll'
       })
     $('.close-modal').on 'click', ->
       $('body')
@@ -296,11 +337,50 @@ fundraiserModal = (team)->
         })
       window.location.hash = ''
     if team is true
+      $('select[name="type"]').val 'team'
+    else
+      $('select[name="type"]').val 'fundraiser'
+    if typeof user == 'undefined'
+      $('[data-step="0"]')
+        .fadeIn '150'
+        .siblings '.step'
+        .fadeOut '150'
+    else
+      $('[data-step="1"]')
+        .fadeIn '150'
+        .siblings '.step'
+        .fadeOut '150'
+  else
+    $('body')
+      .addClass 'create-fundraiser-no-filters'
+    $(canvas)
+      .css({
+        'max-height': height + 'px'
+        'overflow': 'scroll'
+      })
+    $('.close-modal').on 'click', ->
+      $('body')
+        .removeClass 'create-fundraiser-no-filters'
+      $(canvas)
+        .css({
+          'max-height': 'none'
+          'overflow': 'visible'
+        })
+      window.location.hash = ''
+    if team is true
       $('select[name=type]').val 'team'
     else
       $('select[name=type]').val 'fundraiser'
-  else
-    $(canvas).addClass 'overlay'
+    if typeof user == 'undefined'
+      $('[data-step="0"]')
+        .fadeIn '150'
+        .siblings '.step'
+        .fadeOut '150'
+    else
+      $('[data-step="1"]')
+        .fadeIn '150'
+        .siblings '.step'
+        .fadeOut '150'
   return
 
 # Fundraiser Modal Function Trigger
@@ -338,6 +418,22 @@ $('#upload').on 'click', ->
       return
 
 # Upload Custom Photo
+$('#bannerPhoto').on 'click', ->
+  id = $(this).data 'id'
+  $(this).ajaxfileupload
+    action: '/api/3.0/groups/'+id+'/attachments'
+    onComplete: (response) ->
+      $('.upload-button')
+        .text response.data.name
+        setTimeout $('.modal').removeClass 'active', 3000
+        location.reload()
+      return
+    onStart: ->
+      $('.upload-button')
+        .html 'Uploading <i class="fa fa-spin fa-spinner fa-pulse"></i>'
+      return
+
+# Upload Custom Photo
 $('#customPhoto').on 'click', ->
   id = $(this).data 'id'
   $(this).ajaxfileupload
@@ -363,6 +459,23 @@ $('#customPhoto').on 'click', ->
       $('.upload-button')
         .html 'Uploading <i class="fa fa-spin fa-spinner fa-pulse"></i>'
       return
+
+$('.delete').each ->
+  $(this).on 'click', ->
+    click = $(this);
+    id = $(this).data 'photo'
+    group = $(this).data 'group'
+    console.log id, group
+    $.ajax
+      type: 'DELETE'
+      url: '/api/3.0/groups/'+group+'/attachments/'+id
+      async: false
+      success: ->
+        console.log 'Success!'
+        click.parents('.item').fadeOut '150', ->
+          location.reload()
+      error: ->
+        console.log 'Error!'
 
 facebookLogin = ->
 
@@ -426,7 +539,10 @@ $('.upload').on 'click', ->
 $('#background').on 'click', (e) ->
   if e.target.id is 'background'
     $('.modal').removeClass 'active'
-
+$('#banner').on 'click', (e) ->
+  if e.target.id is 'banner'
+    $('.modal').removeClass 'active'
+    window.location.hash = '#'
 $('.subscribe').on 'submit', ->
   $this = $(this)
   data = $(this).serialize()
@@ -551,18 +667,72 @@ $('.wrapper__body').on 'click', (e)->
 
 $('.nav a').on 'click', ->
   className = this.className.split(' ')[0]
-  console.log className
+  max = $(this).parents('.wrapper__body').find('.body__header li').length
   if className == 'back'
-    current = parseInt($('.body__header').find('.active').attr('id')) - 1
-    console.log current
-    $('#' + current).click()
+    current = parseInt($(this).parents('.wrapper__body').find('.body__header').find('.active').attr('id')) - 1
+    $(this).parents('.wrapper__body').find('#' + current).click()
+    $('.nav a.next').text('Next').removeClass 'submit'
   else if className == 'next'
-    current = parseInt($('.body__header').find('.active').attr('id')) + 1
-    console.log current
-    $('#' + current).click()
-    if current == 5
-      console.log 'Should work!'
-      $('.nav a.next').text 'Submit'
-    if current == 6
-      $('.nav a.prev').hide()
-      $('.nav a.next').hide()
+    current = parseInt($(this).parents('.wrapper__body').find('.body__header').find('.active').attr('id')) + 1
+    console.log '#' + current
+    $(this).addClass 'disabled'
+    $(this).parents('.wrapper__body').find('#' + current).click()
+    $(this).parents('.wrapper__body').find('#' + (current - 1)).addClass 'completed'
+    if current == max
+      $('.nav a.next').text('Submit').addClass 'submit'
+
+$('.show__form').on 'click', ->
+  if $(this).hasClass 'student'
+    $('body').addClass 'show'
+    if $(this).hasClass 'pikes'
+      $('body').addClass 'student pikes'
+      console.log 'student pikes'
+    else if $(this).hasClass 'denver'
+      $('body').addClass 'student denver'
+      console.log 'student denver'
+  else if $(this).hasClass 'referral'
+    $('body').addClass 'show'
+    if $(this).hasClass 'pikes'
+      $('body').addClass 'referral pikes'
+      console.log 'referral pikes'
+    else if $(this).hasClass 'denver'
+      $('body').addClass 'referral denver'
+      console.log 'referral denver'
+
+  if $(this).hasClass 'pikes'
+    $('input[name="region"]').val('Pikes Peak')
+  else if $(this).hasClass 'denver'
+    $('input[name="region"]').val('Denver')
+
+$('.glass-form__wrapper').on 'click', ->
+  $('body').removeClass 'show student referral pikes denver volunteer'
+
+$('.show__form__v').on 'click', ->
+  $('body').addClass 'show volunteer'
+  if $(this).hasClass 'pikes'
+    $('body').addClass 'pikes'
+  else if $(this).hasClass 'denver'
+    $('body').addClass 'denver'
+
+$('.wrapper__body > *').on 'click', (e) ->
+  e.stopPropagation()
+
+$('.tab input').on 'keyup keydown focus blur change', ->
+  if $(this).parents('.tab').hasClass 'in'
+    empty = $(this).parents('.in').find('input.required').filter(->
+      @value == ''
+    )
+    if empty.length
+      $('.nav a.next').addClass 'disabled'
+    else
+      $('.nav a.next.disabled').removeClass 'disabled'
+    return
+
+$('#form').on 'submit', (e)->
+  form_data = ''
+  $('#form input[type="text"]').each ->
+    form_data += '<strong>' + $(this).data('label') + ':</strong> ' + $(this).val() + '<br>'
+  $('#form textarea').each ->
+    form_data += '<strong>' + $(this).data('label') + ':</strong> ' + $(this).val() + '<br>'
+  $('#request-body').val(form_data)
+  console.log $('#request-body').val()

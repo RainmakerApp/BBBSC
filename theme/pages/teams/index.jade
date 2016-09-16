@@ -1,16 +1,22 @@
 theme:template(title="Fundraising Teams", name="_default")
   content
     div(class='page page-teams page-sidebar')
-      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+      .jumbotron.sixteen-nine(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1(class='tr-up') Fundraising Teams
       .container#main: .content: .row
         .col.col-sm-12.col-md-8
           //@IF :get.q
           .table.tr-up: h2.tr-up Showing Results for: {:get.q}
           ul.search-results.teams
-            li(:load=":api(3.0).groups().type(team).search({:get.q}) as result", :iterate="self"): .row
+            li(:load=":api(3.0).groups().status(active,completed).type(team).search({:get.q|rawdecode}) as result", :iterate="self"): .row
               .col.col-sm-4
-                img(src='{result.attachments().first.version(,)}')
+                //@IF result.owner.photo_url
+                img(src='{result.owner.photo_url}')
+                //@ELSEIF result.owner.facebook
+                img(src='//graph.facebook.com/{result.owner.facebook.userID}/picture?type=large&width=300&height=300')
+                //@ELSE
+                img(src='//rainmakerapp.s3.amazonaws.com/bbsc/images/public-profile.png')
+                //@ENDIF
               .col.col-sm-8
                 h1 {result.name}
                 {result.description|limitstring(300,...)}
@@ -22,7 +28,7 @@ theme:template(title="Fundraising Teams", name="_default")
                     span.num {result.progress.percent}
                     span.text Funded
                   .stat
-                    span.num {result.progress.amount|money}
+                    span.num {result.progress.money|money}
                     span.text Pledged
                   .stat
                     span.num {result.groups.count}
@@ -37,12 +43,18 @@ theme:template(title="Fundraising Teams", name="_default")
           //@ELSE
           .table.tr-up: h2.tr-up Our Teams
           ul.teams: .row
-            li(:load=":api(3.0).groups().type(team) as team", :iterate="self")
+            li(:load=":api(3.0).groups().status(active,completed).type(team) as team", :iterate="self")
               .col.col-sm-12.col-md-4
-                img(src='{team.photo_url}')
+                //@IF team.owner.photo_url
+                img(src='{team.owner.photo_url}')
+                //@ELSEIF team.owner.facebook
+                img(src='//graph.facebook.com/{team.owner.facebook.userID}/picture?type=large&width=300&height=300')
+                //@ELSE
+                img(src='//rainmakerapp.s3.amazonaws.com/bbsc/images/public-profile.png')
+                //@ENDIF
               .col.col-sm-12.col-md-8
                 h1: a(href='/teams/{team.id}') {team.name}
-                p Team description goes here...Lorem ipsum dolor sit amet, tempor incididunt ut labore et dolore magna aliqua. Ut enniam, quis nostrud exercitation ullamco laboris nisi ut aliq...
+                p {team.description|limitstring(300)}
                 .progress-bar
                   .progress-bar-fill(style='width: {team.progress.percent};')
                 .stat-row
@@ -50,7 +62,7 @@ theme:template(title="Fundraising Teams", name="_default")
                     span.num {team.progress.percent}
                     span.text Funded
                   .stat
-                    span.num {team.progress.amount|money}
+                    span.num {team.progress.money|money}
                     span.text Pledged
                   .stat
                     span.num {team.groups.count}
@@ -73,20 +85,26 @@ theme:template(title="Fundraising Teams", name="_default")
                     td Start Your<br>Own Team
             .input-icon
               form
-                input(type='search' name='q' placeholder='Find a Team or Participant by name...')
+                input(type='search' name='q' placeholder='Find a Team or Fundraiser...')
               i.icon-search
             section.donations
               h3 Recent Donations
               ul
                 li(:load=':api(3.0).designations().tags(group:team) as donation', :iterate='self')
-                  .pull-left {donation.contact.name}
+                  .pull-left {donation.contact.display_name}
                   .pull-right {donation.amount|money}
             section.fundraisers
               h3 Top Fundraisers
               ul
-                li(:load=':api(3.0).groups().type(team).sort(progress,desc).limit(5) as group', :iterate='self'): .row
+                li(:load=':api(3.0).groups().status(active,completed).type(team).sort(progress,desc).limit(5) as group', :iterate='self'): .row
                   .col.col-sm-12.col-md-4(style="vertical-align: middle; float: none; display: table-cell;")
-                    img(src='{group.photo_url}', style='vertical-align: middle;')
+                    //@IF group.owner.photo_url
+                    img(src='{group.owner.photo_url}', style='vertical-align=middle;')
+                    //@ELSEIF group.owner.facebook
+                    img(src='//graph.facebook.com/{group.owner.facebook.userID}/picture?type=large&width=300&height=300', style='vertical-align=middle;')
+                    //@ELSE
+                    img(src='//rainmakerapp.s3.amazonaws.com/bbsc/images/public-profile.png', style='vertical-align=middle;')
+                    //@ENDIF
                   .col.col-sm-12.col-md-8(style="padding-top: 0; vertical-align: middle; float: none; margin: 0; display: table-cell;")
                     a(href='/teams/{group.id}') {group.name}
-                    p(style="margin: 0;") {group.progress.amount|money}
+                    p(style="margin: 0;") {group.progress.money|money}

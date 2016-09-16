@@ -1,9 +1,9 @@
 theme:template(title="Events", name="_default")
   content
     div(class='page page-events')
-      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+      .jumbotron.sixteen-nine(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1.tr-up Our Events
-      .container#main(:load=":api(3.0).groups().type(event).page({:get.page ? :get.page : 1},10) as events")
+      .container#main(:load=":api(3.0).groups().type(event).status(active,completed).page({:get.page ? :get.page : 1},10) as events")
         .table: h2.tr-up: span.tr-up Upcoming Events
         ul.events: .content.row
           li(:load="events as event", :iterate="self")

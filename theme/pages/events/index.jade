@@ -1,0 +1,42 @@
+theme:template(title="Events", name="_default")
+  content
+    div(class='page page-events')
+      .jumbotron.sixteen-nine(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+        h1.tr-up Our Events
+      .container#main(:load=":api(3.0).groups().type(event).sort(timestamp_until,asc).status(active,completed).page({:get.page ? :get.page : 1},10) as events")
+        .table: h2.tr-up: span.tr-up Upcoming Events
+        ul.events: .content.row
+          li(:load="events as event", :iterate="self")
+            .col.col-sm-4.col-md-1
+              .date
+                span.month {event.timestamp.until.unix|date(M)}
+                span.day {event.timestamp.until.unix|date(j)}
+            .col.col-sm-8.col-md-5.thumb
+              img(src='{event.photo-url}')
+            .col.col-sm-12.col-md-6
+              h1 {event.name}
+              p.span {event.location}
+                br
+                |{event.prop.time}
+              p {event.summary}
+              a(href='/events/{event.id}' class='btn-base tiny') View Event Details
+            //- theme:embed(file="includes/event")
+        .pagination: .row
+          .show-sm
+            .col.col-sm-1.ta-center.prev
+              h4.tr-up
+                {events.paging_html(page,pg)}
+            .col.col-sm-10.ta-center
+              h4
+                {events.paging_html(page,pg)}
+            .col.col-sm-1.ta-center.next
+              h4.tr-up
+                {events.paging_html(page,pg)}
+          .show-md
+            .col.col-md-3.ta-left.prev
+              h4.tr-up: {events.paging_html(page,pg)}
+            .col.col-md-6.ta-center
+              h4
+                {events.paging_html(page,pg)}
+            .col.col-md-3.ta-right.next
+              h4.tr-up: {events.paging_html(page,pg)}

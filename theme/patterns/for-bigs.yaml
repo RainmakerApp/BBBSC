@@ -31,6 +31,13 @@ pattern:
     pattern: program-guidelines
     preview: title
   -
+    key: resourcesfor
+    format: blocks
+    name: Resource List
+    singular: "Resource"
+    pattern: resource-pattern
+    preview: title
+  -
     key: resources
     format: html
     name: Resources for Mentoring

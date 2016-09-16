@@ -69,6 +69,7 @@
 @import 'pages/_home.styl'
 @import 'pages/_contact.styl'
 @import 'pages/_fundraiser.styl'
+@import 'pages/_pikes-bowl.styl'
 
 /*
  * General Classes
@@ -108,18 +109,30 @@ span.or
     text-align left
   @media (min-width: $md)
     margin-top -116px
-    padding-bottom 150px
-    padding-top 266px
+    padding-bottom 100px
+    // padding-top 266px
   @media (max-width: 991px)
     margin-top -116px
     padding-bottom 50px
-    padding-top 166px
+    padding-top 100px
+  &:after
+    content ''
+    position absolute
+    top 0
+    bottom 0
+    left 0
+    right 0
+    background rgba(black, 0.4)
+    z-index 0
   h1
     color #FFF
     margin 0
     padding 0
+    position relative
+    z-index 1
     @media (min-width: $md)
       font-size 100px
+      margin-top -50px
     @media (max-width: 991px)
       font-size 48px
 
@@ -348,11 +361,14 @@ $glass-mobile = 768px
 
 // Fade In Event Glass Module
 .glass-event
-  overflow hidden
+  // overflow hidden
   .page.page-events .container#main .glass-event__wrapper.in, .glass-event__wrapper.in
     left 0
     opacity 1
     right 0
+    @media (max-width: $glass-mobile)
+      .wrapper__body
+        display block
       
 $light-gray = #949A9F
 $text-color = #3F3F3F
@@ -360,12 +376,43 @@ $highlight  = #59C77F
 
 
 $form-border = #E1E1E1
+.show.student.pikes
+  .glass-form__wrapper#student.pikes
+    left 0
+    opacity 1
+    width 100%
+.show.student.denver
+  .glass-form__wrapper#student.denver
+    left 0
+    opacity 1
+    width 100%
+.show.referral.pikes
+  .glass-form__wrapper#referral.pikes
+    left 0
+    opacity 1
+    width 100%
+.show.referral.denver
+  .glass-form__wrapper#referral.denver
+    left 0
+    opacity 1
+    width 100%
+.show.volunteer.pikes
+  .glass-form__wrapper#volunteer.pikes
+    left 0
+    opacity 1
+    width 100%
+.show.volunteer.denver
+  .glass-form__wrapper#volunteer.denver
+    left 0
+    opacity 1
+    width 100%
 .glass-form__wrapper
   background rgba(white, 0.85)
   bottom 0
-  left 0
-  opacity 1
-  overflow hidden
+  left -10000%
+  opacity 0
+  // overflow hidden
+  transition opacity 300ms ease
   @media (min-width $sm)
     padding 60px
   @media (max-width ($sm - 1))
@@ -373,7 +420,7 @@ $form-border = #E1E1E1
   position fixed
   top 0
   transition opacity 300ms ease
-  width 100%
+  // width 100%
   z-index 5
   ul li, p
     padding-bottom inherit !important
@@ -398,7 +445,7 @@ $form-border = #E1E1E1
     width 100%
     @media (max-width: $glass-mobile)
       bottom 0
-      display block
+      display none
       height auto
       margin 0
       max-height 100vh
@@ -410,6 +457,15 @@ $form-border = #E1E1E1
       font-size 12px
       font-weight 600
       line-height 48px
+      position relative
+      &:after
+        background-color rgba(white, 0)
+        bottom 0
+        content ''
+        left 0
+        position absolute
+        top 0
+        right 0
       ul
         counter-reset tab-control
         list-style none
@@ -434,6 +490,7 @@ $form-border = #E1E1E1
               text-align center
               width 8px
           &.completed
+            position relative
             &:after
               border-bottom 1px solid
               border-right 1px solid
@@ -533,7 +590,7 @@ $form-border = #E1E1E1
               clearfix()
               input, label
                 float left
-              input[type='checkbox']
+              input[type='checkbox'], input[type='radio']
                 display inline-block
                 height 20px
                 margin-right 5px
@@ -652,7 +709,23 @@ $form-border = #E1E1E1
           &:hover
             background-color $green
             color #FFF
-.page.page-events .container#main .glass-event__wrapper, .glass-event__wrapper
+        &.disabled
+          background-color #999
+          color white
+          pointer-events none
+          position relative
+          &:hover
+            background-color #999
+            color white
+          &:after
+            background-color rgba(white, 0.25)
+            bottom 0
+            content ''
+            left 0
+            position absolute
+            right 0
+            top 0
+.page.page-events .container#main .glass-event__wrapper, .glass-event__wrapper, .page.page-index .container#main .glass-event__wrapper
   background rgba(white, 0.85)
   bottom 0
   left -1000%
@@ -674,7 +747,7 @@ $form-border = #E1E1E1
     text-decoration none
     border-bottom 0
   .wrapper__body
-    box-shadow 0 0 145px rgba(black, 0.30)
+    box-shadow 0 0 145px rgba(#424242, 0.30)
     background-color #FFFFFF
     border-radius 2px
     bottom 60px
@@ -689,7 +762,7 @@ $form-border = #E1E1E1
     width 100%
     @media (max-width: $glass-mobile)
       bottom 0
-      display block
+      display none
       height auto
       margin 0
       max-height 100vh
@@ -847,6 +920,8 @@ $form-border = #E1E1E1
             &.middle
               border-left 1px solid white
               border-right 1px solid white
+              position relative
+              z-index 999999
               @media (max-width 768px)
                 border-right 0
               span:hover
@@ -1056,12 +1131,19 @@ $form-border = #E1E1E1
 
 // Fade In Fundraiser Modal
 .create-fundraiser
-  overflow hidden
+  overflow scroll
   .create-fundraiser__wrapper
     opacity 1
     visibility visible
   #canvas
     filter blur(20px)
+.create-fundraiser-no-filters
+  overflow scroll
+  .create-fundraiser__wrapper
+    opacity 1
+    visibility visible
+  #canvas
+    opacity 0.25
 .create-fundraiser__wrapper
   background rgba(white, 0.5)
   bottom 0
@@ -1159,7 +1241,10 @@ $form-border = #E1E1E1
             height 30px
             margin 0 5px 0 0
             text-align center
+            vertical-align middle
             width 30px
+            i
+              line-height 28px
         &.complete
           li
             font-weight 300
@@ -1180,7 +1265,7 @@ $form-border = #E1E1E1
       position relative
       @media (min-width $sm)
         padding 50px 100px 60px
-      &:not([data-step='1'])
+      &[data-step]
         display none
       &[data-step='4'],
       &[data-step='5']
@@ -1462,7 +1547,7 @@ $form-border = #E1E1E1
     a
       border-bottom 0 !important
     ul
-      left -11%
+      left -50%
       opacity 1
   ul
     background-color rgba($primary, 0.95)
@@ -1479,7 +1564,7 @@ $form-border = #E1E1E1
     transition opacity 300ms ease
     text-align center
     top 20px
-    width 120%
+    width 200%
     & > li, & > li > a
       border-bottom 0 !important
       display block
@@ -1489,6 +1574,8 @@ $form-border = #E1E1E1
     & > li > a
       padding-bottom 15px
       padding-top 15px
+      @media (max-width 1280px)
+        padding 10px 5px
       transition background 300ms ease
       &:last-of-type
         margin-bottom 0
@@ -1659,3 +1746,116 @@ $form-border = #E1E1E1
       text-decoration none
       &:hover
         color darken($text, 25%)
+        
+aspect-ratio($width, $height)
+  position: relative
+  &:before
+    display: block
+    content: ""
+    width: 100%
+    padding-top: ($height / $width * 100%)
+  > .content
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+.sixteen-nine
+  aspect-ratio(4,1)
+  
+h1.page-title
+  font-size 48px
+  font-weight 600
+  margin-bottom 0
+  position relative
+  &:after
+    background $primary
+    bottom -20px
+    content ''
+    height 6px
+    left 0
+    position absolute
+    width 80px
+    
+.pane.content
+  img, a
+    border-bottom 0
+    
+#partners
+  .logo-table
+    clear both
+    width 100%
+    clearfix()
+  .logo
+    border 1px solid lighten($text, 75%)
+    border-radius 2px
+    height 120px
+    line-height 120px
+    padding 10px
+    text-align center
+    img
+      // vertical-align middle
+      text-align center
+      margin 0 auto
+      max-height 100%
+      max-width 100%
+      width auto !important
+  a
+    color #777
+  li
+    margin-bottom 5px
+    
+#sponsor-grid[data-columns]:before
+  content '2 .col.col-sm-6'
+  
+.share
+  position relative
+  z-index 3
+  &:hover .share-list
+    opacity 1
+    // right -100%
+  .share-list
+    bottom -2px
+    opacity 0
+    left -2px
+    list-style none
+    margin 0
+    padding 0
+    position absolute
+    right -2px
+    text-align center
+    transition opacity 300ms ease
+    top -2px
+    // width 100%
+    z-index 2
+    a
+      color #FFF
+      display inline-block
+      float left
+      line-height 38px
+      width 50%
+      &.facebook
+        background-color #3B5998
+      &.twitter
+        background-color #55ACEE
+      
+ul.updates
+  list-style none
+  padding 0
+  margin 0
+  li
+    border-bottom 1px solid #CCC
+    margin-bottom 15px
+    padding-bottom 15px
+    h6
+      font-size 18px
+      margin 0
+    p
+      font-size 14px
+      line-height 18px
+.btn.disabled
+  background-color #999 !important
+  cursor: not-allowed !important
+  
+.banner-area_grid img.item
+  max-width 100%

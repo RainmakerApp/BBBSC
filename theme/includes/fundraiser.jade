@@ -4,7 +4,7 @@
     .wrapper__title
       h1 Let’s Get Started
       p.lead 
-        strong(:load=":api(3.0).groups().status(active).type(fundraiser) as group") {group.length} 
+        strong(:load=":api(3.0).groups().status(active,completed).type(fundraiser) as group") {group.length} 
         |people have already started fundraisers.
     .wrapper__forms(:load=":api(3.0).content(site.createfundraiser) as page")
       .wrapper__forms-nav
@@ -58,7 +58,15 @@
           .pull-right
             small: strong: a(href='#') Already have an account?
       div(class='step', data-step='1')
+        //@IF team.id
+        h1 Fundraise for {team.name}
+        //@ELSEIF group.id
+        h1 Fundraiser for {group.name}
+        //@ELSEIF parent.id
+        h1 Fundraise for {parent.name}
+        //@ELSE
         h1 Create Your Fundraiser
+        //@ENDIF
         form(action='/api/3.0/groups', method='post', class='form ajax', id='create-fundraiser')
           //- input(type='hidden', name='type', value='individual')
           input(type='hidden', name='--namespace', value='create-fundraiser')
@@ -67,6 +75,10 @@
           div(class='messages error', style='display: none;')
           //@IF team.id
           input(type='hidden', name='parent', value='{team.id}')
+          //@ELSEIF group.id
+          input(type='hidden', name='parent', value='{group.id}')
+          //@ELSEIF parent.id
+          input(type='hidden', name='parent', value='{parent.id}')
           //@ENDIF
           div.input-group
             label(for='name') Name Your Fundraiser*
@@ -77,8 +89,7 @@
           div.input-group#select
             label(for='type') Fundraiser Type*
             select(name='type', id='type')
-              option(value='fundraiser') Fundraiser
-              option(value='event_fundraiser') Event
+              option(value='fundraiser') Individual
               option(value='team') Team
           .hide.event-list: div.input-group#select
             label(for='eventName') Choose an Event
@@ -151,7 +162,7 @@
         div(class='select__wrapper')
           h1 Choose A Cover Photo
           .select__wrapper-gallery
-            .col.col-sm-6.tab(:load=":api(3.0).content(site.createfundraiser).relationships(photos) as photo", :iterate="self"): .thumb(style='background-image: url({photo.relationships(image,attachments).first.version()})')
+            .col.col-sm-6.tab(:load=":api(3.0).content(site.createfundraiser).relationships(photos) as photo", :iterate="self"): .thumb(style='background-image: url({photo.relationships(image,attachments).first.version(,)})')
           .row: .btn-row
             .col.col-sm-12.btn
               a(href='#', id='upload__wrapper') Go Back

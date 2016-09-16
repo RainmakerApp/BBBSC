@@ -1,7 +1,11 @@
 theme:template(title="Enroll a Child", name="_default")
   content
+    theme:embed(file="includes/form-referral-pikes")
+    theme:embed(file="includes/form-referral-denver")
+    theme:embed(file="includes/form-student-pikes")
+    theme:embed(file="includes/form-student-denver")
     div(class='page page-enroll', :load=":api(3.0).content(site.enroll) as page")
-      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+      .jumbotron.sixteen-nine(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1(class='tr-up') Enroll a Child
         .language: a(href='{page.content.spanish}', target='_blank') Información en Español
       .center.container.thin.main
@@ -38,7 +42,7 @@ theme:template(title="Enroll a Child", name="_default")
       .section.inverse: .container.thin.main(style='padding-bottom: 0; padding-top: 45px;')
         .center 
           h2(style='margin-bottom: 0;') Program Impact
-          p(style='margin-top: 0; margin-bottom: 30px;') Our programs are delivered 100% by community volunteers who generously give of their time to help youth. Children who may not be suited for our program are as follows:
+          p(style='margin-top: 0; margin-bottom: 30px;') Our programs are delivered by community volunteers who generously give of their time to help youth. Children who may not be suited for our program are as follows:
         ul.stars.thin(style="line-height: 26px;"): .row
           .col.col-sm-12.col-md-6
             li Children currently in an abusive situation or who have not had outside counseling regarding an abusive situation (these children should seek professional counseling).
@@ -46,6 +50,13 @@ theme:template(title="Enroll a Child", name="_default")
           .col.col-sm-12.col-md-6.left
             li Children who do not have permission from their legal guardian to be enrolled in the Big Brothers Big Sisters Program.
             li Children of parents who are merely looking for a babysitter for their children.
+      .container
+        .page.page-mentor-support(style='margin-bottom: 60px;')
+          h1(style='padding: 0 40px;') Who is a candidate for Big Brothers Big Sisters of Colorado?
+          .faq.resources: ul(:load="page.relationships(faq) as qa", :iterate="contents")
+            li: dl
+              dt {qa.content.question}
+              dd {qa.content.answer}
       .section: .container.thin.main
         .row
           .col.col-sm-12.col-md-6
@@ -58,6 +69,7 @@ theme:template(title="Enroll a Child", name="_default")
                 li If you are the parent or guardian in and would like to enroll your child in Denver please fill out:
                   br
                   a(class='btn btn-base tiny', href='{page.content.denverapp.href}', target='_blank') {page.content.denverapp.text}
+
           .col.col-sm-12.col-md-6
             .table
               h2.tr-up(style='font-weight: 600;') To Enroll a Child in Pikes Peak
@@ -83,7 +95,7 @@ theme:template(title="Enroll a Child", name="_default")
       //-   .col.col-sm-12.center
       //-     h1 Get Involved
       //-       p Click here to 
-      //-         a(href='#') volunteer in Denver and Pikes Peak.
+      //-         a(href='/volunteer') volunteer in Denver and Pikes Peak.
       //-   .col.col-sm-12.col-md-6
       //-     h3 Nationally Recognized
       //-     p The Center for the Study and Prevention of Violence at University of Colorado at Boulder recognizes Big Brothers Big Sisters as a "Blueprint" program with proven results.

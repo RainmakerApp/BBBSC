@@ -1,0 +1,254 @@
+.glass-form__wrapper.pikes#referral
+  .wrapper__body
+    span.shut
+    .body__header
+      ul
+        li.active(id='1') Youth Info
+        li(id='2') Parent Info
+        li(id='3') General Info
+    .body__content: form.form(action="/api/3.0/form-completions", method="post")
+      | <:module slug="messages-display" namespace="Youth Referral Form - Pikes Peak" />
+      | <input type="hidden" name="--namespace" value="Youth Referral Form - Pikes Peak" />
+      | <input type="hidden" name="--form" value="Youth Referral Form - Pikes Peak" />
+      | <input type="hidden" name="--failure" value="/enroll-a-child?err=1" />
+      | <input type="hidden" name="--success" value="/enroll-a-child?err=none" />
+      input(type='hidden', name='region')
+      .container-fluid.tab.tab-1.in
+        h1 YOUTH INFO
+          small Children must be between the ages of 7-12 at the time of enrollment.
+        .row.columns
+          .col.col-sm-12.col-md-5
+            .form-group.two.required
+              label Full Name
+                span *
+              .col.col-sm-6.col-md-6.first
+                input(type='text', placeholder='First Name', name='youth[name][first]', class='required')
+              .col.col-sm-6.col-md-6
+                input(type='text', placeholder='Last Name', name='youth[name][last]', class='required')
+          //- End Group One
+          .col.col-sm-6.col-md-3
+            .form-group.three
+              label Birth Date
+              .col.col-sm-3.first
+                input(type='text', placeholder='MM', name='youth[dateOfBirth][m]')
+              .col.col-sm-3.second
+                input(type='text', placeholder='DD', name='youth[dateOfBirth][d]')
+              .col.col-sm-6
+                input(type='text', placeholder='YYYY', name='youth[dateOfBirth][y]')
+          //- End Group Two
+          .col.col-sm-3.col-md-1
+            .form-group.required
+              label Age
+                span *
+              input(type='text', name='age', name='youth[age]', class='required')
+          //- End Group Three
+          .col.col-sm-3.col-md-3
+            .form-group
+              label Gender
+              input(type='text', name='gender', name='youth[gender]')
+          //- End Group Four
+        .row.columns
+          .col.col-sm-6.col-md-6.select
+            .form-group
+              label Ethnicity
+              select(name='youth[ethnicity]')
+                option Caucasian
+                option African American
+                option Native American
+                option Other Ethnicities?
+          //- End Group One
+          .col.col-sm-6.col-md-6
+            .form-group
+              label If Native American, What Tribe?
+              input(type='text', name='youth[tribe]')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-3.col-md-6
+            .form-group
+              label Child's School
+              input(type='text', name='youth[school]')
+          //- End Group One
+          .col.col-sm-3.col-md-4
+            .form-group
+              label School District
+              input(type='text', name='youth[schoolDistrict]')
+          //- End Group Two
+          .col.col-sm-2.col-md-2
+            .form-group
+              label Grade
+              input(type='text', name='youth[grade]')
+          //- End Group Three
+      .container-fluid.tab.tab-2
+        h1 PARENT / GUARDIAN INFO
+          small Tell us a little bit about you
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.two.required
+              label PARENT / GUARDIAN NAME
+                span *
+              .col.col-sm-3.col-md-6.first
+                input(type='text', placeholder='First Name', name='guardianOne[firstName]')
+              .col.col-sm-3.col-md-6
+                input(type='text', placeholder='Last Name', name='guardianOne[lastName]')
+          //- End Group One
+          .col.col-sm-6.col-md-6
+            .form-group.three.required
+              label RELATIONSHIP TO CHILD
+                span *
+              input(type='text', name='guardianOne[relationship]', class='required')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.two.required
+              label PARENT / GUARDIAN NAME
+              .col.col-sm-3.col-md-6.first
+                input(type='text', placeholder='First Name', name='guardianTwo[firstName]', class='required')
+              .col.col-sm-3.col-md-6
+                input(type='text', placeholder='Last Name', name='guardianTwo[lastName]', class='required')
+          //- End Group One
+          .col.col-sm-6.col-md-6
+            .form-group.three.required
+              label RELATIONSHIP TO CHILD
+              input(type='text', name='guardianTwo[relationship]', class='required')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.required
+              label Street Address
+              input(type='text', name='address[street]', class='required')
+          //- End Group One
+          .col.col-sm-3.col-md-3
+            .form-group.required
+              label City
+              input(type='text', name='address[city]', class='required')
+          //- End Group Two
+          .col.col-sm-3.col-md-3
+            .form-group.required
+              label Zip Code
+              input(type='text', name='address[zip]', class='required')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-4.col-md-6
+            .form-group.required
+              label Home Phone Number
+                span *
+              input(type='text', name='guardianOne[homePhone]')
+          .col.col-sm-4.col-md-6
+            .form-group
+              label Cell Phone Number
+              input(type='text', name='guardianOne[cellPhone]')
+          .col.col-sm-4.col-md-12
+              .form-group
+                label Email Address
+                input(type='text', name='guardianOne[emailAddress]')
+      .container-fluid.tab.tab-3
+        h1 General Info
+          small We'd love to get to know you.. tell us about yourself.
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.check.required
+              label Does the child qualify or receive free or reduced lunch at school?
+                span *
+              .options
+                label
+                  input(type='checkbox', name='freeLunch', value='Yes')
+                  | Yes
+                br
+                label
+                  input(type='checkbox', name='freeLunch', value='No')
+                  | No
+                br
+                label
+                  input(type='checkbox', name='freeLunch', value='Unsure')
+                  | Unsure
+          .col.col-sm-6.col-md-6
+            .form-group.check.required
+              label What is the primary language spoken in the home?
+                span *
+              .options
+                label
+                  input(type='checkbox', name='language[language]')
+                  | English
+                br
+                label
+                  input(type='checkbox', name='language[language]')
+                  | Spanish
+                br
+                label
+                  input(type='checkbox', name='language[language]')
+                  | Other
+                  input(type='text', name='language[other]')
+        .row.columns
+          .col.col-sm-12.col-md-12
+            .form-group
+              label What is your primary reason for you wanting this child to have a Big Brother / Big Sister?
+              input(type='text', name='reason')
+          .col.col-sm-12.col-md-12
+            .form-group
+              label Comments or Additional Information
+              input(type='text', name='comments')
+        .row.columns
+          .col.col-sm-4
+            .form-group
+              label Marital Status
+                span *
+              input(type='text', name='maritalStatus')
+          .col.col-sm-8
+            .form-group
+              label Are one of both parents currently Active Duty Military?
+                span *
+              input(type='text', name='military')
+        hr
+        .row.columns
+          .col.col-sm-12.col-md-12
+            label If you are submitting this referral form, but you are not the child's parent/guardian, the following information is required:
+              span *
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group
+              label Name
+              input(type='text', name='applicant[name]')
+          //- End Group One
+          .col.col-sm-6.col-md-6
+            .form-group
+              label How do you know or work with this child?
+              input(type='text', name='applicant[relationship]')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group
+              label Phone Number
+              input(type='text', name='applicant[phone]')
+          .col.col-sm-6.col-md-6
+            .form-group
+              label Email Address
+              input(type='text', name='applicant[email]')
+        .row.columns
+          .col.col-sm-12.col-md-12
+            .form-group
+              label If you are a professional that works with this child (teacher, social worker, counselor, other), what organization/school/agency do you represent?
+              input(type='text', name='professional[affiliation]')
+        .row.columns
+          .col.col-sm-12.col-md-12
+            .form-group.check
+              label Tell us which of these is true
+              .options
+                label
+                  input(type='radio', name='whoToContact')
+                  | I have spoken with the child's parent/guardian about this referral. Contact the parent/guardian directly.
+                br
+                label
+                  input(type='radio', name='whoToContact')
+                  | I have not spoken with the parent/guardian about this referral. Please contact me directly to discuss this referral.
+      .container-fluid.tab.tab-6
+        .success-message
+          div.check
+            span
+          h1 Success message!
+    .body__footer
+      .nav.container-fluid
+        hr
+        .pull-left
+          a(class='back', href='#') Back
+        .pull-right
+          a(class='next disabled', href='#') Next

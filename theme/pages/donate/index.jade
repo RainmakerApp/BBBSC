@@ -1,9 +1,12 @@
 theme:template(title="Volunteer", name="_default")
   content
     .page.page-donate
-      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+      .jumbotron.sixteen-nine(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1.tr-up Support The Cause
       .container.thin
+       .center.promise(style='margin-top: 30px; margin-bottom: 15px; border-bottom: 1px solid; padding-bottom: 30px;')
+          strong Big Brothers Big Sisters of Colorado's Donor Promise:
+          p Your contribution will always be used for the purpose you intended and you will always be recognized according to your wishes. At any time, you have the right to inquire about how your support has been used and how it has benefited the community.
         ul.donate-methods: .row
           a(href='#/my/donate'): li.main
             .col.col-sm-12.col-md-2.thumb
@@ -17,6 +20,3 @@ theme:template(title="Volunteer", name="_default")
             .col.col-sm-12.col-md-10
               h3.tr-up {method.content.title}
               {method.content.description}
-        .center.promise
-          strong Big Brothers Big Sisters of Colorado's Donor Promise:
-          p Your contribution will always be used for the purpose you intended and you will always be recognized according to your wishes. At any time, you have the right to inquire about how your support has been used and how it has benefited the community.

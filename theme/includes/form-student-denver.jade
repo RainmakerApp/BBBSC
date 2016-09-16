@@ -1,0 +1,534 @@
+.glass-form__wrapper#student.denver
+  .wrapper__body
+    span.shut
+    .body__header
+      ul
+        li.active(id='1') Youth Info
+        li(id='2') Parent Info
+        li(id='3') General Info
+        //- li(id='4') Matching Preferences
+        li(id='4') Stengths &amp; Challenges
+        li(id='5') Notes
+        //- li(id='6' style='display: none;') Notes
+    .body__content: form.form(action="/api/3.0/form-completions", method="post")
+      | <:module slug="messages-display" namespace="Student Application - Pikes Peak" />
+      | <input type="hidden" name="--namespace" value="Student Application - Pikes Peak" />
+      | <input type="hidden" name="--form" value="Pikes Peak Student Application" />
+      | <input type="hidden" name="--failure" value="/enroll-a-child?err=1" />
+      | <input type="hidden" name="--success" value="/enroll-a-child?err=none" />
+      input(type='hidden', name='region')
+      .container-fluid.tab.tab-1.in
+        h1 YOUTH INFO
+          small *This form is to be completed by the child's parent or guardian. To qualify for our programs, a child must be between the ages of 7 and 12, from a single parent household, and must qualify for free or reduced lunch at school.
+        .row.columns
+          .col.col-sm-12.col-md-5
+            .form-group.two.required
+              label Full Name
+                span *
+              .col.col-sm-6.col-md-6.first
+                input(type='text', placeholder='First Name', name='youth[name][first]', class='required')
+              .col.col-sm-6.col-md-6
+                input(type='text', placeholder='Last Name', name='youth[name][last]', class='required')
+          //- End Group One
+          .col.col-sm-6.col-md-3
+            .form-group.three
+              label Birth Date
+              .col.col-sm-3.first
+                input(type='text', placeholder='MM', name='youth[dateOfBirth][m]')
+              .col.col-sm-3.second
+                input(type='text', placeholder='DD', name='youth[dateOfBirth][d]')
+              .col.col-sm-6
+                input(type='text', placeholder='YYYY', name='youth[dateOfBirth][y]')
+          //- End Group Two
+          .col.col-sm-3.col-md-1
+            .form-group.required
+              label Age
+                span *
+              input(type='text', name='youth[age]', class='required')
+          //- End Group Three
+          .col.col-sm-3.col-md-3
+            .form-group
+              label Gender
+              input(type='text', name='youth[gender]')
+          //- End Group Four
+        .row.columns
+          .col.col-sm-6.col-md-6.select
+            .form-group.required
+              label Ethnicity
+                span *
+              select(name='youth[ethnicity]', class='required')
+                option Caucasian
+                option African American
+                option Native American
+                option Other Ethnicities?
+          //- End Group One
+          .col.col-sm-6.col-md-6
+            .form-group
+              label If Native American, What Tribe?
+              input(type='text', name='youth[tribe]')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-3.col-md-4
+            .form-group.required
+              label Child's School
+                span *
+              input(type='text', name='youth[school]', class='required')
+          //- End Group One
+          .col.col-sm-3.col-md-3
+            .form-group.required
+              label School District
+                span *
+              input(type='text', name='youth[schoolDistrict]', class='required')
+          //- End Group Two
+          .col.col-sm-2.col-md-2
+            .form-group
+              label Grade
+              input(type='text', name='youth[grade]')
+          //- End Group Three
+          .col.col-sm-4.col-md-3
+            .form-group
+              label Student ID Number
+              input(type='text', name='youth[studentID]')
+          //- End Group Four
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group
+              label Teacher Name
+              input(type='text', name='youth[teacher]')
+          .col.col-sm-6.col-md-6
+            .form-group
+              label School Counselor's Name
+              input(type='text', name='youth[counselor]')
+      .container-fluid.tab.tab-2
+        h1 PARENT / GUARDIAN INFO
+          small Tell us a little bit about you
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.two.required
+              label PARENT / GUARDIAN NAME
+                span *
+              .col.col-sm-3.col-md-6.first
+                input(type='text', placeholder='First Name', name='guardianOne[firstName]', class='required')
+              .col.col-sm-3.col-md-6
+                input(type='text', placeholder='Last Name', name='guardianOne[lastName]', class='required')
+          //- End Group One
+          .col.col-sm-6.col-md-6
+            .form-group.three.required
+              label RELATIONSHIP TO CHILD
+                span *
+              input(type='text', name='guardianOne[relationship]', class='required')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.two
+              label PARENT / GUARDIAN NAME
+              .col.col-sm-2.col-md-6.first
+                input(type='text', placeholder='First Name', name='guardianTwo[firstName]')
+              .col.col-sm-2.col-md-6
+                input(type='text', placeholder='Last Name', name='guardianTwo[lastName]')
+          //- End Group One
+          .col.col-sm-6.col-md-6
+            .form-group.three
+              label RELATIONSHIP TO CHILD
+              input(type='text', name='guardianTwo[relationship]')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.required
+              label Street Address
+                span *
+              input(type='text', name='address[street]', class='required')
+          //- End Group One
+          .col.col-sm-3.col-md-3
+            .form-group.required
+              label City
+                span *
+              input(type='text', name='address[city]', class='required')
+          //- End Group Two
+          .col.col-sm-3.col-md-3
+            .form-group.required
+              label Zip Code
+                span *
+              input(type='text', name='address[zip]', class='required')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-4.col-md-6
+            .form-group.required
+              label Home Phone Number
+                span *
+              input(type='text', name='guardianOne[homePhone]', class='required')
+          .col.col-sm-4.col-md-6
+            .form-group
+              label Cell Phone Number
+              input(type='text', name='guardianOne[cellPhone]')
+          .col.col-sm-4.col-md-12
+              .form-group
+                label Email Address
+                input(type='text', name='guardianOne[emailAddress]')
+        .row.columns
+          
+        hr
+        .row.columns
+          .col.col-sm-5.col-md-5.select
+            .form-group
+              label Marital Status
+              select(name='guardianOne[maritalStatus]')
+                option Married
+                option Single
+                option Other Options (?)
+          .col.col-sm-7.col-md-7.select
+            .form-group
+              label Are One or Both Parents Currently or Recently Incarcerated?
+              select(name='incarcerationHistory')
+                option Yes
+                option No
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group
+              label 1. PARENT / GUARDIAN’S EMPLOYERS (if applicable)
+              input(type='text', name='employerOne[name]')
+          .col.col-sm-2.col-md-2
+            .form-group
+              label Work Phone
+              input(type='text', name='employerOne[phone]')
+          .col.col-sm-4.col-md-4
+            .form-group.check
+              label May We Contact You At Work?
+              .options
+                label
+                  input(type='radio', value='No', name='employerOne[contact]')
+                  | No
+                label
+                  input(type='radio', value='Yes', name='employerOne[contact]')
+                  | Yes
+        .row.columns
+          .col.col-sm-5.col-md-6
+            .form-group
+              label 2. PARENT / GUARDIAN’S EMPLOYERS (if applicable)
+              input(type='text', name='employerTwo[name]')
+          .col.col-sm-3.col-md-2
+            .form-group
+              label Work Phone
+              input(type='text', name='employerTwo[phone]')
+          .col.col-sm-4.col-md-4
+            .form-group.check
+              label May We Contact You At Work?
+              .options
+                label
+                  input(type='radio', value='No', name='employerTwo[contact]')
+                  | No
+                label
+                  input(type='radio', value='Yes', name='employerTwo[contact]')
+                  | Yes
+      .container-fluid.tab.tab-3
+        h1 General Info
+          small We'd love to get to know you.. tell us about yourself.
+        .row.columns
+          .col.col-sm-12
+            .form-group
+              label Names and Ages of Family Members in the Home
+              input(type='text', name='peopleInTheHome')
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.check.required
+              label Are you currently recieving any of the following assistance?
+                span *
+              .options
+                label
+                  input(type='checkbox', name='assistance[program]', value='Reduced Lunch')
+                  | Reduced Lunch
+                br
+                label
+                  input(type='checkbox', name='assistance[program]', value='Social Security')
+                  | Social Security
+                br
+                label
+                  input(type='checkbox', name='assistance[program]', value='TANF')
+                  | TANF
+                br
+                label
+                  input(type='checkbox', name='assistance[program]', value='Child Support')
+                  | Child Support
+                br
+                label
+                  input(type='checkbox', name='assistance[program]', value='Food Stamps')
+                  | Food Stamps
+          .col.col-sm-6.col-md-6
+            .form-group.check
+              label Is the child involved with any of the following services? (Click All that applies)
+              .options
+                label
+                  input(type='checkbox', name='services[programs]', value='Mental Health (Couseling / Therapy)')
+                  | Mental Health (Couseling / Therapy)
+                br
+                label
+                  input(type='checkbox', name='services[programs]', value='Human Services')
+                  | Human Services
+                br
+                label
+                  input(type='checkbox', name='services[programs]', value='Court Involvement')
+                  | Court Involvement
+                br
+                label
+                  input(type='checkbox', name='services[programs]', value='Other')
+                  | Other
+                  input(type='text', name='services[other]')
+        .row.columns
+          .col.col-sm-12.col-md-6
+            .form-group.check.required
+              label Has your Child had any Contact with Law Enforcement?
+                span *
+              .options
+                label
+                  input(type='radio', name='lawEnforcement[contact]', value='Yes')
+                  | Yes
+                label
+                  input(type='radio', name='lawEnforcement[contact]', value='No')
+                  | No
+          .col.col-sm-12.col-md-6
+            .form-group
+              label If Yes, please Explain
+              input(type='text', name='lawEnforcement[reason]')
+        .row.columns
+          .col.col-sm-12.col-md-12
+            .form-group.check
+              label IS THE CHILD CURRENTLY PARTICIPATING IN OTHER ORGANIZATIONS OR COMMUNITY ACTIVITIES?
+              .row.columns.options.tons
+                .col.col-sm-6.col-md-4: label
+                  input(type='checkbox', name='organizations[organization]', value='Denver Kids')
+                  | Denver Kids
+                .col.col-sm-6.col-md-4: label
+                  input(type='checkbox', name='organizations[organization]', value='Denver Partners')
+                  | Denver Partners
+                .col.col-sm-6.col-md-4: label
+                  input(type='checkbox', name='organizations[organization]', value='Other Mentoring Program')
+                  | Other Mentoring Program
+                .col.col-sm-6.col-md-4: label
+                  input(type='checkbox', name='organizations[organization]', value='Boy / Girl Scouts')
+                  | Boy / Girl Scouts
+                .col.col-sm-6.col-md-4: label
+                  input(type='checkbox', name='organizations[organization]', value='Organized Sports')
+                  | Organized Sports
+                .col.col-sm-6.col-md-4: label
+                  input(type='checkbox', name='organizations[organization]', value='Boys and Girls Club')
+                  | Boys and Girls Club
+                .col.col-sm-6.col-md-4: label
+                  input(type='checkbox', name='organizations[organization]', value='Other')
+                  | Other
+                  input(type='text', name='organizations[other]')
+      //- .container-fluid.tab.tab-4
+        h1 Matching Preferences
+          small Do you (Parent &amp; Child) have any preferences regarding volunteers in the following areas?
+        .row.columns
+          .col.col-sm-12.col-md-6
+            .form-group.check
+              label Smoking
+                span *
+              .row.columns.options.tons
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[smoking]', value='Prefer Nonsmoker')
+                  | Prefer Nonsmoker
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[smoking]', value='Prefer No Smoking In Front of Child')
+                  | Prefer No Smoking In Front of Child
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[smoking]', value='No Preference')
+                  | No Preference
+          .col.col-sm-12.col-md-6
+            .form-group.check
+              label Owning Pets
+                span *
+              .row.columns.options.tons
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[pets]', value='Prefer They Do Not Own Pets')
+                  | Prefer They Do Not Own Pets
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[pets]', value='No Preference')
+                  | No Preference
+        .row.columns
+          .col.col-sm-12.col-md-6
+            .form-group.check
+              label Owning Firearms (Will Be Locked &amp; Stored)
+                span *
+              .row.columns.options.tons
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[firearms]', value='Prefer They Do Not Own Firearms')
+                  | Prefer They Do Not Own Firearms
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[firearms]', value='No Preference')
+                  | No Preference
+          .col.col-sm-12.col-md-6
+            .form-group.check
+              label Sexual Orienation
+                span *
+              .row.columns.options.tons
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[sexualOrientation]', value='I Prefer Heterosexual')
+                  | I Prefer Heterosexual
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[sexualOrientation]', value='No Preference')
+                  | No Preference
+        .row.columns
+          .col.col-sm-12.col-md-3
+            .form-group.check
+              label Race or Ethnicity
+                span *
+              .row.columns.options.tons
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[race]', value='I Prefer...')
+                  | I Prefer...
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[race]', value='No Preference')
+                  | No Preference
+          .col.col-sm-12.col-md-9
+            .form-group
+              label Race Or Ethnicity Preference
+              input(type='text', name='preferances[racePref]')
+        .row.columns
+          .col.col-sm-12.col-md-3
+            .form-group.check
+              label Religion or Faith
+                span *
+              .row.columns.options.tons
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[religion]', value='I Prefer...')
+                  | I Prefer...
+                .col.col-sm-12.col-md-12: label
+                  input(type='radio', name='preferences[religion]', value='No Preference')
+                  | No Preference
+          .col.col-sm-12.col-md-9
+            .form-group
+              label Religion or Faith Preference
+              input(type='text', name='preferances[religionPref]')
+        .row.columns
+          .col.col-sm-12.col-md-12
+            .form-group
+              label Any Other Preferences
+              input(type='text', name='preferences[other]')
+        .row.columns
+          .col.col-sm-12.col-md-12
+          .form-group.check
+            label Characteristics That Describe Your Child:
+            .row.columns.options.tons
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Confident')
+                | Confident
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Stubborn')
+                | Stubborn
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Impatient')
+                | Impatient
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Shy')
+                | Shy
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Nervous')
+                | Nervous
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Outgoing')
+                | Outgoing
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Patient')
+                | Patient
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Good Listener')
+                | Good Listener
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Cooperative')
+                | Cooperative
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Likes School')
+                | Likes School
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Open')
+                | Open
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Active')
+                | Active
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Independent')
+                | Independent
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Dislikes School')
+                | Dislikes School
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Opinionated')
+                | Opinionated
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Indecisive')
+                | Indecisive
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Talkative')
+                | Talkative
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Bossy')
+                | Bossy
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Friendly')
+                | Friendly
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Quiet')
+                | Quiet
+              .col.col-sm-12.col-md-4: label
+                input(type='checkbox', name='characteristics', value='Other')
+                | Other
+                input(type='text', name='characteristics[other]')
+      .container-fluid.tab.tab-4
+        h1 STRENGTHS
+        .row.columns: .col.col-sm-4.col-md-12: .form-group
+          label School
+          input(type='text', name='strengths[school]')
+        .row.columns: .col.col-sm-4.col-md-12: .form-group
+          label Home
+          input(type='text', name='strengths[home]')
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
+          label Behaviors
+          input(type='text', name='strengths[behaviors]')
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
+          label Others
+          input(type='text', name='strengths[others]')
+        h1 CHALLENGES
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
+          label School
+          input(type='text', name='challenges[school]')
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
+          label Home
+          input(type='text', name='challenges[home]')
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
+          label Behaviors
+          input(type='text', name='challenges[behaviors]')
+        .row.columns: .col.col-sm-6.col-md-12: .form-group
+          label Others
+          input(type='text', name='challenges[others]')
+      .container-fluid.tab.tab-5
+        h1 NOTES:
+        .row.columns: .col.col-sm-12: .form-group
+          label Why are you interested in getting your child a mentor?
+          input(type='text', name='why')
+        .row.columns: .col.col-sm-12: .form-group
+          label Please provide us with any additional information you would like us to know about your child.
+          input(type='text', name='additionalInformation')
+        .row.columns
+          .col.col-sm-12
+            p I give permission for the above named minor child to apply for Big Brothers Big Sisters of Colorado, Inc. I understand that this completed application does not guarantee participation or acceptance in Big Brothers Big Sisters of Colorado. All information will be held by BBBSC is confidential.
+          .col.col-sm-8: .form-group
+            label To Sign, Please Type your Full Name Below
+              span *
+            input(type='text', name='signature[name]')
+          .col.col-sm-4: .form-group
+            label Today's Date
+              span *
+            input(type='text', name='signature[date]')
+      .container-fluid.tab.tab-6
+        .success-message
+          div.check
+            span
+          h1 Success message!
+    .body__footer
+      .nav.container-fluid
+        hr
+        .pull-left
+          a(class='back', href='#') Back
+        .pull-right
+          a(class='next disabled', href='#') Next

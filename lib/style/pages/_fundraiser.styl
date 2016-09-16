@@ -82,16 +82,52 @@
 			position relative
 			clearfix()
 			.position-absolute
-				bottom 15px
+				bottom 20px
 				position absolute
 				right 15px
+				z-index 45
 			.banner-area_grid
-				height 400px
+				height auto
+				min-height 60px
 				margin 0 auto
 				overflow hidden
+				padding 5px
 				width 100%
-				.item img
-					max-width 100%
+				.item
+					background-size cover
+					background-position center
+					float left
+					position relative
+					z-index 0
+					&:hover i
+						opacity 1
+					i
+						background-color rgba(black, 0.85)
+						// border-radius 50%
+						// box-shadow 0 0 10px black
+						color white
+						cursor pointer
+						font-size 12px
+						font-style normal
+						font-weight 400
+						letter-spacing 0.125em
+						line-height 32px
+						right 15px
+						opacity 0
+						padding 0 15px
+						position absolute
+						top 15px
+						text-align center
+						transition all 300ms ease
+						width auto
+						&:before
+							content 'REMOVE'
+						&:hover
+							background-color rgba(#c0392b, 0.85)
+					// height 160px
+					// vertical-align bottom
+					// width 160px
+					// max-width 100%
 			.banner-area_featured
 				background-color darken(#EEE, 25%)
 				background-image url(../images/dummy/tall-thumb.png)
@@ -132,9 +168,6 @@
 						transition all 300ms ease
 			.banner-area_meta
 				margin 15px 0 0
-				padding-left 130px
-				@media (min-width $sm)
-					padding-left 255px
 				position absolute
 				width 100%
 				.meta_title, .meta_info

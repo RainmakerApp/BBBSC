@@ -22,3 +22,21 @@ pattern:
     format: button
     name: Mentor in Pikes Peak Button
     description: You can link a the PDF or form by checking the "external" box
+  -
+    key: contenttwo
+    format: html
+    name: Additional Content
+  -
+    key: faq
+    format: blocks
+    name: FAQ Style Section
+    singular: Block
+    pattern: question
+    preview: question
+  -
+    key: actualfaq
+    format: blocks
+    name: Actual FAQ Section
+    singular: Block
+    pattern: question
+    preview: question

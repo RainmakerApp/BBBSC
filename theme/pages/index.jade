@@ -4,22 +4,31 @@ theme:template(title="Home", name="_index")
       .slides(:load=":api(3.0).content(site.index).relationships(slides) as slides")
         //@IF slides|count >= 2
         span.right
-          i.fa.fa-angle-right
+          i.fa.fa-angle-right.next
         span.left
-          i.fa.fa-angle-left
+          i.fa.fa-angle-left.prev
         //@ENDIF
         ul
           li.jumbotron.home(:load=":api(3.0).content(site.index).relationships(slides) as slide", :iterate="self", style="background-image: url({slide.relationships(image,attachments).first.photo-url})")
             .gradient
             .container: .row
+              //@IF slide.content.featured
+              .col.col-sm-12.col-md-7
+                h1 {slide.content.header}
+                p {slide.content.body|strip_tags|limit_words(150,...)}
+                a(href='{slide.content.action.href}' class='btn-white') {slide.content.action.text}
+              .col.col-sm-12.col-md-5.text-right
+                img(src='{slide.relationships(featured,attachments).first.raw}', style='max-width: 100%;')
+              //@ELSE
               .col.col-sm-12.col-md-8
                 h1 {slide.content.header}
-                {slide.content.body}
+                p {slide.content.body|strip_tags|limit_words(150,...)}
                 a(href='{slide.content.action.href}' class='btn-white') {slide.content.action.text}
+              //@ENDIF
       .newsletter-banner: .container: .row
         .col.col-sm-12.col-md-6
           form.subscribe
-            h1 Subscribe To Our Newsletter
+            h1 Subscribe To Our E-Newsletter
             .messages.error(style='display: none;')
             input(type='hidden', name='tags', value='list:newsletter')
             input(type='email', name='email', placeholder='Enter your email address here...')
@@ -45,7 +54,7 @@ theme:template(title="Home", name="_index")
               i.fa.fa-twitter
               |<a href="https://twitter.com/{:settings.social-twitter}" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false"></a>
       .slider-area
-        .col.col-sm-12.col-md-6#story
+        .col.col-sm-12.col-md-6#story.shelf
           ul(:load=":api(3.0).posts().tags(post:featured).status(published) as posts")
             li(:load="posts as post", :iterate="self", style="background-image: url({post.attachments().first.version(,)})")
               .flag Featured Story
@@ -53,7 +62,7 @@ theme:template(title="Home", name="_index")
                 h1 {post.title}
                 p {post.excerpt|limitstring(148,...)|strip_tags}
                 a(href='/blog/{post.id}' class='btn-white small') Learn More Now
-        .col.col-sm-12.col-md-6#program
+        .col.col-sm-12.col-md-6#program.shelf
           ul(:load=":api(3.0).content(site.index).relationships(programs) as programs")
             li(:load="programs as program", :iterate="self", style="background-image: url({program.relationships(image,attachments).first.photo-url})")
               .flag Featured Program
@@ -65,7 +74,7 @@ theme:template(title="Home", name="_index")
         .col.col-sm-12.col-md-6
           a(href='/events'): h1.green Featured Events 
             i.fa.fa-angle-right.circle
-          ul.events(:load=":api(3.0).groups().type(event) as events")
+          ul.events(:load=":api(3.0).groups().type(event).sort(timestamp_until,asc).status(active,completed).tags(group:featured).limit(3) as events")
             li(:load="events as event", :iterate="self")
               .col.col-md-3.col-sm-12
                 img(src='{event.photo-url}')
@@ -80,8 +89,10 @@ theme:template(title="Home", name="_index")
                   i.fa.fa-map-marker 
                   | {event.location|split(b64:LA==,0)}
                 //- a(href='{event.prop.link}' class='btn-pill') Event Details
-                a(href='#/event/{event.id}' class='btn-pill tiny show__event', data-target='{event.id}') View Event Details
+                a(href='/events/{event.id}' class='btn-pill tiny') View Event Details
               theme:embed(file="includes/event")
+            a(href='/events', class='read__more') View All 
+              i.fa.fa-angle-right
         .col.col-sm-12.col-md-6
           a(href='/blog'): h1.orange Recent Blog Posts 
             i.fa.fa-angle-right.circle

@@ -1,0 +1,10 @@
+.modal#banner
+  .modal-container
+    .main
+      p Add Banner Photo
+      a(href='#', class='btn btn-green upload-button') Upload Photo
+        //@IF team.id
+        input(type='file', name='file', id='bannerPhoto', data-id='{team.id}')
+        //@ELSEIF group.id
+        input(type='file', name='file', id='bannerPhoto', data-id='{group.id}')
+        //@ENDIf

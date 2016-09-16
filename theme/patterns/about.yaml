@@ -18,7 +18,35 @@ pattern:
   -
     key: partners
     format: html
-    name: Partners
+    name: Partners Overview
+  -
+    key: corpsponsors
+    format: blocks
+    name: 'Corporate Sponsors ($50,000+)'
+    singular: Corporate Sponsor
+    pattern: corsponss
+    preview: name
+  -
+    key: smsponsors
+    format: blocks
+    name: 'Sponsors ($25,000+)'
+    singular: Sponsor
+    pattern: sponsor-block
+    preview: name
+  -
+    key: smmsponsors
+    format: blocks
+    name: 'Sponsors ($10,000+)'
+    singular: Sponsor
+    pattern: sm-sponsor
+    preview: name
+  -
+    key: smmmsponsors
+    format: blocks
+    name: 'Sponsors ($5,000+)'
+    singular: Sponsor
+    pattern: sm-sponsor
+    preview: name
   -
     key: resources
     format: html

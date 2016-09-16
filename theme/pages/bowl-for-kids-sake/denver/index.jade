@@ -1,0 +1,72 @@
+theme:template(title="Bowl For Kids Sake - Denver", name="_bowl-denver")
+  content
+    div(class='page page-bowl page-sidebar', :load=":api(3.0).projects(421) as project")
+      //- {project|dump}
+      .jumbotron.sixteen-nine
+        .container
+          h1.tr-up Bowl for Kids' Sake
+            .thin-text Denver
+        .progress
+          span(style='width: {project.progress.percent};')
+          p.raised RAISED: 
+            strong {project.progress.money|money}
+          p.goal GOAL: 
+            strong {project.target|money}
+      .container: .content: .row
+        .col.col-sm-12.col-md-8
+          h1 Event Details
+          .section(style='margin-bottom: 60px;')
+            h4.tr-up Overview
+            p {project.description}
+          //- .row(style='margin-bottom: 30px;')
+            .col.col-sm-12.col-md-4: .section
+              h4.tr-up Date &amp; Time
+              p(style='margin-bottom: 0; margin-top: 0;') {project.prop.start-time} - {project.prop.end-time}
+              p {project.timestamp.until.unix|date(F j)}, {project.timestamp.until.unix|date(Y)}
+            .col.col-sm-12.col-md-8: .section
+              h4.tr-up Location
+              p(style='margin-bottom: 0; margin-top: 0;') {project.prop.venue}
+              p {project.location}
+          .btn-group
+            a(href='/bowl-for-kids-sake/denver/participate', class='btn btn-green') Participate Now!
+            a(href='denver/teams', class='btn btn-base') View All Teams
+            //- a(href='#', class='btn btn-light-gray') Bowl as a Company  
+          .resources-section
+            h4.tr-up Frequently Asked Questions
+            .page.page-mentor-support: .faq.resources: ul
+              li(:load="project.content.slug(resources).relationships(resources) as qa", :iterate="self"): dl
+                dt {qa.content.question|strip_tags}
+                dd {qa.content.answer}
+          .section
+            h4.tr-up Sponsors
+              .pull-right: small: a(href='mailto:katie.groke@biglittlecolorado.org') Add Your Business to the List
+            .sponsors.row
+              .col.col-sm-6.col-md-4(:load="project.content.slug(resources).relationships(sponsors) as sponsor", :iterate="self"): a(href="{sponsor.content.link}", target="_blank"): .sponsor
+                img(src='{sponsor.relationships(image,attachments).first.version(,)}', title='{sponsor.content.name}')
+        .col.col-sm-12.col-md-4
+          .sidebar
+            .input-icon
+              form(action='denver/teams')
+                input(type='search' name='q' placeholder='Find a Team or Fundraiser...')
+              i.icon-search
+            section.donations
+              h3 Recent Donations
+              ul
+                li(:load=':api(3.0).projects(421).designations().limit(5) as donation', :iterate='self')
+                  .pull-left {donation.contact.display_name}
+                  .pull-right {donation.amount|money}
+            section.fundraisers
+              h3 Top Fundraisers
+              ul
+                li(:load=':api(3.0).projects(421).groups().status(active,completed).type(team).sort(progress,desc).limit(5) as group', :iterate='self'): .row
+                  .col.col-sm-12.col-md-4(style="vertical-align: middle; float: none; display: table-cell;")
+                    //@IF group.owner.photo_url
+                    img(src='{group.owner.photo_url}', style='vertical-align=middle;')
+                    //@ELSEIF group.owner.facebook
+                    img(src='//graph.facebook.com/{group.owner.facebook.userID}/picture?type=large&width=300&height=300', style='vertical-align=middle;')
+                    //@ELSE
+                    img(src='//rainmakerapp.s3.amazonaws.com/bbsc/images/public-profile.png', style='vertical-align=middle;')
+                    //@ENDIF
+                  .col.col-sm-12.col-md-8(style="padding-top: 0; vertical-align: middle; float: none; margin: 0; display: table-cell;")
+                    a(href='/teams/{group.id}') {group.name}
+                    p(style="margin: 0;") {group.progress.money|money}

@@ -1,0 +1,64 @@
+theme:template(title="For Bigs & Families", name="_default")
+  content
+    .page.page-mentor-support(:load=":api(3.0).content(site.bigs) as page")
+      .jumbotron.sixteen-nine(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+        h1.tr-up For Bigs &amp; Families
+      .container
+        .tabs.big.two
+          div(class='tr-up tab active', data-target='activities', style='text-align: center;')
+            p Ideas
+          div(class='tr-up tab', data-target='support', style='text-align: center;')
+            p Resources
+      .pane.active#activities
+        .container: .row.content
+          .col.col-sm-12.col-md-6
+            h1.guidelines
+              i.icon-cal
+              |Calendar of Events
+            ul.calendars: .row
+              li(:load="page.relationships(calendars) as calendar", :iterate="self"): div
+                h4 {calendar.content.title}
+                h1: i.icon-pdf
+                //@IF calendar.content.action.external
+                a(href='{calendar.content.action.href}', target='_blank') {calendar.content.action.text}
+                //@ELSE
+                a(href='{calendar.content.action.href}') {calendar.content.action.text}
+                //@ENDIF
+          .col.col-md-offset.col-md-1
+            p &nbsp;
+          .col.col-sm-12.col-md-5
+            h1.idea Ideas &amp; Discounts
+            div.table
+              {page.content.ideas}
+        .sub-footer: .container
+          {page.content.featured}
+        .container: .content
+          h1.guidelines(style="margin-top: 60px;")
+            i.icon-checklist
+            |Activity Planning
+          div.table
+            {page.content.activities}
+      .pane#support
+        .container: .row.content
+          .col.col-sm-12.col-md-6
+            h1.guidelines
+              i.icon-guidelines
+              |Resources
+            .faq.resources: ul(:load="page.relationships(resourcesfor) as qa", :iterate="contents")
+              li: dl
+                dt {qa.content.topic}
+                dd {qa.content.desc}
+          .col.col-md-offset.col-md-1
+            p &nbsp;
+          .col.col-sm-12.col-md-5
+            h1.resources Tips for Mentors
+            div.table
+              {page.content.resources}
+        .sub-footer.faq: .container
+          h1
+            i.icon-question
+            |Frequently Asked Questions
+          ul(:load="page.relationships(faq) as qa", :iterate="contents")
+            li: dl
+              dt {qa.content.question}
+              dd {qa.content.answer|strip_tags}

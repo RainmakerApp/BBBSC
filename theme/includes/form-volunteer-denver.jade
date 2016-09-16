@@ -1,0 +1,120 @@
+.glass-form__wrapper.denver#volunteer
+  .wrapper__body
+    span.shut
+    //- .body__header
+      ul
+        li.active(id='1') Youth Info
+        li(id='2') Parent Info
+        li(id='3') General Info
+    .body__content: form.form(action="/api/3.0/form-completions", method="post")
+      | <:module slug="messages-display" namespace="Denver Volunteer Enquiry Form" />
+      | <input type="hidden" name="--namespace" value="Denver Volunteer Enquiry Form" />
+      | <input type="hidden" name="--form" value="Denver Volunteer Enquiry Form" />
+      | <input type="hidden" name="--failure" value="/volunteer?err=1" />
+      | <input type="hidden" name="--success" value="/volunteer?err=none" />
+      input(type='hidden', name='region')
+      .container-fluid.tab.tab-1.in
+        h1(style="margin-top: -15px;") Denver Volunteer Inquiry Form
+        .row.columns
+          .col.col-sm-12.col-md-6
+            .form-group.two.required
+              label Full Name
+                span *
+              .col.col-sm-6.col-md-6.first
+                input(type='text', placeholder='First Name', name='contact[name][first]', class='required')
+              .col.col-sm-6.col-md-6
+                input(type='text', placeholder='Last Name', name='contact[name][last]', class='required')
+          //- End Group One
+          .col.col-sm-6.col-md-3
+            .form-group.three
+              label Birth Date
+                span *
+              .col.col-sm-3.first
+                input(type='text', placeholder='MM', name='contact[dateOfBirth][m]')
+              .col.col-sm-3.second
+                input(type='text', placeholder='DD', name='contact[dateOfBirth][d]')
+              .col.col-sm-6
+                input(type='text', placeholder='YYYY', name='contact[dateOfBirth][y]')
+          //- End Group Three
+          .col.col-sm-3.col-md-3
+            .form-group
+              label Gender
+              input(type='text', name='gender', name='contact[gender]')
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.required
+              label Street Address
+                span *
+              input(type='text', name='contact[street]', class='required')
+          //- End Group One
+          .col.col-sm-3.col-md-3
+            .form-group.required
+              label City
+              input(type='text', name='contact[city]', class='required')
+          //- End Group Two
+          .col.col-sm-3.col-md-3
+            .form-group.required
+              label Zip Code
+              input(type='text', name='contact[zip]', class='required')
+          //- End Group Two
+        .row.columns
+          .col.col-sm-12.col-md-7
+            .form-group
+              label Email Address
+                span *
+              input(type='text', name='contact[emailAddress]')
+          .col.col-sm-12.col-md-5
+            .form-group
+              label Employer
+              input(type='text', name='contact[employer]')
+        .row.columns
+          .col.col-sm-6.col-md-6
+            .form-group.check
+              label Do you Speak Spanish?
+              .options
+                label
+                  input(type='checkbox', name='spanish', value='Yes')
+                  | Yes
+                br
+                label
+                  input(type='checkbox', name='spanish', value='No')
+                  | No
+          .col.col-sm-6.col-md-6
+            .form-group.check.required
+              label Do you have your own transportation?
+                span *
+              .options
+                label
+                  input(type='checkbox', name='transportation', value='Yes')
+                  | Yes
+                br
+                label
+                  input(type='checkbox', name='transportation', value='No')
+                  | No
+        .row.columns
+          .col.col-sm-12.col-md-12
+            .form-group
+              label How did you hear about us?
+              input(type='text', name='referral')
+        .row.columns
+          .col.col-sm-12.col-md-12
+            .form-group
+              label Questions / Comments:
+              input(type='text', name='comments')
+        .row.columns
+          .col.col-sm-12.col-md-12
+            .form-group.check.required
+              .options
+                label
+                  input(type='checkbox', name='emailOptIn', value='I would like to recieve email updates.')
+                  strong Check here if you would like to recieve email updates from Big Brothers Big Sisters of Colorado.
+      .container-fluid.tab.tab-6
+        .success-message
+          div.check
+            span
+          h1 Success message!
+    .body__footer
+      .nav.container-fluid
+        hr
+        .pull-right
+          a(class='submit disabled', href='#') SUBMIT

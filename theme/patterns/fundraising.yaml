@@ -1,0 +1,13 @@
+page:
+  path: /site
+  slug: fundraising
+  name: Fundraiser Page Content
+pattern:
+  -
+    key: content
+    format: html
+    name: Main Content
+  -
+    key: footnote
+    format: html
+    name: "Footnote / Contact Info"

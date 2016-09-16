@@ -1,0 +1,9 @@
+pattern:
+  -
+    key: question
+    format: html
+    name: Question
+  -
+    key: answer
+    format: html
+    name: Answer

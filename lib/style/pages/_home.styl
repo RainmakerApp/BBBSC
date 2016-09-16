@@ -15,6 +15,9 @@ $border = #E7E7E7
       display table-cell
       float left
       list-style none
+      a
+        color inherit
+        text-decoration underline
   span.right, span.left, ol.dots
     display none
   @media (min-width: $sm)
@@ -52,6 +55,7 @@ $border = #E7E7E7
       top 0
     background-color $primary
     background-image url(../images/banners/home.png)
+    background-position top center
     background-size cover
     color #FFF
     position relative
@@ -67,7 +71,7 @@ $border = #E7E7E7
       margin 0
       padding 0
       @media (min-width: $md)
-        font-size 48px
+        font-size 42px
       @media (max-width: 991px)
         font-size 32px
     p
@@ -82,6 +86,7 @@ $border = #E7E7E7
     a.btn-white
       font-size 16px
       padding 15px 40px 12px
+      text-decoration none
       i
         font-size 22px
         margin-left 10px
@@ -99,6 +104,9 @@ $border = #E7E7E7
           &:before
             position relative
             right -1px
+    img
+      float right
+      max-height 175px
   .newsletter-banner
     background-color #703795
     color #FFF
@@ -159,6 +167,8 @@ $border = #E7E7E7
       right 0
       top 0
       z-index 1
+      @media (max-width: 940px)
+        display none
       @media (max-width: 900px)
         left 0
         top -35px
@@ -257,7 +267,7 @@ $border = #E7E7E7
           iframe
             bottom -40px
             left 50%
-            position absolute
+            position absolute !important
             transform translateX(-50%)
             z-index 3
         @media (min-width: $lg)
@@ -288,6 +298,7 @@ $border = #E7E7E7
       margin 0
       li
         background-repeat no-repeat
+        background-position center
         background-size cover
         float left
         &:nth-child(n+2)
@@ -350,6 +361,12 @@ $border = #E7E7E7
       right 0
       top 0
       z-index 0
+  .events 
+    a.read__more
+      color #C4C4C4
+      font-weight 600
+      text-decoration none
+      @extend .tr-up
   .posts
     margin-bottom 60px
     margin-top 60px

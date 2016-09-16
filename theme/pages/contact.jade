@@ -1,11 +1,11 @@
 theme:template(title="Contact Us", name="_default")
   content
     div(class='page page-contact')
-      .jumbotron(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
+      .jumbotron.sixteen-nine(style='background-image: url({header.relationships(images,attachments).random().version(,)})'): .container
         h1(class='tr-up') We're eager to hear from you
           p Simply call, email, or use the form below to get in touch.
-        a(href='/volunteer', class='btn btn-white') Volunteer As A Mentor
-        a(href='/enroll-a-child', class='btn btn-white') Enroll A Child
+        a(href='/volunteer', class='btn btn-white', style='z-index: 2; position: relative;') Volunteer As A Mentor
+        a(href='/enroll-a-child', class='btn btn-white', style='z-index: 2; position: relative;') Enroll A Child
       .container.thin#main: .row
         .col.col-sm-12.col-md-8.content
           h2.tr-up Send Us a Message
@@ -18,32 +18,34 @@ theme:template(title="Contact Us", name="_default")
             | <input type="hidden" name="--failure" value="/contact#form" />
             | <input type="hidden" name="--form" value="contact" />
             | <input type="hidden" name="--success" value="/contact?success=true" />
-            | <input type="hidden" name="--conversation" value="message" />
             div.input-group.split
               label(for='first') Your Name*
               .input-column
-                input(type='text', name='contact[firstName]', placeholder='First Name', id='first')
+                input(type='text', name='contact[firstName]', placeholder='First Name', id='first', data-label='First Name')
               .input-column
-                input(type='text', name='contact[lastName]', placeholder='Last Name', id='last')
+                input(type='text', name='contact[lastName]', placeholder='Last Name', id='last', data-label='Last Name')
             div.input-group
               label(for='email') Your Email*
-              input(type='text', name='contact[email]', placeholder='Email Address', id='email')
+              input(type='text', name='contact[email]', placeholder='Email Address', id='email', data-label='Email')
             div.input-group.split
               .input-column
                 label(for='phone') Your Phone Number*
-                input(type='text', name='contact[phone]', placeholder='(000) 123 - 4567', id='phone')
+                input(type='text', name='contact[phone]', placeholder='(000) 123 - 4567', id='phone', data-label='Phone')
               .input-column
                 label(for='zip') Your Zip Code*
-                input(type='text', name='contact[]', placeholder='Zip Code', id='zip')
+                input(type='text', name='contact[]', placeholder='Zip Code', id='zip', data-label='Zip')
             div.input-group
               label(for='message') Message*
-              textarea(id='message', rows='6', name='message')
+              textarea(id='message', rows='6', name='message', data-label='Message')
+
+            | <input type="hidden" name="--conversation" value="compiled" />
+            | <input type="hidden" name="compiled" value="" id="request-body" />
             button(type='submit', class='tr-up form-button') Submit Message
             //@ENDIF
         .col.col-sm-12.col-md-4.sidebar
           .info-group
             h2.tr-up Connect on Social Media
-            a(href='{:settings.facebook-page}'): div.facebook
+            a(href='https://{:settings.facebook-page}'): div.facebook
               span.icon
                 i.fa.fa-facebook
               span Facebook

@@ -1,0 +1,79 @@
+//- include ../includes/_mixins.jade
+
+doctype html
+html(lang="en")
+  head
+    title {:options.title} - Big Brothers Big Sisters of Colorado
+    meta(charset='UTF-8')
+    meta(content='The Mission of Big Brothers Big Sisters is to provide children facing adversity with strong and enduring, professionally supported one-to-one relationships', name='description')
+    meta(content='', name='author')
+    meta(content='3 days', name='revisit-after')
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+
+    //- Facebook
+    meta(content='The Mission of Big Brothers Big Sisters is to provide children facing adversity with strong and enduring, professionally supported one-to-one relationships', name='og:description')
+    meta(content='assets://images/bbbsc-share.png', name='og:image')
+
+    script(src="https://assets.donate.io/static/widget/embed.js", :ignore="true")
+    script(:ignore="true").
+      var __rmSettings = { organization:'bbbsc', domain:'www.biglittlecolorado.org' }
+
+    // build:css /styles/main.css
+    link(href='assets://css/main.css', rel='stylesheet')
+    // endbuild
+
+    // Ridiculously Responsive Social Sharing Buttons
+    link(href='assets://css/rrssb.css', rel='stylesheet')
+
+    // Font Awesome Icon Font
+    link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
+
+    // Typekit
+    script(src="//use.typekit.net/duk0vdw.js")
+    script.
+      try{Typekit.load();}catch(e){}
+
+  body(class=page,style='background-image: url(https://tookapic.imgix.net/photos/2015/240/0/8/089732b3dea7c0c57e88aa2e96256ae0.JPG?w=770&q=90&s=fb68c400815a79c85c4ed235c20b49a3); background-size: cover;')
+  
+    <:jolt placeholder="content" />
+
+    // build:js /scripts/vendor.min.js
+    script(src='assets://js/jquery.min.js')
+    script(src='assets://js/modernizr-2.6.2-respond-1.1.0.min.js')
+    script(src='assets://js/rrssb.min.js')
+    script(src='assets://js/freewall.min.js')
+    script(src='assets://js/unslider.min.js')
+    script(src='assets://js/jquery.fine-uploader.min.js')
+    script(src='assets://js/optiscroll.min.js')
+    script(src='assets://js/salvattore.min.js')
+    script(src='assets://js/imagesloaded.min.js')
+    // endbuild
+
+    script(src='assets://js/calendar.min.js')
+
+    // build:js /scripts/main.js
+    script(src='assets://js/main.js')
+    // endbuild
+
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-64993402-1', 'auto');
+      ga('send', 'pageview');
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '929983597012726',
+          xfbml      : true,
+          version    : 'v2.2'
+        });
+      };
+      (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));

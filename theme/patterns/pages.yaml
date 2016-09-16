@@ -1,0 +1,12 @@
+page:
+  path: /site
+  slug: pages
+  name: Pages
+pattern:
+  -
+    key: custompages
+    format: blocks
+    name: Custom Pages
+    singular: Page
+    pattern: page-content
+    preview: title

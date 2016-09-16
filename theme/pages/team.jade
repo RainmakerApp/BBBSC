@@ -1,0 +1,2 @@
+theme:template(title="Redirect", name="_index", :load=":api(3.0).groups({:url.2}) as group")
+  redirect(:eval="true") /teams/{group.slug ? group.slug : group.id}

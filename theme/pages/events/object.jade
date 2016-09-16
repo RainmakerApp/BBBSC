@@ -1,0 +1,131 @@
+theme:template(title="{group.name}", name="_fundraiser", :load=":api(3.0).groups({:url.2}, fundraiser) as group")
+  redirect(:eval="group.type == 'team'") /teams/{group.id}
+  content
+    div(class='page page-fundraiser')
+      //- .fundraiser-info: .container.thin: .row
+        .col.col-sm-12.col-md-5
+          .funds-raised
+            p.left {group.progress.money|money}
+              small Raised Already
+            p.right
+              small {group.target|money}
+          .progress-bar
+            .progress-bar-fill(style="width: {group.progress.percent};")
+        .col.col-sm-12.col-md-2
+          a(href='#', data-action='donate', data-group='{group.id}' data-tags='group:team:fundraiser', class='rain btn btn-green fill') Donate
+        .col.col-sm-12.col-md-5.align-right
+          p
+            span.ends Ends:
+            span.num-group#months
+              span.num {group.timestamp.until.countdown.week|lpad(2,0)|substr(0,1)}
+              span.num {group.timestamp.until.countdown.week|lpad(2,0)|substr(1,1)}
+            span.num-group#weeks
+              span.num {group.timestamp.until.countdown.day|lpad(2,0)|substr(0,1)}
+              span.num {group.timestamp.until.countdown.day|lpad(2,0)|substr(1,1)}
+      .container.thin#main
+        //@IF group.photos.length <= 0
+        div(style="height: 100px;")
+        //@ENDIF
+        .banner-area(:load="group.owner as owner")
+          //@IF :member.id == owner.id
+          a(class='btn btn-purple fill position-absolute', href='#/my/account/fundraisers/{team.id}/details') Manage Event
+          //@ENDIF
+          div.banner-area_grid: img(src='{group.photo-url}', class='item')
+          div.banner-area_meta
+            .meta_title(style="width: 100%; padding-right: 0;")
+              //@IF !group.prop.free
+              a(href='#/my/checkout/details?group={group.id}', class='btn btn-green fill pull-right') Purchase Tickets
+              //@ENDIF
+              h1 {group.name}
+                br
+                small(style="font-weight: 300; display: block; margin-top: 5px") Date: {group.timestamp.until.unix|date(M j)}, {group.timestamp.until.unix|date(Y)}
+              //- a(href='#', class='btn fill btn-light-gray') Share
+            //- .meta_info
+              span.num#supporters {group.members.length}
+              span.num#updates {group.posts.length}
+              //- span.num#shares 1,109
+        .mobile-title(style="width: 100%; padding-right: 0;")
+          h1 {group.name}
+            //@IF !group.prop.free
+            a(href='#/my/checkout/details?group={group.id}', class='btn fill btn-green pull-right') Purchase Tickets
+            //@ENDIF
+            br
+            small(style="font-weight: 300; display: block; margin-top: 5px") Date: {group.timestamp.until.unix|date(M j)}, {group.timestamp.until.unix|date(Y)}
+          //- a(href='#', class='btn fill btn-light-gray') Share
+        .row
+          //- .col.col-md-12.col-lg-3: .sidebar: .row
+            section.supports.col.col-sm-12.col-md-6.col-lg-12
+              h4 Supporters 
+                small {group.members.length}
+              ul
+                li(:load='group.members.page(1,5).limit(10) as supporter', :iterate='self')
+                  .left {supporter.display_name}
+                  .right {supporter.context-donation-total|money}
+          .col.col-md-12
+            ul.tabs: .track
+              li(class='tab active', data-target='details') Event Details
+              //@IF group.project
+              li(class='tab', data-target='for') What is the money for?
+              //@ENDIF
+              //- li(class='tab', data-target='posts') Updates 
+                span.badge {group.posts.length}
+            .pane.active#details
+              br
+              strong {group.prop.headline}
+              {group.description|ormarkdown}
+              //@IF !group.prop.free
+              a.btn.btn-green(href="#/my/checkout/details?group={group.id}") Purchase Tickets
+              //@ENDIF
+              //- form#ticket
+                .ticket
+                  .ticket__left
+                    .ticket__left-punchout
+                  .ticket__right
+                    h2 Your Ticket For
+                    h1 {group.name}
+                    .row.tr-up.icons
+                      .col.col-sm-12.col-md-6
+                        p
+                          i.fa.fa-calendar
+                          //- span.head 23 Dec 2014 | 7:00pm - 8:00pm
+                          span.head {group.timestamp.until.unix|date(j F Y)} | {group.prop.start-time} - {group.prop.end-time}
+                          span.lead Event Date
+                      .col.col-sm-12.col-md-6
+                        p
+                          i.fa.fa-map-marker
+                          span.head {group.prop.venue}
+                          span.lead {group.location}
+                    .row.tr-up.input
+                      .col.col-sm-12.col-md-6
+                        p: span.lead Ticket Type
+                        .icon-select
+                          select(name='ticket-type')
+                            option(value='25') $25 - One Team Entry
+                          i.fa.fa-sort-desc
+                      .col.col-sm-12.col-md-2
+                        p: span.lead Quantity
+                        .icon-select
+                          select(name='ticket-amount')
+                            option(value='1') 01
+                            option(value='2') 02
+                            option(value='3') 03
+                            option(value='4') 04
+                            option(value='5') 05
+                          i.fa.fa-sort-desc
+                      .col.col-sm-12.col-md-4.total
+                        p $25
+                .pull-right
+                  a(href='#', class='btn fill btn-green') Confirm
+            .pane#for
+              br
+              {group.project().description}
+            .pane#posts
+              br
+              //@IF group.posts.length == 0
+              strong No updates yet.
+              //@ELSE
+              ul
+                li(class="update", :load="group.posts.status(published) as update", :iterate="self")
+                  h6 {update.title}
+                  p {update.content}
+              //@ENDIF

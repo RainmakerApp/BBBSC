@@ -62,23 +62,27 @@
         small Presented By: 
           strong {event.prop.presented-by}
         //@ENDIF
-        p {event.timestamp.until.localized_pretty}
+        p <span style="text-transform: uppercase;">{event.prop.start-time} {event.prop.start-time-meridiem} MT</span> | {event.timestamp.start.unix|date(l)}, {event.timestamp.start.unix|date(M)} {event.timestamp.start.unix|date(jS Y)}
         p {event.location_name}
       .hero__overlay
       .button-group: ul
         li.share Invite Friends
           ul.options
-            li: a(href='https://www.facebook.com/dialog/feed?app_id=929983597012726&display=popup&href=http://bbbsc.donate.io/events/%23/event/{event.id}&redirect_uri=http://bbbsc.donate.io/events/%23/event/{event.id}&description={event.description|strip_tags}&caption={event.name}&picture={:e.url.link([event.photo_url])}', class='popup') Facebook
-            li: a(href='http://twitter.com/home?status={event.description|strip_tags|limitstring(80,...)} - www.bbbsc.donate.io/events/#/event/{event.id}', class='twitter-share popup') Twitter
+            li: a(href='https://www.facebook.com/dialog/feed?app_id=929983597012726&display=popup&href=http://bbbsc.donate.io/events/%23/event/{event.id}&redirect_uri=http://bbbsc.donate.io/events/%23/event/{event.id}&description={event.summary|strip_tags}&caption={event.name}&picture={:e.url.link([event.photo_url])}', class='popup') Facebook
+            li: a(href='http://twitter.com/home?status={event.summary|strip_tags|limitstring(80,...)} - www.bbbsc.donate.io/events/#/event/{event.id}', class='twitter-share popup') Twitter
             li: a(href='mailto:?subject={event.name} - Big Brothers Big Sisters of Colorado&body=www.bbbsc.donate.io/events/#/event/{event.id}') Email
         li.middle: span(class='addtocalendar atc-style-menu-wb', data-on-button-click='atcButtonClick', data-on-calendar-click='atcCalendarClick')
           .atcb-link Add To Calendar
           var.atc_event
-            var.atc_date_start {event.date_start}
-            var.atc_date_end {event.date_until}
-            var.atc_timezone America/New_York
+            //@IF event.prop.start-time
+            var.atc_date_start {event.timestamp.start.unix|date(o-m-d)} {event.prop.start-time}:00
+            //@ENDIF
+            //@IF event.prop.end-time
+            var.atc_date_end {event.timestamp.until.unix|date(o-m-d)} {event.prop.end-time}:00
+            //@ENDIF
+            var.atc_timezone America/Chicago
             var.atc_title {event.name}
-            var.atc_description {event.description|strip_tags}
+            var.atc_description {event.summary|strip_tags}
             var.atc_location {event.location}
             var.atc_organizer {event.owner.name}
             //- {event.owner|dump}
@@ -168,11 +172,16 @@
             p {event.location}
           .gradient-overlay
           //- Load a Google Map here from the Address Rainmaker Stores
-          <iframe width="100%" height="125" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q={event.location}&key=AIzaSyAY4UeZE328Mf4VB6iFINcMVWP4zoQOeeM"></iframe>
+          <iframe width="100%" height="125" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q={event.location|urlencode}&key=AIzaSyBIjBo-KW6dL9ZdvRYT6HrAsHClQRlP6Hw"></iframe>
       .content__section
         h2 Sponsors
         .row.col-offset
-          .col.col-sm-12.col-md-6(:load="event.photos.tags(file:sponsor) as photo", :iterate="self"): img(src='{photo.photo-url}')
+          .col.col-sm-12.col-md-6(:load="event.photos.tags(file:sponsor) as photo", :iterate="self")
+            //@IF photo.title
+            a(href='{photo.title}', target='_blank'): img(src='{photo.photo-url}')
+            //@ELSE
+            img(src='{photo.photo-url}')
+            //@ENDIF
       //- .content__section
         h2 Testimonials
         p * Where does this section come from? 
@@ -191,4 +200,8 @@
       p Already have an account? 
         a(href='#') Sign In.
       //@END
+      //@IF event.has_tag(group:closed)
+      a(href='', class='btn disabled'): small REGISTRATION CLOSED
+      //@ELSE
       a(href='#/my/checkout?group={event.id}', class='btn') REGISTER
+      //@ENDIF

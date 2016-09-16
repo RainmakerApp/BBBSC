@@ -1,0 +1,155 @@
+.page-bowl
+	color #575757
+	.align-center
+		text-align center
+		&.content-area
+			padding-bottom 90px
+			p
+				color #a1a1a1
+				font-size 16px
+				line-height 22px
+				margin-top 25px
+			h4
+				font-weight 600
+				letter-spacing 0.075em
+				font-size 16px
+			h1
+				font-size 32px
+				margin 0
+				padding-bottom 20px
+				position relative
+				&:after
+					background-color $primary
+					bottom 0
+					content ''
+					height 4px
+					left 0
+					margin 0 auto
+					position absolute
+					right 0
+					width 40%
+				@media (min-width: 768px)
+					font-size 68px
+			a:first-of-type
+				margin-right 15px
+	.jumbotron
+		background-image url('../images/banners/bowling-pikes.png')
+		margin-bottom 32px
+		position relative
+		h1
+			font-size 68px
+			line-height 120px
+			.thin-text
+				font-weight 100
+		.progress
+			background-color #E6E6E6
+			bottom -32px
+			left 0
+			height 32px
+			position absolute
+			right 0
+			span
+				background-color $green
+				bottom 0
+				left 0
+				position absolute
+				top 0
+				min-width 1%
+				max-width 100%
+			p
+				color #FFF
+				font-weight 100
+				font-size 18px
+				letter-spacing 0.05em
+				margin 0
+				position absolute
+				top -30px
+				z-index 2
+				&.raised
+					left 15px
+				&.goal
+					right 15px
+	.content
+		padding-top 60px
+		h1
+			display inline-block
+			font-size 68px
+			margin-bottom 30px
+			position relative
+			text-transform initial
+			&:after
+				background-color $primary
+				bottom 0
+				content ''
+				height 4px
+				left 0
+				position absolute
+				width 110%
+		h4
+			font-size 22px
+			letter-spacing 0.05em
+			line-height 24px
+			margin-bottom 0
+			a
+				color #C6C6C6
+				font-size 14px
+				font-weight 100
+				letter-spacing 0.015em
+				line-height 24px
+				text-transform initial
+				vertical-align middle
+		p
+			color #A1A1A1
+			font-size 16px
+			font-weight 300
+			line-height 20px
+		.btn-group
+			margin-bottom 45px
+			a
+				margin-top 0
+			a.btn-green
+				background-color $green
+				color #FFF !important
+				margin-right 10px
+		.resources-section
+			border-bottom 1px solid #E6E6E6
+			border-top 1px solid #E6E6E6
+			margin 0 -15px 30px
+			padding 30px 15px
+			ul
+				list-style none
+				margin-bottom 0
+				a
+					color #C6C6C6
+					font-size 16px
+					line-height 26px
+		.sponsors
+			margin-top 15px
+			.sponsor
+				// background-color #C6C6C6
+				// color darken(#C6C6C6, 30%)
+				border 1px solid #C6C6C6
+				border-radius 3px
+				font-size 0
+				line-height 132px
+				margin-bottom 15px
+				padding 15px
+				position relative
+				text-align center
+				text-transform uppercase
+				&:before
+					content ''
+					height 100%
+					display inline-block
+					vertical-align middle
+				&:after
+					background-color rgba(white, 0)
+					bottom 0
+					content ''
+					left 0
+					position absolute
+					right 0
+					top 0
+				img
+					display inline-block
+					vertical-align middle

@@ -1,0 +1,19 @@
+pattern:
+  -
+    key: resources
+    format: blocks
+    name: Frequently Asked Questions
+    singular: Question
+    pattern: single-resources
+    preview: title
+  -
+    key: custom
+    format: html
+    name: Custom Content
+  -
+    key: sponsors
+    format: blocks
+    name: Sponsors
+    singular: Sponsor
+    pattern: sponsor
+    preview: name

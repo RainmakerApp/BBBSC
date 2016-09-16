@@ -1,0 +1,19 @@
+pattern:
+  -
+    key: banner
+    format: upload
+    name: Banner Image
+    description: "If no image is uploaded, the page will display only the title."
+  - 
+    key: title
+    format: title
+    name: Title
+  -
+    key: content
+    format: html
+    name: Content
+  -
+    key: slug
+    format: string
+    name: Page Slug
+    description: "The URL for the page, Ex) terms-and-conditions"
